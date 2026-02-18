@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-02-18T13:17:06.148Z",
+  "generated_at": "2026-02-18T17:26:13.749Z",
   "dataset_version": "1.2.0",
   "dataset_baseline_date": "2026-02-18",
   "hashes": {
-    "sources": "sha256:04550438e3037bd21acebc52df53ea6967cdb0adc22c0e96d3361e36b6e5291b",
-    "clauseReferenceLibrary": "sha256:bad85b4f6512bb7056d1026c2c0b07daa92529313bb5cfdda3ce5b21be1ae2c8",
-    "architecturePatterns": "sha256:f97f5222dd0e6545f33865cd54c24bb757afd9e651e27a5f4ec0a357b9ba39e0",
+    "sources": "sha256:82e9ec46831c638394c1b9566be21df5375333d0426b51b73dfb90d82fd7a69f",
+    "clauseReferenceLibrary": "sha256:1e1ae1d672ffb6fa80a4ff8826c1cf92a65dc33bed087e1ed1fc97cdf626bc0e",
+    "architecturePatterns": "sha256:c56a6a415ad5fac086a3207d9556708c641b245bd0e4c431d9209c0cf5cef2e1",
     "dataCategories": "sha256:b382aecfcfbc04d00cc39677df4475f30d4a6e21355adc4b9edcb36c7d677db5",
     "threatScenarios": "sha256:a31e10f6d9fd61b91ffd1d801160a22f884767523af4a1d3ad6001f51fe501e8",
-    "technicalStandards": "sha256:d5c0d6aa5bb9e992b18d8a4bb7eb85d9a1201609b1d669c5cf5e41736562e01d",
-    "applicabilityRules": "sha256:17ef6fc14ef0c5d2c975434aa5b8b0466eb0fcea2e48c8d40f5619e51e43410d",
+    "technicalStandards": "sha256:8a3a19d04cc8d2cd32a68ee2d13c8b09a1d267377fc093d0ef45be5f6b0268fd",
+    "applicabilityRules": "sha256:9b7d323137817ca3f46fd1a7b1113bcb71ae851c6f6a7f7d84c381fcc5d43016",
     "evidenceArtifacts": "sha256:411798c0d70ac7c6fbffd3c9c9a6079ab44d91688fded2ff6970906c9e21c746",
     "jurisdictionComparisons": "sha256:0be2fd043ea3a2e7866acff4d231ef0ddcb3a1c2a8826e9bc90cdcbac12bc194",
     "jurisdictionProfiles": "sha256:730f93ec94469c3044b8e078097d42889fda42fb25014c1e2966328633750268",
@@ -17,5 +17,5 @@
     "controlBaselines": "sha256:f8a11c61d42b23e63f0bcb0a02890d48226c6319c8bdb91ddf946cc7edb8dfef",
     "expertPlaybooks": "sha256:322c0b8922252b447c3422db27cc7f42f881cec05e22033dfd65f0af979c34d7"
   },
-  "combined_fingerprint": "sha256:aeff8dd0cd9937df9cba9171eb4f5e46db66b113c68ca1a1a53acc77232b2ecc"
+  "combined_fingerprint": "sha256:ce6503e8f985b721d4da90ac013a874890b153b16d626fc91ae0fec678f1aaf8"
 }

@@ -98,6 +98,7 @@ Expertise additions:
 - Applicability responses now include resolved jurisdiction profile context
 - Deterministic expertise scorecard with strict-mode hard fail thresholds
 - Curated expert decision playbooks for export control, CMMC, NATO sharing, incident response, and supply-chain workflows
+- Expanded standards corpus for defense/aerospace engineering assurance (DFARS 7019/7020, NIST 800-161r1, NIST 800-218, NIST 800-37r2, NIST 800-61r3, EASA Part-IS, NATO STANAG 4586/4609/5516/4671, ECSS-E-ST-40C, ECSS-Q-ST-80C, NASA NPR 7150.2, MIL-STD-810, MIL-STD-461, MIL-HDBK-516, AS9100D, AS9110C, DO-355, DO-178C, DO-254, ARP4754A, ARP4761A)
 
 ## Testing
 

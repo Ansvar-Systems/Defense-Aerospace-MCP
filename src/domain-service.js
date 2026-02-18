@@ -26,6 +26,12 @@ const REDIRECT_KEYWORDS = [
     pattern: /(5g|telecom|nfv|cpni|calea)/i,
     mcp: "telecommunications",
     reason: "Telecommunications domain obligations are covered by the Telecommunications MCP."
+  },
+  {
+    pattern:
+      /(sovd|autosar|iso\/sae\s*21434|iso[\s-]*21434|unece\s*r?155|unece\s*r?156|wp\.?\s*29|csms|sums|doip|uds|obd-?ii|can\s*bus|automotive cybersecurity)/i,
+    mcp: "automotive-cybersecurity",
+    reason: "Automotive cybersecurity standards and diagnostics domains are covered by the Automotive Cybersecurity MCP."
   }
 ];
 
@@ -76,6 +82,78 @@ function dedupeBy(items, keyFn) {
     results.push(item);
   }
   return results;
+}
+
+const STANDARD_MATCH_STOPWORDS = new Set([
+  "nist",
+  "sp",
+  "dfars",
+  "dodi",
+  "dod",
+  "cfr",
+  "rtca",
+  "sae",
+  "eurocae",
+  "eu",
+  "and",
+  "the",
+  "for",
+  "with",
+  "all",
+  "any",
+  "req",
+  "requirement",
+  "requirements",
+  "control",
+  "controls",
+  "standard",
+  "standards",
+  "framework",
+  "frameworks",
+  "baseline",
+  "guidance",
+  "policy",
+  "policies",
+  "level",
+  "rev",
+  "revision",
+  "part",
+  "article",
+  "section",
+  "clause",
+  "applicability",
+  "security",
+  "800",
+  "252",
+  "204"
+]);
+
+function normalizeMatchText(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim()
+    .replace(/\s+/g, " ");
+}
+
+function tokenizeForStandardMatch(value) {
+  return dedupeBy(
+    normalizeMatchText(value)
+      .split(" ")
+      .filter((token) => {
+        if (!token) {
+          return false;
+        }
+        if (STANDARD_MATCH_STOPWORDS.has(token)) {
+          return false;
+        }
+        if (token.length <= 2 && !/^\d{3,}$/.test(token)) {
+          return false;
+        }
+        return true;
+      }),
+    (token) => token
+  );
 }
 
 function normalizeArray(value) {
@@ -882,6 +960,12 @@ const EXPERTISE_REQUIRED_SOURCE_IDS = [
   "dfars-7012",
   "itar-usml",
   "ear-ccl",
+  "stanag-4671",
+  "as9100d",
+  "as9110c",
+  "mil-std-810",
+  "mil-std-461",
+  "mil-hdbk-516",
   "eu-dual-use",
   "eu-nis2",
   "nato-cm-2002-49"
@@ -2297,11 +2381,31 @@ function makeTools(db, metadataMap) {
         });
       }
 
-      const token = `${requirementRef} ${controlId}`.toLowerCase();
+      const redirect = shouldRedirect(`${requirementRef} ${controlId}`);
+      if (redirect) {
+        return wrapResponse(
+          {
+            standard_mappings: [],
+            guidance: `Out of scope for Defense/Aerospace MCP. Route to ${redirect.mcp} MCP.`
+          },
+          metadataMap,
+          {
+            confidence: "authoritative",
+            out_of_scope: [redirect.reason],
+            inference_rationale: "Requirement classified as non-defense domain content."
+          }
+        );
+      }
+
+      const queryText = `${requirementRef} ${controlId}`.trim();
+      const normalizedQuery = normalizeMatchText(queryText);
+      const queryTokens = tokenizeForStandardMatch(queryText);
+      const queryNumericTokens = queryTokens.filter((tokenPart) => /^\d{3,}$/.test(tokenPart));
+      const minimumTokenHits = queryTokens.length >= 8 ? 4 : queryTokens.length >= 5 ? 3 : queryTokens.length >= 3 ? 2 : 1;
       const standards = getAllStandards();
 
       const mappings = standards
-        .filter((standard) => {
+        .map((standard) => {
           const fields = [
             standard.id,
             standard.name,
@@ -2309,22 +2413,63 @@ function makeTools(db, metadataMap) {
             ...standard.key_clauses,
             ...standard.control_mappings.map((entry) => `${entry.framework} ${entry.control}`),
             ...standard.regulation_mappings.map((entry) => `${entry.regulation_id} ${entry.section}`)
-          ]
-            .join(" ")
-            .toLowerCase();
+          ].join(" ");
 
-          return token
-            .split(/\s+/)
-            .filter(Boolean)
-            .some((part) => fields.includes(part));
+          const normalizedId = normalizeMatchText(standard.id);
+          const normalizedName = normalizeMatchText(standard.name);
+          const normalizedFields = normalizeMatchText(fields);
+          const fieldTokenSet = new Set(tokenizeForStandardMatch(fields));
+          const tokenHits = queryTokens.filter((tokenPart) => fieldTokenSet.has(tokenPart));
+          const numericHits = tokenHits.filter((tokenPart) => /^\d{2,}$/.test(tokenPart));
+          const specificNumericHits = tokenHits.filter((tokenPart) => /^\d{4,}$/.test(tokenPart));
+          const alphaNumericHits = tokenHits.filter((tokenPart) => /\d/.test(tokenPart) && /[a-z]/.test(tokenPart));
+          const phraseHit =
+            (normalizedId.length >= 5 && normalizedQuery.includes(normalizedId)) ||
+            (normalizedName.length >= 8 && normalizedQuery.includes(normalizedName));
+          let include =
+            phraseHit ||
+            tokenHits.length >= minimumTokenHits ||
+            (tokenHits.length >= 2 && numericHits.length >= 1) ||
+            queryTokens.some((tokenPart) => tokenPart.length >= 6 && normalizedFields.includes(tokenPart)) ||
+            specificNumericHits.length >= 1;
+
+          if (
+            include &&
+            queryNumericTokens.length > 0 &&
+            !phraseHit &&
+            numericHits.length === 0 &&
+            alphaNumericHits.length === 0
+          ) {
+            include = false;
+          }
+
+          if (!include) {
+            return null;
+          }
+
+          const relevance =
+            phraseHit || tokenHits.length >= minimumTokenHits + 1
+              ? "high"
+              : tokenHits.length >= Math.max(2, minimumTokenHits - 1)
+                ? "medium"
+                : "low";
+
+          return {
+            standard_id: standard.id,
+            standard_name: standard.name,
+            clause: standard.key_clauses[0] || "general applicability",
+            relevance,
+            implementation_guidance: standard.implementation_guidance,
+            _score: tokenHits.length + (phraseHit ? 2 : 0) + (numericHits.length > 0 ? 1 : 0)
+          };
         })
-        .map((standard) => ({
-          standard_id: standard.id,
-          standard_name: standard.name,
-          clause: standard.key_clauses[0] || "general applicability",
-          relevance: "high",
-          implementation_guidance: standard.implementation_guidance
-        }));
+        .filter(Boolean)
+        .sort((left, right) => right._score - left._score || left.standard_id.localeCompare(right.standard_id))
+        .map((entry) => {
+          const nextEntry = { ...entry };
+          delete nextEntry._score;
+          return nextEntry;
+        });
 
       return wrapResponse(
         {

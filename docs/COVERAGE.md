@@ -7,8 +7,8 @@ This document tracks scope, completeness, and correctness for the Defense/Aerosp
 - Dataset version: `1.2.0`
 - Knowledge baseline date: `2026-02-18`
 - Dataset last updated: `2026-02-18`
-- Latest golden audit report: `2026-02-18T07:56:14.491Z` (`data/golden-standard-report.json`)
-- Latest audit grade: `A` (`56` pass, `0` fail, `1` warning)
+- Latest golden audit report: `2026-02-18T17:26:14.539Z` (`data/golden-standard-report.json`)
+- Latest audit grade: `A` (`87` pass, `0` fail, `1` warning)
 
 ## Geographic Coverage Targets
 
@@ -20,24 +20,24 @@ This document tracks scope, completeness, and correctness for the Defense/Aerosp
 
 ## Jurisdiction Profile Inventory
 
-- Total profiles: `89`
+- Total profiles: `90`
 - EU region profiles: `28` (`EU` baseline + 27 member-state profiles)
 - US region profiles: `52` (`US` baseline + 51 state profiles including DC)
-- NATO region profiles: `9` (NATO baseline + focused NATO-country profiles where not fully represented by EU/US baselines)
+- NATO region profiles: `10` (NATO baseline + focused NATO-country profiles where not fully represented by EU/US baselines)
 
 ## Domain Knowledge Coverage
 
 | Knowledge set | Records |
 | --- | ---: |
-| Sources | 20 |
+| Sources | 56 |
 | Architecture patterns | 12 |
 | Data categories | 12 |
 | Threat scenarios | 13 |
-| Technical standards | 16 |
-| Applicability rules | 18 |
-| Clause references | 12 |
+| Technical standards | 45 |
+| Applicability rules | 50 |
+| Clause references | 46 |
 | Evidence artifacts | 6 |
-| Expert playbooks | 8 |
+| Expert playbooks | 11 |
 
 ## Data Completeness by Jurisdiction
 

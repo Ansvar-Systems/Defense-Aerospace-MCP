@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-18T13:17:06.319Z",
+  "generated_at": "2026-02-18T17:26:14.539Z",
   "dataset_version": "1.2.0",
   "knowledge_baseline_date": "2026-02-18",
   "grade": "A",
@@ -37,7 +37,7 @@
     {
       "gate": "technical_standards_count",
       "status": "pass",
-      "details": "16 records"
+      "details": "45 records"
     },
     {
       "gate": "technical_standards_citations",
@@ -47,7 +47,7 @@
     {
       "gate": "applicability_rules_count",
       "status": "pass",
-      "details": "21 records"
+      "details": "50 records"
     },
     {
       "gate": "applicability_rules_citations",
@@ -88,6 +88,14 @@
       "status": "pass"
     },
     {
+      "gate": "source_nist-800-161r1",
+      "status": "pass"
+    },
+    {
+      "gate": "source_nist-800-218",
+      "status": "pass"
+    },
+    {
       "gate": "source_dod-cmmc-32cfr170",
       "status": "pass"
     },
@@ -97,6 +105,14 @@
     },
     {
       "gate": "source_dfars-7012",
+      "status": "pass"
+    },
+    {
+      "gate": "source_dfars-7019",
+      "status": "pass"
+    },
+    {
+      "gate": "source_dfars-7020",
       "status": "pass"
     },
     {
@@ -113,6 +129,110 @@
     },
     {
       "gate": "source_dodi-8510-01",
+      "status": "pass"
+    },
+    {
+      "gate": "source_rtca-do-355",
+      "status": "pass"
+    },
+    {
+      "gate": "source_rtca-do-178c",
+      "status": "pass"
+    },
+    {
+      "gate": "source_rtca-do-254",
+      "status": "pass"
+    },
+    {
+      "gate": "source_sae-arp4754a",
+      "status": "pass"
+    },
+    {
+      "gate": "source_sae-arp4761a",
+      "status": "pass"
+    },
+    {
+      "gate": "source_easa-part-is-2023-203",
+      "status": "pass"
+    },
+    {
+      "gate": "source_easa-part-is-2022-1645",
+      "status": "pass"
+    },
+    {
+      "gate": "source_nist-800-37r2",
+      "status": "pass"
+    },
+    {
+      "gate": "source_nist-800-61r3",
+      "status": "pass"
+    },
+    {
+      "gate": "source_stanag-4586",
+      "status": "pass"
+    },
+    {
+      "gate": "source_stanag-4609",
+      "status": "pass"
+    },
+    {
+      "gate": "source_stanag-5516",
+      "status": "pass"
+    },
+    {
+      "gate": "source_ecss-e-st-40c",
+      "status": "pass"
+    },
+    {
+      "gate": "source_ecss-q-st-80c",
+      "status": "pass"
+    },
+    {
+      "gate": "source_nasa-npr-7150-2",
+      "status": "pass"
+    },
+    {
+      "gate": "source_mil-std-1553",
+      "status": "pass"
+    },
+    {
+      "gate": "source_mil-std-1760",
+      "status": "pass"
+    },
+    {
+      "gate": "source_rtca-do-160",
+      "status": "pass"
+    },
+    {
+      "gate": "source_face-technical-standard",
+      "status": "pass"
+    },
+    {
+      "gate": "source_sosa-technical-standard",
+      "status": "pass"
+    },
+    {
+      "gate": "source_stanag-4671",
+      "status": "pass"
+    },
+    {
+      "gate": "source_as9100d",
+      "status": "pass"
+    },
+    {
+      "gate": "source_as9110c",
+      "status": "pass"
+    },
+    {
+      "gate": "source_mil-std-810",
+      "status": "pass"
+    },
+    {
+      "gate": "source_mil-std-461",
+      "status": "pass"
+    },
+    {
+      "gate": "source_mil-hdbk-516",
       "status": "pass"
     },
     {
@@ -140,7 +260,7 @@
     {
       "gate": "clause_reference_library",
       "status": "pass",
-      "details": "16 clause references"
+      "details": "46 clause references"
     },
     {
       "gate": "expert_playbook_depth",
@@ -265,7 +385,7 @@
     "Advisory source present (NIST SP 800-172 Rev.3 FPD); ensure this is not treated as binding requirement text."
   ],
   "summary": {
-    "pass_count": 57,
+    "pass_count": 87,
     "fail_count": 0,
     "warning_count": 1
   }

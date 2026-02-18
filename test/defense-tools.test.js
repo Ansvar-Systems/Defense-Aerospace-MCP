@@ -246,6 +246,21 @@ test("search_domain_knowledge redirects out-of-scope healthcare query", async ()
   }
 });
 
+test("search_domain_knowledge redirects out-of-scope automotive query", async () => {
+  const runtime = createRuntime();
+  try {
+    const response = await runtime.tools.search_domain_knowledge({
+      query: "AUTOSAR SOVD and UNECE R155 controls"
+    });
+
+    assert.equal(response.data.results.length, 0);
+    assert.ok(response.data.guidance.includes("automotive-cybersecurity"));
+    assert.ok(response.metadata.out_of_scope.length > 0);
+  } finally {
+    runtime.cleanup();
+  }
+});
+
 test("build_evidence_plan returns CMMC SSP artifact", async () => {
   const runtime = createRuntime();
   try {
@@ -588,6 +603,127 @@ test("map_to_technical_standards maps CMMC references", async () => {
   }
 });
 
+test("map_to_technical_standards maps DFARS assessment and supply-chain standards", async () => {
+  const runtime = createRuntime();
+  try {
+    const response = await runtime.tools.map_to_technical_standards({
+      requirement_ref: "DFARS 252.204-7019 252.204-7020 NIST SP 800-161 supply chain"
+    });
+
+    const standardIds = response.data.standard_mappings.map((entry) => entry.standard_id);
+    assert.ok(standardIds.includes("DFARS_7019_ASSESSMENT"));
+    assert.ok(standardIds.includes("DFARS_7020_ASSESSMENT"));
+    assert.ok(standardIds.includes("NIST_SP_800_161"));
+  } finally {
+    runtime.cleanup();
+  }
+});
+
+test("map_to_technical_standards maps aerospace airworthiness assurance standards", async () => {
+  const runtime = createRuntime();
+  try {
+    const response = await runtime.tools.map_to_technical_standards({
+      requirement_ref: "DO-355 DO-178C DO-254 ARP4754A ARP4761A"
+    });
+
+    const standardIds = response.data.standard_mappings.map((entry) => entry.standard_id);
+    assert.ok(standardIds.includes("DO_355"));
+    assert.ok(standardIds.includes("DO_178C"));
+    assert.ok(standardIds.includes("DO_254"));
+    assert.ok(standardIds.includes("ARP4754A"));
+    assert.ok(standardIds.includes("ARP4761A"));
+  } finally {
+    runtime.cleanup();
+  }
+});
+
+test("map_to_technical_standards maps aerospace regulatory and incident governance standards", async () => {
+  const runtime = createRuntime();
+  try {
+    const response = await runtime.tools.map_to_technical_standards({
+      requirement_ref: "EASA Part-IS NIST SP 800-37 NIST SP 800-61"
+    });
+
+    const standardIds = response.data.standard_mappings.map((entry) => entry.standard_id);
+    assert.ok(standardIds.includes("EASA_PART_IS"));
+    assert.ok(standardIds.includes("NIST_SP_800_37"));
+    assert.ok(standardIds.includes("NIST_SP_800_61"));
+    assert.ok(!standardIds.includes("CMMC_2_0"));
+  } finally {
+    runtime.cleanup();
+  }
+});
+
+test("map_to_technical_standards maps NATO interoperability and space mission standards", async () => {
+  const runtime = createRuntime();
+  try {
+    const response = await runtime.tools.map_to_technical_standards({
+      requirement_ref: "STANAG 4586 STANAG 4609 STANAG 5516 ECSS-E-ST-40C NASA NPR 7150.2"
+    });
+
+    const standardIds = response.data.standard_mappings.map((entry) => entry.standard_id);
+    assert.ok(standardIds.includes("NATO_STANAG_4586"));
+    assert.ok(standardIds.includes("NATO_STANAG_4609"));
+    assert.ok(standardIds.includes("NATO_STANAG_5516"));
+    assert.ok(standardIds.includes("ECSS_E_ST_40"));
+    assert.ok(standardIds.includes("NASA_NPR_7150_2"));
+  } finally {
+    runtime.cleanup();
+  }
+});
+
+test("map_to_technical_standards maps avionics and open architecture standards", async () => {
+  const runtime = createRuntime();
+  try {
+    const response = await runtime.tools.map_to_technical_standards({
+      requirement_ref: "MIL-STD-1553 MIL-STD-1760 DO-160 FACE Technical Standard SOSA Technical Standard"
+    });
+
+    const standardIds = response.data.standard_mappings.map((entry) => entry.standard_id);
+    assert.ok(standardIds.includes("MIL_STD_1553"));
+    assert.ok(standardIds.includes("MIL_STD_1760"));
+    assert.ok(standardIds.includes("DO_160"));
+    assert.ok(standardIds.includes("FACE_TS"));
+    assert.ok(standardIds.includes("SOSA_TS"));
+  } finally {
+    runtime.cleanup();
+  }
+});
+
+test("map_to_technical_standards maps defense qualification and aerospace quality standards", async () => {
+  const runtime = createRuntime();
+  try {
+    const response = await runtime.tools.map_to_technical_standards({
+      requirement_ref: "STANAG 4671 AS9100D AS9110C MIL-STD-810 MIL-STD-461 MIL-HDBK-516"
+    });
+
+    const standardIds = response.data.standard_mappings.map((entry) => entry.standard_id);
+    assert.ok(standardIds.includes("NATO_STANAG_4671"));
+    assert.ok(standardIds.includes("AS9100D_QMS"));
+    assert.ok(standardIds.includes("AS9110C_MRO_QMS"));
+    assert.ok(standardIds.includes("MIL_STD_810"));
+    assert.ok(standardIds.includes("MIL_STD_461"));
+    assert.ok(standardIds.includes("MIL_HDBK_516"));
+  } finally {
+    runtime.cleanup();
+  }
+});
+
+test("map_to_technical_standards redirects out-of-scope automotive references", async () => {
+  const runtime = createRuntime();
+  try {
+    const response = await runtime.tools.map_to_technical_standards({
+      requirement_ref: "AUTOSAR SOVD ISO/SAE 21434 UNECE R155"
+    });
+
+    assert.equal(response.data.standard_mappings.length, 0);
+    assert.ok(response.data.guidance.includes("automotive-cybersecurity"));
+    assert.ok(response.metadata.out_of_scope.length > 0);
+  } finally {
+    runtime.cleanup();
+  }
+});
+
 test("classify_export_control maps missile description to ITAR", async () => {
   const runtime = createRuntime();
   try {
@@ -696,6 +832,181 @@ test("US minimum coverage resolves applicability for US state context", async ()
     assert.ok(response.data.context.country_contexts.includes("US"));
     assert.ok(response.data.context.jurisdiction_profile);
     assert.equal(response.data.context.jurisdiction_profile.coverage_level, "minimum");
+  } finally {
+    runtime.cleanup();
+  }
+});
+
+test("US supply-chain applicability includes SCRM and assessment obligations", async () => {
+  const runtime = createRuntime();
+  try {
+    const response = await runtime.tools.assess_applicability({
+      country: "US",
+      role: "defense_subcontractor",
+      data_types: ["cui", "supply-chain-data"],
+      system_types: ["da-supply-chain"]
+    });
+
+    assert.ok(response.data.obligations.some((entry) => entry.regulation_id === "DFARS_252.204-7019"));
+    assert.ok(response.data.obligations.some((entry) => entry.regulation_id === "DFARS_252.204-7020"));
+    assert.ok(response.data.obligations.some((entry) => entry.regulation_id === "NIST_SP_800_161"));
+    assert.ok(response.data.obligations.some((entry) => entry.regulation_id === "NIST_SP_800_61"));
+  } finally {
+    runtime.cleanup();
+  }
+});
+
+test("EU aerospace applicability includes EASA Part-IS obligations", async () => {
+  const runtime = createRuntime();
+  try {
+    const response = await runtime.tools.assess_applicability({
+      country: "FR",
+      role: "aerospace_oem",
+      data_types: ["weapons-system-data"],
+      system_types: ["aircraft"]
+    });
+
+    assert.ok(response.data.obligations.some((entry) => entry.regulation_id === "EASA_PART_IS_2023_203"));
+  } finally {
+    runtime.cleanup();
+  }
+});
+
+test("NATO coalition UAV applicability includes interoperability STANAG obligations", async () => {
+  const runtime = createRuntime();
+  try {
+    const response = await runtime.tools.assess_applicability({
+      country: "SE",
+      role: "aerospace_oem",
+      data_types: ["nato-classified", "weapons-system-data"],
+      system_types: ["da-uav", "da-c2"],
+      additional_context: { tags: ["coalition_sharing"] }
+    });
+
+    assert.ok(response.data.obligations.some((entry) => entry.regulation_id === "NATO_STANAG_4586"));
+    assert.ok(response.data.obligations.some((entry) => entry.regulation_id === "NATO_STANAG_4609"));
+    assert.ok(response.data.obligations.some((entry) => entry.regulation_id === "NATO_STANAG_5516"));
+  } finally {
+    runtime.cleanup();
+  }
+});
+
+test("EU space applicability includes ECSS software standards", async () => {
+  const runtime = createRuntime();
+  try {
+    const response = await runtime.tools.assess_applicability({
+      country: "FR",
+      role: "aerospace_oem",
+      data_types: ["weapons-system-data"],
+      system_types: ["da-satellite"]
+    });
+
+    assert.ok(response.data.obligations.some((entry) => entry.regulation_id === "ECSS_E_ST_40"));
+    assert.ok(response.data.obligations.some((entry) => entry.regulation_id === "ECSS_Q_ST_80"));
+  } finally {
+    runtime.cleanup();
+  }
+});
+
+test("US space applicability includes NASA software governance baseline", async () => {
+  const runtime = createRuntime();
+  try {
+    const response = await runtime.tools.assess_applicability({
+      country: "US",
+      role: "aerospace_oem",
+      data_types: ["weapons-system-data"],
+      system_types: ["da-satellite"]
+    });
+
+    assert.ok(response.data.obligations.some((entry) => entry.regulation_id === "NASA_NPR_7150_2"));
+  } finally {
+    runtime.cleanup();
+  }
+});
+
+test("US avionics applicability includes MIL bus and interface standards", async () => {
+  const runtime = createRuntime();
+  try {
+    const response = await runtime.tools.assess_applicability({
+      country: "US",
+      role: "aerospace_oem",
+      data_types: ["weapons-system-data"],
+      system_types: ["da-weapons-system"]
+    });
+
+    assert.ok(response.data.obligations.some((entry) => entry.regulation_id === "MIL_STD_1553"));
+    assert.ok(response.data.obligations.some((entry) => entry.regulation_id === "MIL_STD_1760"));
+    assert.ok(response.data.obligations.some((entry) => entry.regulation_id === "DO_160"));
+  } finally {
+    runtime.cleanup();
+  }
+});
+
+test("US mission-system applicability includes FACE and SOSA open architecture obligations", async () => {
+  const runtime = createRuntime();
+  try {
+    const response = await runtime.tools.assess_applicability({
+      country: "US",
+      role: "prime_contractor",
+      data_types: ["weapons-system-data", "nato-classified"],
+      system_types: ["da-c2"]
+    });
+
+    assert.ok(response.data.obligations.some((entry) => entry.regulation_id === "FACE_TS"));
+    assert.ok(response.data.obligations.some((entry) => entry.regulation_id === "SOSA_TS"));
+  } finally {
+    runtime.cleanup();
+  }
+});
+
+test("US aerospace applicability includes qualification and quality management baselines", async () => {
+  const runtime = createRuntime();
+  try {
+    const response = await runtime.tools.assess_applicability({
+      country: "US",
+      role: "aerospace_oem",
+      data_types: ["weapons-system-data", "program-protection", "supply-chain-data"],
+      system_types: ["da-uav", "da-weapons-system"]
+    });
+
+    assert.ok(response.data.obligations.some((entry) => entry.regulation_id === "MIL_STD_810"));
+    assert.ok(response.data.obligations.some((entry) => entry.regulation_id === "MIL_STD_461"));
+    assert.ok(response.data.obligations.some((entry) => entry.regulation_id === "MIL_HDBK_516"));
+    assert.ok(response.data.obligations.some((entry) => entry.regulation_id === "AS9100D_QMS"));
+    assert.ok(response.data.obligations.some((entry) => entry.regulation_id === "AS9110C_MRO_QMS"));
+  } finally {
+    runtime.cleanup();
+  }
+});
+
+test("NATO UAV applicability includes STANAG 4671 airworthiness baseline", async () => {
+  const runtime = createRuntime();
+  try {
+    const response = await runtime.tools.assess_applicability({
+      country: "NO",
+      role: "aerospace_oem",
+      data_types: ["weapons-system-data", "nato-classified"],
+      system_types: ["da-uav"]
+    });
+
+    assert.ok(response.data.obligations.some((entry) => entry.regulation_id === "NATO_STANAG_4671"));
+  } finally {
+    runtime.cleanup();
+  }
+});
+
+test("US DoD applicability includes RMF governance baseline", async () => {
+  const runtime = createRuntime();
+  try {
+    const response = await runtime.tools.assess_applicability({
+      country: "US",
+      role: "prime_contractor",
+      data_types: ["cui"],
+      system_types: ["da-cui-environment"],
+      additional_context: { programs: ["DoD"] }
+    });
+
+    assert.ok(response.data.obligations.some((entry) => entry.regulation_id === "NIST_SP_800_37"));
   } finally {
     runtime.cleanup();
   }

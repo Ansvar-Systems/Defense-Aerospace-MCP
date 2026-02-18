@@ -8,12 +8,28 @@ const KNOWLEDGE_BASELINE = {
   highlights: [
     "NIST SP 800-171 Rev.3 final published 2024-05-14.",
     "CMMC Program final rule (32 CFR Part 170) effective 2024-12-16.",
-    "DFARS CMMC implementation (Subpart 204.75 and clauses 252.204-7021/-7025) effective 2025-11-10 with phased rollout through 2028-11-10."
+    "DFARS CMMC implementation (Subpart 204.75 and clauses 252.204-7021/-7025) effective 2025-11-10 with phased rollout through 2028-11-10.",
+    "Expanded defense/aerospace baseline includes DFARS 252.204-7019/-7020, NIST SP 800-161r1, NIST SP 800-218 (SSDF), EASA Part-IS, NATO interoperability standards, avionics bus/interface standards, military qualification and EMI standards, aerospace quality baselines, and RTCA/SAE airworthiness assurance standards."
   ],
   references: [
     "https://csrc.nist.gov/pubs/sp/800/171/r3/final",
     "https://www.federalregister.gov/documents/2024/10/15/2024-22905/cybersecurity-maturity-model-certification-cmmc-program",
-    "https://www.acquisition.gov/dfars/subpart-204.75-cybersecurity-maturity-model-certification-requirements"
+    "https://www.acquisition.gov/dfars/subpart-204.75-cybersecurity-maturity-model-certification-requirements",
+    "https://www.acquisition.gov/dfars/252.204-7019-notice-nist-sp-800-171-dod-assessment-requirements",
+    "https://www.acquisition.gov/dfars/252.204-7020-nist-sp-800-171-dod-assessment-requirements",
+    "https://csrc.nist.gov/pubs/sp/800/161/r1/final",
+    "https://csrc.nist.gov/pubs/sp/800/218/final",
+    "https://csrc.nist.gov/pubs/sp/800/37/r2/final",
+    "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+    "https://www.easa.europa.eu/en/document-library/regulations/commission-implementing-regulation-eu-2023203",
+    "https://www.easa.europa.eu/en/document-library/regulations/commission-delegated-regulation-eu-20221645",
+    "https://nso.nato.int",
+    "https://ecss.nl",
+    "https://quicksearch.dla.mil",
+    "https://www.sae.org/standards/content/as9100d/",
+    "https://www.sae.org/standards/content/as9110c/",
+    "https://www.opengroup.org/face",
+    "https://www.opengroup.org/sosa"
   ]
 };
 const EU_MEMBER_STATE_CODES = [
@@ -514,6 +530,396 @@ const sources = [
     knowledge_tier: "authoritative"
   },
   {
+    id: "dfars-7019",
+    name: "DFARS 252.204-7019",
+    source_type: "regulation",
+    content: "Notice of NIST SP 800-171 DoD Assessment Requirements",
+    provenance: "Acquisition.gov / DoD",
+    license: "Public domain (US government)",
+    refresh_cadence: "Per amendment",
+    source_url: "https://www.acquisition.gov/dfars/252.204-7019-notice-nist-sp-800-171-dod-assessment-requirements",
+    effective_date: "2020-11-30",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "dfars-7020",
+    name: "DFARS 252.204-7020",
+    source_type: "regulation",
+    content: "NIST SP 800-171 DoD Assessment Requirements",
+    provenance: "Acquisition.gov / DoD",
+    license: "Public domain (US government)",
+    refresh_cadence: "Per amendment",
+    source_url: "https://www.acquisition.gov/dfars/252.204-7020-nist-sp-800-171-dod-assessment-requirements",
+    effective_date: "2020-11-30",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "nist-800-161r1",
+    name: "NIST SP 800-161 Rev.1",
+    source_type: "standard",
+    content: "Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations",
+    provenance: "NIST",
+    license: "Public domain (US government)",
+    refresh_cadence: "Per revision",
+    source_url: "https://csrc.nist.gov/pubs/sp/800/161/r1/final",
+    effective_date: "2022-05-05",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "nist-800-218",
+    name: "NIST SP 800-218 (SSDF)",
+    source_type: "standard",
+    content: "Secure Software Development Framework practices and implementation examples",
+    provenance: "NIST",
+    license: "Public domain (US government)",
+    refresh_cadence: "Per revision",
+    source_url: "https://csrc.nist.gov/pubs/sp/800/218/final",
+    effective_date: "2022-02-04",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "rtca-do-355",
+    name: "RTCA DO-355 / ED-204",
+    source_type: "standard",
+    content: "Information security guidance for continuing airworthiness",
+    provenance: "RTCA / EUROCAE",
+    license: "Licensed standard text",
+    refresh_cadence: "Per revision",
+    source_url: "https://www.rtca.org/standards/",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "rtca-do-178c",
+    name: "RTCA DO-178C / ED-12C",
+    source_type: "standard",
+    content: "Software considerations in airborne systems and equipment certification",
+    provenance: "RTCA / EUROCAE",
+    license: "Licensed standard text",
+    refresh_cadence: "Per revision",
+    source_url: "https://www.rtca.org/standards/",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "rtca-do-254",
+    name: "RTCA DO-254 / ED-80",
+    source_type: "standard",
+    content: "Design assurance guidance for airborne electronic hardware",
+    provenance: "RTCA / EUROCAE",
+    license: "Licensed standard text",
+    refresh_cadence: "Per revision",
+    source_url: "https://www.rtca.org/standards/",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "sae-arp4754a",
+    name: "SAE ARP4754A",
+    source_type: "standard",
+    content: "Guidelines for development of civil aircraft and systems",
+    provenance: "SAE International",
+    license: "Licensed standard text",
+    refresh_cadence: "Per revision",
+    source_url: "https://www.sae.org/standards/content/arp4754a/",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "sae-arp4761a",
+    name: "SAE ARP4761A",
+    source_type: "standard",
+    content: "Safety assessment process for civil airborne systems and equipment",
+    provenance: "SAE International",
+    license: "Licensed standard text",
+    refresh_cadence: "Per revision",
+    source_url: "https://www.sae.org/standards/content/arp4761a/",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "easa-part-is-2023-203",
+    name: "EASA Part-IS (EU 2023/203)",
+    source_type: "regulation",
+    content: "Implementing rules for information security risk management in aviation (Part-IS)",
+    provenance: "EASA / European Commission",
+    license: "EU public law text",
+    refresh_cadence: "Per amendment",
+    source_url: "https://www.easa.europa.eu/en/document-library/regulations/commission-implementing-regulation-eu-2023203",
+    effective_date: "2023-10-22",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "easa-part-is-2022-1645",
+    name: "EASA Part-IS (EU 2022/1645)",
+    source_type: "regulation",
+    content: "Delegated act introducing information security requirements for air operations and continuing airworthiness contexts",
+    provenance: "EASA / European Commission",
+    license: "EU public law text",
+    refresh_cadence: "Per amendment",
+    source_url: "https://www.easa.europa.eu/en/document-library/regulations/commission-delegated-regulation-eu-20221645",
+    effective_date: "2022-09-14",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "nist-800-37r2",
+    name: "NIST SP 800-37 Rev.2",
+    source_type: "standard",
+    content: "Risk Management Framework for information systems and organizations",
+    provenance: "NIST",
+    license: "Public domain (US government)",
+    refresh_cadence: "Per revision",
+    source_url: "https://csrc.nist.gov/pubs/sp/800/37/r2/final",
+    effective_date: "2018-12-20",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "nist-800-61r3",
+    name: "NIST SP 800-61 Rev.3",
+    source_type: "standard",
+    content: "Incident response recommendations and lifecycle guidance",
+    provenance: "NIST",
+    license: "Public domain (US government)",
+    refresh_cadence: "Per revision",
+    source_url: "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+    effective_date: "2025-04-03",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "stanag-4586",
+    name: "NATO STANAG 4586",
+    source_type: "standard",
+    content: "Standard interfaces for UAV control system interoperability",
+    provenance: "NATO Standardization Office",
+    license: "NATO public summaries",
+    refresh_cadence: "Per revision",
+    source_url: "https://nso.nato.int",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "stanag-4609",
+    name: "NATO STANAG 4609",
+    source_type: "standard",
+    content: "Digital motion imagery standard for ISR interoperability",
+    provenance: "NATO Standardization Office",
+    license: "NATO public summaries",
+    refresh_cadence: "Per revision",
+    source_url: "https://nso.nato.int",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "stanag-5516",
+    name: "NATO STANAG 5516",
+    source_type: "standard",
+    content: "Tactical data exchange interoperability (Link 16) profile guidance",
+    provenance: "NATO Standardization Office",
+    license: "NATO public summaries",
+    refresh_cadence: "Per revision",
+    source_url: "https://nso.nato.int",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "ecss-e-st-40c",
+    name: "ECSS-E-ST-40C",
+    source_type: "standard",
+    content: "Space engineering software general requirements",
+    provenance: "ECSS",
+    license: "Public summary / licensed detail",
+    refresh_cadence: "Per revision",
+    source_url: "https://ecss.nl",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "ecss-q-st-80c",
+    name: "ECSS-Q-ST-80C",
+    source_type: "standard",
+    content: "Space product assurance software requirements",
+    provenance: "ECSS",
+    license: "Public summary / licensed detail",
+    refresh_cadence: "Per revision",
+    source_url: "https://ecss.nl",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "nasa-npr-7150-2",
+    name: "NASA NPR 7150.2",
+    source_type: "policy",
+    content: "NASA software engineering requirements",
+    provenance: "NASA NODIS",
+    license: "Public domain (US government)",
+    refresh_cadence: "Per revision",
+    source_url: "https://nodis3.gsfc.nasa.gov/displayDir.cfm?t=NPR&c=7150&s=2",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "mil-std-1553",
+    name: "MIL-STD-1553",
+    source_type: "standard",
+    content: "Digital time-division command/response multiplex data bus standard",
+    provenance: "US DoD",
+    license: "Public guidance",
+    refresh_cadence: "Per revision",
+    source_url: "https://quicksearch.dla.mil",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "mil-std-1760",
+    name: "MIL-STD-1760",
+    source_type: "standard",
+    content: "Aircraft/store electrical interconnection system interface standards",
+    provenance: "US DoD",
+    license: "Public guidance",
+    refresh_cadence: "Per revision",
+    source_url: "https://quicksearch.dla.mil",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "rtca-do-160",
+    name: "RTCA DO-160",
+    source_type: "standard",
+    content: "Environmental conditions and test procedures for airborne equipment",
+    provenance: "RTCA",
+    license: "Licensed standard text",
+    refresh_cadence: "Per revision",
+    source_url: "https://www.rtca.org/standards/",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "face-technical-standard",
+    name: "FACE Technical Standard",
+    source_type: "standard",
+    content: "Open architecture conformance profiles for airborne software portability and interoperability",
+    provenance: "The Open Group FACE Consortium",
+    license: "Public summary / licensed detail",
+    refresh_cadence: "Per revision",
+    source_url: "https://www.opengroup.org/face",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "sosa-technical-standard",
+    name: "SOSA Technical Standard",
+    source_type: "standard",
+    content: "Sensor Open Systems Architecture technical profile for modular interoperable defense systems",
+    provenance: "The Open Group SOSA Consortium",
+    license: "Public summary / licensed detail",
+    refresh_cadence: "Per revision",
+    source_url: "https://www.opengroup.org/sosa",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "stanag-4671",
+    name: "NATO STANAG 4671",
+    source_type: "standard",
+    content: "Unmanned aerial systems airworthiness requirements for NATO interoperability",
+    provenance: "NATO Standardization Office",
+    license: "NATO public summaries",
+    refresh_cadence: "Per revision",
+    source_url: "https://nso.nato.int",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "as9100d",
+    name: "AS9100D",
+    source_type: "standard",
+    content: "Quality management systems requirements for aviation, space, and defense organizations",
+    provenance: "IAQG / SAE International",
+    license: "Licensed standard text",
+    refresh_cadence: "Per revision",
+    source_url: "https://www.sae.org/standards/content/as9100d/",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "as9110c",
+    name: "AS9110C",
+    source_type: "standard",
+    content: "Quality management systems requirements for aviation maintenance organizations",
+    provenance: "IAQG / SAE International",
+    license: "Licensed standard text",
+    refresh_cadence: "Per revision",
+    source_url: "https://www.sae.org/standards/content/as9110c/",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "mil-std-810",
+    name: "MIL-STD-810",
+    source_type: "standard",
+    content: "Environmental engineering considerations and laboratory test methods",
+    provenance: "US DoD",
+    license: "Public guidance",
+    refresh_cadence: "Per revision",
+    source_url: "https://quicksearch.dla.mil",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "mil-std-461",
+    name: "MIL-STD-461",
+    source_type: "standard",
+    content: "Requirements for control of electromagnetic interference characteristics of subsystems and equipment",
+    provenance: "US DoD",
+    license: "Public guidance",
+    refresh_cadence: "Per revision",
+    source_url: "https://quicksearch.dla.mil",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "mil-hdbk-516",
+    name: "MIL-HDBK-516",
+    source_type: "standard",
+    content: "Airworthiness certification criteria for military aircraft systems",
+    provenance: "US DoD",
+    license: "Public guidance",
+    refresh_cadence: "Per revision",
+    source_url: "https://quicksearch.dla.mil",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
     id: "uk-osa-2023",
     name: "UK Official Secrets Act 2023",
     source_type: "regulation",
@@ -765,6 +1171,426 @@ const clauseReferenceLibrary = [
     status: "effective"
   },
   {
+    id: "clause-dfars-7019",
+    regulation_id: "DFARS_252.204-7019",
+    provision_ref: "252.204-7019",
+    title: "Notice of NIST SP 800-171 DoD assessment requirements",
+    summary: "Requires offerors to ensure current NIST SP 800-171 assessment results are posted and available in SPRS.",
+    source_id: "dfars-7019",
+    source_url: "https://www.acquisition.gov/dfars/252.204-7019-notice-nist-sp-800-171-dod-assessment-requirements",
+    legal_force: "regulation",
+    jurisdiction_scope: "US",
+    effective_date: "2020-11-30",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-dfars-7020",
+    regulation_id: "DFARS_252.204-7020",
+    provision_ref: "252.204-7020",
+    title: "DoD assessment access and support requirements",
+    summary: "Requires contractor support for DoD medium/high assessments including access to facilities, systems, and personnel.",
+    source_id: "dfars-7020",
+    source_url: "https://www.acquisition.gov/dfars/252.204-7020-nist-sp-800-171-dod-assessment-requirements",
+    legal_force: "regulation",
+    jurisdiction_scope: "US",
+    effective_date: "2020-11-30",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-nist-800-161r1",
+    regulation_id: "NIST_SP_800_161",
+    provision_ref: "Rev.1",
+    title: "Cybersecurity supply chain risk management practices",
+    summary: "Defines enterprise and system lifecycle controls for supplier risk, provenance, and criticality analysis.",
+    source_id: "nist-800-161r1",
+    source_url: "https://csrc.nist.gov/pubs/sp/800/161/r1/final",
+    legal_force: "standard-policy",
+    jurisdiction_scope: "US",
+    effective_date: "2022-05-05",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-nist-800-218",
+    regulation_id: "NIST_SP_800_218",
+    provision_ref: "SSDF",
+    title: "Secure software development framework baseline",
+    summary: "Defines secure development practices across governance, implementation, verification, and vulnerability response.",
+    source_id: "nist-800-218",
+    source_url: "https://csrc.nist.gov/pubs/sp/800/218/final",
+    legal_force: "standard-policy",
+    jurisdiction_scope: "US",
+    effective_date: "2022-02-04",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-do-355",
+    regulation_id: "DO_355",
+    provision_ref: "ED-204",
+    title: "Continuing airworthiness security guidance",
+    summary: "Defines operational and maintenance-phase cybersecurity objectives to maintain airworthiness over system life.",
+    source_id: "rtca-do-355",
+    source_url: "https://www.rtca.org/standards/",
+    legal_force: "standard-policy",
+    jurisdiction_scope: "INTL",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-do-178c",
+    regulation_id: "DO_178C",
+    provision_ref: "ED-12C",
+    title: "Airborne software design assurance",
+    summary: "Defines software lifecycle objectives and evidence expectations by development assurance level.",
+    source_id: "rtca-do-178c",
+    source_url: "https://www.rtca.org/standards/",
+    legal_force: "standard-policy",
+    jurisdiction_scope: "INTL",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-do-254",
+    regulation_id: "DO_254",
+    provision_ref: "ED-80",
+    title: "Airborne electronic hardware design assurance",
+    summary: "Defines lifecycle planning, verification, and configuration expectations for airborne electronic hardware.",
+    source_id: "rtca-do-254",
+    source_url: "https://www.rtca.org/standards/",
+    legal_force: "standard-policy",
+    jurisdiction_scope: "INTL",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-arp4754a",
+    regulation_id: "ARP4754A",
+    provision_ref: "ARP4754A",
+    title: "Aircraft and systems development process guidance",
+    summary: "Defines integrated aircraft/system development processes, validation, and requirements traceability.",
+    source_id: "sae-arp4754a",
+    source_url: "https://www.sae.org/standards/content/arp4754a/",
+    legal_force: "standard-policy",
+    jurisdiction_scope: "INTL",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-arp4761a",
+    regulation_id: "ARP4761A",
+    provision_ref: "ARP4761A",
+    title: "Aircraft/system safety assessment guidance",
+    summary: "Defines FHA/PSSA/SSA safety assessment methods to support certification and risk acceptance.",
+    source_id: "sae-arp4761a",
+    source_url: "https://www.sae.org/standards/content/arp4761a/",
+    legal_force: "standard-policy",
+    jurisdiction_scope: "INTL",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-easa-part-is-2023-203",
+    regulation_id: "EASA_PART_IS_2023_203",
+    provision_ref: "Implementing Regulation (EU) 2023/203",
+    title: "Aviation information security risk management and reporting requirements",
+    summary: "Defines organizational ISMS, incident reporting, governance, and assurance obligations for regulated aviation entities.",
+    source_id: "easa-part-is-2023-203",
+    source_url: "https://www.easa.europa.eu/en/document-library/regulations/commission-implementing-regulation-eu-2023203",
+    legal_force: "regulation",
+    jurisdiction_scope: "EU",
+    effective_date: "2023-10-22",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-easa-part-is-2022-1645",
+    regulation_id: "EASA_PART_IS_2022_1645",
+    provision_ref: "Delegated Regulation (EU) 2022/1645",
+    title: "Aviation information security requirements for air operations and continuing airworthiness",
+    summary: "Establishes delegated information security obligations that complement operational and continuing airworthiness domains.",
+    source_id: "easa-part-is-2022-1645",
+    source_url: "https://www.easa.europa.eu/en/document-library/regulations/commission-delegated-regulation-eu-20221645",
+    legal_force: "regulation",
+    jurisdiction_scope: "EU",
+    effective_date: "2022-09-14",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-nist-800-37r2",
+    regulation_id: "NIST_SP_800_37",
+    provision_ref: "Rev.2",
+    title: "Risk Management Framework lifecycle",
+    summary: "Defines prepare/categorize/select/implement/assess/authorize/monitor lifecycle for federal and mission systems.",
+    source_id: "nist-800-37r2",
+    source_url: "https://csrc.nist.gov/pubs/sp/800/37/r2/final",
+    legal_force: "standard-policy",
+    jurisdiction_scope: "US",
+    effective_date: "2018-12-20",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-nist-800-61r3",
+    regulation_id: "NIST_SP_800_61",
+    provision_ref: "Rev.3",
+    title: "Incident response lifecycle and operational recommendations",
+    summary: "Defines preparation, detection/analysis, containment/eradication/recovery, and post-incident activity guidance.",
+    source_id: "nist-800-61r3",
+    source_url: "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+    legal_force: "standard-policy",
+    jurisdiction_scope: "US",
+    effective_date: "2025-04-03",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-stanag-4586",
+    regulation_id: "NATO_STANAG_4586",
+    provision_ref: "STANAG 4586",
+    title: "UAV control interface interoperability profile",
+    summary: "Defines interface and message interoperability requirements for UAV command and control systems.",
+    source_id: "stanag-4586",
+    source_url: "https://nso.nato.int",
+    legal_force: "alliance-policy",
+    jurisdiction_scope: "NATO",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-stanag-4609",
+    regulation_id: "NATO_STANAG_4609",
+    provision_ref: "STANAG 4609",
+    title: "ISR motion imagery interoperability baseline",
+    summary: "Defines standardized formats and metadata for interoperable digital motion imagery in coalition ISR workflows.",
+    source_id: "stanag-4609",
+    source_url: "https://nso.nato.int",
+    legal_force: "alliance-policy",
+    jurisdiction_scope: "NATO",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-stanag-5516",
+    regulation_id: "NATO_STANAG_5516",
+    provision_ref: "STANAG 5516",
+    title: "Tactical data link interoperability baseline (Link 16)",
+    summary: "Defines tactical data exchange interoperability constraints and message handling profiles for coalition operations.",
+    source_id: "stanag-5516",
+    source_url: "https://nso.nato.int",
+    legal_force: "alliance-policy",
+    jurisdiction_scope: "NATO",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-ecss-e-st-40c",
+    regulation_id: "ECSS_E_ST_40",
+    provision_ref: "ECSS-E-ST-40C",
+    title: "Space software engineering general requirements",
+    summary: "Defines software lifecycle engineering requirements for space systems and mission segments.",
+    source_id: "ecss-e-st-40c",
+    source_url: "https://ecss.nl",
+    legal_force: "standard-policy",
+    jurisdiction_scope: "EU",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-ecss-q-st-80c",
+    regulation_id: "ECSS_Q_ST_80",
+    provision_ref: "ECSS-Q-ST-80C",
+    title: "Space software product assurance requirements",
+    summary: "Defines software assurance, verification, and quality objectives for space products and mission software.",
+    source_id: "ecss-q-st-80c",
+    source_url: "https://ecss.nl",
+    legal_force: "standard-policy",
+    jurisdiction_scope: "EU",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-nasa-npr-7150-2",
+    regulation_id: "NASA_NPR_7150_2",
+    provision_ref: "NPR 7150.2",
+    title: "NASA software engineering requirements baseline",
+    summary: "Defines software lifecycle and assurance requirements for NASA mission and supporting systems.",
+    source_id: "nasa-npr-7150-2",
+    source_url: "https://nodis3.gsfc.nasa.gov/displayDir.cfm?t=NPR&c=7150&s=2",
+    legal_force: "standard-policy",
+    jurisdiction_scope: "US",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-mil-std-1553",
+    regulation_id: "MIL_STD_1553",
+    provision_ref: "MIL-STD-1553",
+    title: "Digital avionics data bus interoperability baseline",
+    summary: "Defines command/response data bus characteristics and interoperability constraints for avionics systems.",
+    source_id: "mil-std-1553",
+    source_url: "https://quicksearch.dla.mil",
+    legal_force: "standard-policy",
+    jurisdiction_scope: "US",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-mil-std-1760",
+    regulation_id: "MIL_STD_1760",
+    provision_ref: "MIL-STD-1760",
+    title: "Aircraft/store interface interoperability baseline",
+    summary: "Defines electrical and data interface requirements between aircraft and stores/payloads.",
+    source_id: "mil-std-1760",
+    source_url: "https://quicksearch.dla.mil",
+    legal_force: "standard-policy",
+    jurisdiction_scope: "US",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-do-160",
+    regulation_id: "DO_160",
+    provision_ref: "DO-160",
+    title: "Airborne equipment environmental qualification baseline",
+    summary: "Defines environmental test and qualification expectations for airborne equipment resilience.",
+    source_id: "rtca-do-160",
+    source_url: "https://www.rtca.org/standards/",
+    legal_force: "standard-policy",
+    jurisdiction_scope: "INTL",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-face-ts",
+    regulation_id: "FACE_TS",
+    provision_ref: "FACE Technical Standard",
+    title: "Open airborne software portability and interoperability profile",
+    summary: "Defines conformance profiles that improve airborne software portability, reuse, and interoperability.",
+    source_id: "face-technical-standard",
+    source_url: "https://www.opengroup.org/face",
+    legal_force: "standard-policy",
+    jurisdiction_scope: "US",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-sosa-ts",
+    regulation_id: "SOSA_TS",
+    provision_ref: "SOSA Technical Standard",
+    title: "Open modular sensor architecture baseline",
+    summary: "Defines modular sensor architecture profiles supporting interoperability and rapid capability insertion.",
+    source_id: "sosa-technical-standard",
+    source_url: "https://www.opengroup.org/sosa",
+    legal_force: "standard-policy",
+    jurisdiction_scope: "US",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-stanag-4671",
+    regulation_id: "NATO_STANAG_4671",
+    provision_ref: "STANAG 4671",
+    title: "NATO UAS airworthiness interoperability baseline",
+    summary: "Defines common UAS airworthiness criteria to support coalition interoperability and certification alignment.",
+    source_id: "stanag-4671",
+    source_url: "https://nso.nato.int",
+    legal_force: "alliance-policy",
+    jurisdiction_scope: "NATO",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-as9100d",
+    regulation_id: "AS9100D_QMS",
+    provision_ref: "AS9100D",
+    title: "Aviation, space, and defense quality management baseline",
+    summary: "Defines QMS requirements for risk-based planning, configuration control, and product realization in aerospace programs.",
+    source_id: "as9100d",
+    source_url: "https://www.sae.org/standards/content/as9100d/",
+    legal_force: "standard-policy",
+    jurisdiction_scope: "INTL",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-as9110c",
+    regulation_id: "AS9110C_MRO_QMS",
+    provision_ref: "AS9110C",
+    title: "Aviation maintenance quality management baseline",
+    summary: "Defines QMS requirements for maintenance, repair, and overhaul organizations supporting aerospace fleets.",
+    source_id: "as9110c",
+    source_url: "https://www.sae.org/standards/content/as9110c/",
+    legal_force: "standard-policy",
+    jurisdiction_scope: "INTL",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-mil-std-810",
+    regulation_id: "MIL_STD_810",
+    provision_ref: "MIL-STD-810",
+    title: "Environmental engineering qualification baseline",
+    summary: "Defines environmental profile tailoring and test methods for defense equipment qualification.",
+    source_id: "mil-std-810",
+    source_url: "https://quicksearch.dla.mil",
+    legal_force: "standard-policy",
+    jurisdiction_scope: "US",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-mil-std-461",
+    regulation_id: "MIL_STD_461",
+    provision_ref: "MIL-STD-461",
+    title: "Electromagnetic compatibility qualification baseline",
+    summary: "Defines EMI/EMC control and verification requirements for defense subsystems and equipment.",
+    source_id: "mil-std-461",
+    source_url: "https://quicksearch.dla.mil",
+    legal_force: "standard-policy",
+    jurisdiction_scope: "US",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-mil-hdbk-516",
+    regulation_id: "MIL_HDBK_516",
+    provision_ref: "MIL-HDBK-516",
+    title: "Military airworthiness certification criteria baseline",
+    summary: "Defines military aircraft airworthiness certification criteria and verification evidence expectations.",
+    source_id: "mil-hdbk-516",
+    source_url: "https://quicksearch.dla.mil",
+    legal_force: "standard-policy",
+    jurisdiction_scope: "US",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
     id: "clause-eu-cra-art6",
     regulation_id: "EU_CRA_2024_2847",
     provision_ref: "Article 6",
@@ -951,7 +1777,18 @@ const architecturePatterns = [
       "GPS/PNT dependencies",
       "Insufficient runtime attestation"
     ],
-    applicable_standards: ["MIL_STD_882", "DODI_8510_01", "DO_326A"],
+    applicable_standards: [
+      "MIL_STD_882",
+      "MIL_STD_1553",
+      "MIL_STD_1760",
+      "MIL_STD_810",
+      "MIL_STD_461",
+      "MIL_HDBK_516",
+      "DO_160",
+      "DODI_8510_01",
+      "DO_326A",
+      "AS9100D_QMS"
+    ],
     regulatory_hot_spots: ["Program Protection Plans", "RMF authorization", "ITAR technical data controls"],
     citations: [
       { type: "MIL", ref: "MIL-STD-882", source_url: "https://quicksearch.dla.mil" },
@@ -988,7 +1825,7 @@ const architecturePatterns = [
     ],
     integration_points: ["NATO federation", "ISR ingest", "Joint fires systems"],
     known_weaknesses: ["Cross-domain translation errors", "Labeling/caveat drift"],
-    applicable_standards: ["NATO_STANAG_4774", "NATO_STANAG_4778", "ICD_503"],
+    applicable_standards: ["NATO_STANAG_4774", "NATO_STANAG_4778", "NATO_STANAG_5516", "SOSA_TS", "ICD_503"],
     regulatory_hot_spots: ["NATO security agreements", "National disclosure policies"],
     citations: [
       { type: "NATO", ref: "STANAG 4774", source_url: "https://nso.nato.int" }
@@ -1024,7 +1861,7 @@ const architecturePatterns = [
     ],
     integration_points: ["National intelligence exchange", "C2 dissemination"],
     known_weaknesses: ["Data poisoning in multi-source fusion", "Insider query abuse"],
-    applicable_standards: ["ICD_503", "NATO_STANAG_4778"],
+    applicable_standards: ["ICD_503", "NATO_STANAG_4778", "NATO_STANAG_4609"],
     regulatory_hot_spots: ["National intelligence acts", "Program protection controls"],
     citations: [{ type: "IC", ref: "ICD 503", source_url: "https://www.dni.gov" }]
   },
@@ -1059,7 +1896,7 @@ const architecturePatterns = [
     ],
     integration_points: ["Satellite gateway", "C2 systems"],
     known_weaknesses: ["Jamming susceptibility", "Key rollover failures"],
-    applicable_standards: ["CNSSI_1253", "NATO_SDIP_27"],
+    applicable_standards: ["CNSSI_1253", "NATO_SDIP_27", "NATO_STANAG_5516"],
     regulatory_hot_spots: ["National COMSEC doctrine"],
     citations: [{ type: "NATO", ref: "SDIP-27", source_url: "https://nso.nato.int" }]
   },
@@ -1087,7 +1924,7 @@ const architecturePatterns = [
     ],
     integration_points: ["Space situational awareness feeds", "Mission assurance SOC"],
     known_weaknesses: ["Ground station compromise", "Replay on command link"],
-    applicable_standards: ["DODI_8510_01", "NIST_SP_800_53_DOD_OVERLAY"],
+    applicable_standards: ["DODI_8510_01", "NIST_SP_800_53_DOD_OVERLAY", "ECSS_E_ST_40", "ECSS_Q_ST_80", "NASA_NPR_7150_2"],
     regulatory_hot_spots: ["Export control on payload tech"],
     citations: [{ type: "DODI", ref: "DoDI 8510.01", source_url: "https://www.esd.whs.mil/DD/DoD-Issuances/DoD-Issuances-Website/" }]
   },
@@ -1115,7 +1952,27 @@ const architecturePatterns = [
     ],
     integration_points: ["ISR payload network", "Airspace management"],
     known_weaknesses: ["GNSS spoofing", "Uplink takeover"],
-    applicable_standards: ["DO_326A", "DO_356A", "MIL_STD_882"],
+    applicable_standards: [
+      "DO_326A",
+      "DO_356A",
+      "DO_355",
+      "DO_178C",
+      "DO_254",
+      "ARP4754A",
+      "ARP4761A",
+      "EASA_PART_IS",
+      "NATO_STANAG_4586",
+      "NATO_STANAG_4609",
+      "NATO_STANAG_4671",
+      "DO_160",
+      "MIL_STD_810",
+      "MIL_STD_461",
+      "MIL_HDBK_516",
+      "FACE_TS",
+      "AS9100D_QMS",
+      "AS9110C_MRO_QMS",
+      "MIL_STD_882"
+    ],
     regulatory_hot_spots: ["Airworthiness cybersecurity evidence"],
     citations: [{ type: "RTCA", ref: "DO-326A", source_url: "https://www.rtca.org" }]
   },
@@ -1153,7 +2010,17 @@ const architecturePatterns = [
       "Supplier endpoint compromise",
       "Unauthorized ITAR transfer"
     ],
-    applicable_standards: ["CMMC_2_0", "NIST_SP_800_171", "NISPOM"],
+    applicable_standards: [
+      "CMMC_2_0",
+      "NIST_SP_800_171",
+      "NIST_SP_800_161",
+      "NIST_SP_800_218",
+      "DFARS_7019_ASSESSMENT",
+      "DFARS_7020_ASSESSMENT",
+      "AS9100D_QMS",
+      "AS9110C_MRO_QMS",
+      "NISPOM"
+    ],
     regulatory_hot_spots: ["ITAR/EAR", "DFARS 252.246-7008", "FOCI review"],
     citations: [
       { type: "CFR", ref: "22 CFR 120-130", source_url: "https://www.ecfr.gov/current/title-22/chapter-I/subchapter-M" },
@@ -1184,7 +2051,7 @@ const architecturePatterns = [
     ],
     integration_points: ["DoD identity federation", "CDS services"],
     known_weaknesses: ["Tenant boundary misconfigurations", "Excessive privileged cloud roles"],
-    applicable_standards: ["NIST_SP_800_53_DOD_OVERLAY", "DODI_8500_01"],
+    applicable_standards: ["NIST_SP_800_53_DOD_OVERLAY", "NIST_SP_800_37", "DODI_8500_01"],
     regulatory_hot_spots: ["Impact level authorization", "Deemed export in cloud admin access"],
     citations: [{ type: "DODI", ref: "DoDI 8500.01", source_url: "https://www.esd.whs.mil/DD/DoD-Issuances/DoD-Issuances-Website/" }]
   },
@@ -2416,6 +3283,83 @@ const technicalStandards = [
     citations: [{ type: "NIST", ref: "SP 800-172", source_url: "https://csrc.nist.gov/pubs/sp/800/172/final" }]
   },
   {
+    id: "NIST_SP_800_161",
+    name: "NIST SP 800-161 Rev.1",
+    version: "Rev.1 (2022)",
+    publisher: "NIST",
+    scope: "Cybersecurity supply chain risk management practices for systems and organizations",
+    key_clauses: ["enterprise C-SCRM integration", "supplier criticality analysis", "supplier monitoring and response"],
+    control_mappings: [
+      { framework: "nist_sp_800_53", control: "SR family" },
+      { framework: "cmmc_2_0", control: "supplier assurance support" }
+    ],
+    regulation_mappings: [
+      { regulation_id: "DFARS_252.204-7019", section: "SPRS assessment baseline support" },
+      { regulation_id: "DFARS_252.204-7020", section: "assessment support obligations" }
+    ],
+    implementation_guidance:
+      "Integrate supplier criticality analysis, contractual controls, and continuous supplier risk monitoring into SSP and POA&M workflows.",
+    licensing_restrictions: "Public domain",
+    citations: [{ type: "NIST", ref: "SP 800-161 Rev.1", source_url: "https://csrc.nist.gov/pubs/sp/800/161/r1/final" }]
+  },
+  {
+    id: "NIST_SP_800_218",
+    name: "NIST SP 800-218 (SSDF)",
+    version: "Final (2022)",
+    publisher: "NIST",
+    scope: "Secure software development framework practices",
+    key_clauses: ["Prepare the organization", "Protect the software", "Produce well-secured software", "Respond to vulnerabilities"],
+    control_mappings: [
+      { framework: "cmmc_2_0", control: "secure development evidence" },
+      { framework: "nist_sp_800_53", control: "SA and SI families" }
+    ],
+    regulation_mappings: [{ regulation_id: "DFARS_252.204-7020", section: "assessment evidence quality" }],
+    implementation_guidance:
+      "Operationalize SSDF practices in CI/CD with traceable design, code review, testing, and vulnerability response evidence.",
+    licensing_restrictions: "Public domain",
+    citations: [{ type: "NIST", ref: "SP 800-218", source_url: "https://csrc.nist.gov/pubs/sp/800/218/final" }]
+  },
+  {
+    id: "DFARS_7019_ASSESSMENT",
+    name: "DFARS 252.204-7019",
+    version: "current",
+    publisher: "US DoD",
+    scope: "Notice and eligibility requirements for NIST SP 800-171 DoD assessments",
+    key_clauses: ["SPRS posting prerequisite", "assessment recency requirement"],
+    control_mappings: [{ framework: "cmmc_2_0", control: "assessment readiness pre-award" }],
+    regulation_mappings: [{ regulation_id: "DFARS_252.204-7019", section: "all" }],
+    implementation_guidance:
+      "Ensure current Basic/Medium/High assessment data is posted in SPRS and contractually scoped before proposal submission.",
+    licensing_restrictions: "Public guidance",
+    citations: [
+      {
+        type: "DFARS",
+        ref: "252.204-7019",
+        source_url: "https://www.acquisition.gov/dfars/252.204-7019-notice-nist-sp-800-171-dod-assessment-requirements"
+      }
+    ]
+  },
+  {
+    id: "DFARS_7020_ASSESSMENT",
+    name: "DFARS 252.204-7020",
+    version: "current",
+    publisher: "US DoD",
+    scope: "Contractor support requirements for DoD medium/high cybersecurity assessments",
+    key_clauses: ["access to facilities and systems", "records and personnel support"],
+    control_mappings: [{ framework: "cmmc_2_0", control: "assessment execution support" }],
+    regulation_mappings: [{ regulation_id: "DFARS_252.204-7020", section: "all" }],
+    implementation_guidance:
+      "Maintain assessment-ready evidence and provide auditable access support for DoD-led validation activities.",
+    licensing_restrictions: "Public guidance",
+    citations: [
+      {
+        type: "DFARS",
+        ref: "252.204-7020",
+        source_url: "https://www.acquisition.gov/dfars/252.204-7020-nist-sp-800-171-dod-assessment-requirements"
+      }
+    ]
+  },
+  {
     id: "CNSSI_1253",
     name: "CNSSI 1253",
     version: "current",
@@ -2481,6 +3425,48 @@ const technicalStandards = [
     citations: [{ type: "NATO", ref: "SDIP-27", source_url: "https://nso.nato.int" }]
   },
   {
+    id: "NATO_STANAG_4586",
+    name: "NATO STANAG 4586",
+    version: "Edition current",
+    publisher: "NATO",
+    scope: "UAV control system interoperability interfaces",
+    key_clauses: ["common control interface profiles", "interoperable message sets"],
+    control_mappings: [{ framework: "coalition-uav", control: "uav c2 interoperability" }],
+    regulation_mappings: [{ regulation_id: "NATO_C_M_2002_49", section: "coalition mission interoperability" }],
+    implementation_guidance:
+      "Standardize UAV command/control interfaces and coalition integration profiles to reduce mission interoperability failures.",
+    licensing_restrictions: "Public summary only",
+    citations: [{ type: "NATO", ref: "STANAG 4586", source_url: "https://nso.nato.int" }]
+  },
+  {
+    id: "NATO_STANAG_4609",
+    name: "NATO STANAG 4609",
+    version: "Edition current",
+    publisher: "NATO",
+    scope: "Digital motion imagery interoperability for ISR",
+    key_clauses: ["motion imagery encoding baseline", "imagery metadata interoperability"],
+    control_mappings: [{ framework: "coalition-isr", control: "imagery data interoperability" }],
+    regulation_mappings: [{ regulation_id: "NATO_C_M_2002_49", section: "coalition ISR dissemination" }],
+    implementation_guidance:
+      "Use STANAG 4609-aligned imagery and metadata pipelines to ensure coalition ISR consumption and exploitation compatibility.",
+    licensing_restrictions: "Public summary only",
+    citations: [{ type: "NATO", ref: "STANAG 4609", source_url: "https://nso.nato.int" }]
+  },
+  {
+    id: "NATO_STANAG_5516",
+    name: "NATO STANAG 5516",
+    version: "Edition current",
+    publisher: "NATO",
+    scope: "Tactical data exchange interoperability (Link 16)",
+    key_clauses: ["message interoperability profile", "tactical data link coordination"],
+    control_mappings: [{ framework: "coalition-c2", control: "tactical data link interoperability" }],
+    regulation_mappings: [{ regulation_id: "NATO_C_M_2002_49", section: "coalition c2 exchange" }],
+    implementation_guidance:
+      "Align tactical data link message handling and gateway integration controls for coalition command-and-control operations.",
+    licensing_restrictions: "Public summary only",
+    citations: [{ type: "NATO", ref: "STANAG 5516", source_url: "https://nso.nato.int" }]
+  },
+  {
     id: "MIL_STD_882",
     name: "MIL-STD-882",
     version: "latest",
@@ -2518,6 +3504,332 @@ const technicalStandards = [
     implementation_guidance: "Define repeatable verification evidence for airborne and ground systems.",
     licensing_restrictions: "Licensed standard text",
     citations: [{ type: "RTCA", ref: "DO-356A", source_url: "https://www.rtca.org" }]
+  },
+  {
+    id: "DO_355",
+    name: "DO-355 / ED-204",
+    version: "current",
+    publisher: "RTCA / EUROCAE",
+    scope: "Information security guidance for continuing airworthiness",
+    key_clauses: ["operations-phase security controls", "maintenance and update security", "continued airworthiness security monitoring"],
+    control_mappings: [{ framework: "do_326a", control: "continued operational security" }],
+    regulation_mappings: [{ regulation_id: "AIRWORTHINESS_CYBER", section: "continued operational assurance" }],
+    implementation_guidance:
+      "Extend cybersecurity controls into fleet operations, maintenance, and service bulletins with documented residual risk acceptance.",
+    licensing_restrictions: "Licensed standard text",
+    citations: [{ type: "RTCA", ref: "DO-355", source_url: "https://www.rtca.org/standards/" }]
+  },
+  {
+    id: "DO_178C",
+    name: "DO-178C / ED-12C",
+    version: "current",
+    publisher: "RTCA / EUROCAE",
+    scope: "Software considerations in airborne systems and equipment certification",
+    key_clauses: ["development assurance levels (DAL A-E)", "software lifecycle objectives", "verification independence"],
+    control_mappings: [{ framework: "airworthiness", control: "software assurance evidence" }],
+    regulation_mappings: [{ regulation_id: "AIRBORNE_SOFTWARE_ASSURANCE", section: "all lifecycle objectives" }],
+    implementation_guidance:
+      "Maintain end-to-end software requirements traceability and independent verification artifacts aligned to assigned DAL.",
+    licensing_restrictions: "Licensed standard text",
+    citations: [{ type: "RTCA", ref: "DO-178C", source_url: "https://www.rtca.org/standards/" }]
+  },
+  {
+    id: "DO_254",
+    name: "DO-254 / ED-80",
+    version: "current",
+    publisher: "RTCA / EUROCAE",
+    scope: "Design assurance guidance for airborne electronic hardware",
+    key_clauses: ["hardware planning and requirements", "elemental analysis", "verification and configuration control"],
+    control_mappings: [{ framework: "airworthiness", control: "hardware assurance evidence" }],
+    regulation_mappings: [{ regulation_id: "AIRBORNE_HARDWARE_ASSURANCE", section: "all lifecycle objectives" }],
+    implementation_guidance:
+      "Apply hardware planning, verification, and configuration control evidence for complex airborne electronic hardware.",
+    licensing_restrictions: "Licensed standard text",
+    citations: [{ type: "RTCA", ref: "DO-254", source_url: "https://www.rtca.org/standards/" }]
+  },
+  {
+    id: "ARP4754A",
+    name: "SAE ARP4754A",
+    version: "current",
+    publisher: "SAE International",
+    scope: "Guidelines for development of civil aircraft and systems",
+    key_clauses: ["integrated aircraft/system development", "requirements allocation and validation", "development planning"],
+    control_mappings: [{ framework: "airworthiness", control: "system lifecycle integration" }],
+    regulation_mappings: [{ regulation_id: "AIRCRAFT_SYSTEM_DEVELOPMENT", section: "all" }],
+    implementation_guidance:
+      "Use integrated aircraft and system development planning with traceable requirement allocation across airborne and ground components.",
+    licensing_restrictions: "Licensed standard text",
+    citations: [{ type: "SAE", ref: "ARP4754A", source_url: "https://www.sae.org/standards/content/arp4754a/" }]
+  },
+  {
+    id: "ARP4761A",
+    name: "SAE ARP4761A",
+    version: "current",
+    publisher: "SAE International",
+    scope: "Safety assessment process for civil airborne systems and equipment",
+    key_clauses: ["functional hazard assessment", "preliminary system safety assessment", "system safety assessment"],
+    control_mappings: [{ framework: "airworthiness", control: "hazard and safety evidence" }],
+    regulation_mappings: [{ regulation_id: "AIRCRAFT_SYSTEM_SAFETY", section: "all" }],
+    implementation_guidance:
+      "Maintain FHA/PSSA/SSA artifacts linked to cybersecurity threat models and design assurance evidence for certification audits.",
+    licensing_restrictions: "Licensed standard text",
+    citations: [{ type: "SAE", ref: "ARP4761A", source_url: "https://www.sae.org/standards/content/arp4761a/" }]
+  },
+  {
+    id: "EASA_PART_IS",
+    name: "EASA Part-IS (EU 2023/203 and 2022/1645)",
+    version: "current",
+    publisher: "EASA / European Commission",
+    scope: "Aviation information security risk management and incident reporting obligations",
+    key_clauses: ["organizational ISMS for aviation", "incident reporting obligations", "continuing airworthiness information security"],
+    control_mappings: [{ framework: "airworthiness", control: "operational information security governance" }],
+    regulation_mappings: [
+      { regulation_id: "EASA_PART_IS_2023_203", section: "implementing regulation" },
+      { regulation_id: "EASA_PART_IS_2022_1645", section: "delegated regulation" }
+    ],
+    implementation_guidance:
+      "Implement a regulator-auditable aviation ISMS that covers design, production, operations, continuing airworthiness, and mandatory incident reporting.",
+    licensing_restrictions: "EU public law text",
+    citations: [
+      {
+        type: "EU",
+        ref: "Implementing Regulation (EU) 2023/203",
+        source_url: "https://www.easa.europa.eu/en/document-library/regulations/commission-implementing-regulation-eu-2023203"
+      }
+    ]
+  },
+  {
+    id: "ECSS_E_ST_40",
+    name: "ECSS-E-ST-40C",
+    version: "current",
+    publisher: "ECSS",
+    scope: "Space software engineering lifecycle requirements",
+    key_clauses: ["software lifecycle processes", "requirements traceability", "verification planning"],
+    control_mappings: [{ framework: "space-engineering", control: "mission software lifecycle governance" }],
+    regulation_mappings: [{ regulation_id: "SPACE_MISSION_ASSURANCE", section: "software engineering baseline" }],
+    implementation_guidance:
+      "Apply ECSS-E-ST-40 lifecycle controls across mission segment and ground segment software with auditable verification evidence.",
+    licensing_restrictions: "Public summary / licensed detail",
+    citations: [{ type: "ECSS", ref: "ECSS-E-ST-40C", source_url: "https://ecss.nl" }]
+  },
+  {
+    id: "ECSS_Q_ST_80",
+    name: "ECSS-Q-ST-80C",
+    version: "current",
+    publisher: "ECSS",
+    scope: "Space software product assurance requirements",
+    key_clauses: ["software assurance planning", "quality objectives", "independence and verification"],
+    control_mappings: [{ framework: "space-assurance", control: "software assurance baseline" }],
+    regulation_mappings: [{ regulation_id: "SPACE_MISSION_ASSURANCE", section: "software assurance baseline" }],
+    implementation_guidance:
+      "Integrate software assurance objectives, defect governance, and independent verification evidence into mission acceptance criteria.",
+    licensing_restrictions: "Public summary / licensed detail",
+    citations: [{ type: "ECSS", ref: "ECSS-Q-ST-80C", source_url: "https://ecss.nl" }]
+  },
+  {
+    id: "NASA_NPR_7150_2",
+    name: "NASA NPR 7150.2",
+    version: "current",
+    publisher: "NASA",
+    scope: "Software engineering requirements for NASA mission and support systems",
+    key_clauses: ["software classification and rigor", "lifecycle requirements", "assurance and independent verification"],
+    control_mappings: [{ framework: "space-assurance", control: "software rigor and assurance" }],
+    regulation_mappings: [{ regulation_id: "NASA_MISSION_SOFTWARE", section: "software lifecycle baseline" }],
+    implementation_guidance:
+      "Use NPR 7150.2 software class and assurance expectations to set mission software rigor, testing, and independent verification requirements.",
+    licensing_restrictions: "Public domain",
+    citations: [
+      {
+        type: "NASA",
+        ref: "NPR 7150.2",
+        source_url: "https://nodis3.gsfc.nasa.gov/displayDir.cfm?t=NPR&c=7150&s=2"
+      }
+    ]
+  },
+  {
+    id: "MIL_STD_1553",
+    name: "MIL-STD-1553",
+    version: "current",
+    publisher: "US DoD",
+    scope: "Digital command/response avionics data bus interoperability",
+    key_clauses: ["bus controller and remote terminal interoperability", "deterministic message timing expectations"],
+    control_mappings: [{ framework: "avionics-integration", control: "data bus interoperability baseline" }],
+    regulation_mappings: [{ regulation_id: "AVIONICS_INTERFACE_BASELINE", section: "mission bus interoperability" }],
+    implementation_guidance:
+      "Use MIL-STD-1553 interface and message baseline controls for deterministic avionics integration and test verification.",
+    licensing_restrictions: "Public guidance",
+    citations: [{ type: "MIL", ref: "MIL-STD-1553", source_url: "https://quicksearch.dla.mil" }]
+  },
+  {
+    id: "MIL_STD_1760",
+    name: "MIL-STD-1760",
+    version: "current",
+    publisher: "US DoD",
+    scope: "Aircraft/store electrical and data interface interoperability",
+    key_clauses: ["store interface compatibility", "power/data interconnect requirements"],
+    control_mappings: [{ framework: "avionics-integration", control: "aircraft payload interface interoperability" }],
+    regulation_mappings: [{ regulation_id: "AVIONICS_INTERFACE_BASELINE", section: "aircraft-store interface baseline" }],
+    implementation_guidance:
+      "Apply MIL-STD-1760 interface controls to payload/store integration with explicit compatibility and certification evidence.",
+    licensing_restrictions: "Public guidance",
+    citations: [{ type: "MIL", ref: "MIL-STD-1760", source_url: "https://quicksearch.dla.mil" }]
+  },
+  {
+    id: "DO_160",
+    name: "DO-160",
+    version: "current",
+    publisher: "RTCA",
+    scope: "Environmental conditions and test procedures for airborne equipment",
+    key_clauses: ["environmental qualification test categories", "equipment resilience baseline"],
+    control_mappings: [{ framework: "airworthiness", control: "environmental qualification evidence" }],
+    regulation_mappings: [{ regulation_id: "AIRBORNE_EQUIPMENT_ENVIRONMENTAL_QUALIFICATION", section: "environmental qualification profile" }],
+    implementation_guidance:
+      "Integrate DO-160 qualification planning and evidence into airborne equipment release and sustainment workflows.",
+    licensing_restrictions: "Licensed standard text",
+    citations: [{ type: "RTCA", ref: "DO-160", source_url: "https://www.rtca.org/standards/" }]
+  },
+  {
+    id: "FACE_TS",
+    name: "FACE Technical Standard",
+    version: "current",
+    publisher: "The Open Group FACE Consortium",
+    scope: "Open architecture conformance for airborne software portability and interoperability",
+    key_clauses: ["conformance profiles", "portable software segment interfaces"],
+    control_mappings: [{ framework: "open-architecture", control: "airborne software portability baseline" }],
+    regulation_mappings: [{ regulation_id: "MOSA_OPEN_ARCHITECTURE", section: "face conformance profile" }],
+    implementation_guidance:
+      "Adopt FACE-aligned software segmentation and conformance evidence to improve cross-platform portability and coalition interoperability.",
+    licensing_restrictions: "Public summary / licensed detail",
+    citations: [{ type: "FACE", ref: "Technical Standard", source_url: "https://www.opengroup.org/face" }]
+  },
+  {
+    id: "SOSA_TS",
+    name: "SOSA Technical Standard",
+    version: "current",
+    publisher: "The Open Group SOSA Consortium",
+    scope: "Open modular sensor architecture interoperability profiles",
+    key_clauses: ["modular sensor architecture profile", "plug-and-play interoperability constraints"],
+    control_mappings: [{ framework: "open-architecture", control: "modular sensor interoperability baseline" }],
+    regulation_mappings: [{ regulation_id: "MOSA_OPEN_ARCHITECTURE", section: "sosa conformance profile" }],
+    implementation_guidance:
+      "Use SOSA profiles to enforce modular sensor integration boundaries and evidence-backed interoperability in mission systems.",
+    licensing_restrictions: "Public summary / licensed detail",
+    citations: [{ type: "SOSA", ref: "Technical Standard", source_url: "https://www.opengroup.org/sosa" }]
+  },
+  {
+    id: "NATO_STANAG_4671",
+    name: "NATO STANAG 4671",
+    version: "Edition current",
+    publisher: "NATO",
+    scope: "Unmanned aerial systems airworthiness interoperability requirements",
+    key_clauses: ["coalition UAS airworthiness criteria", "certification evidence interoperability"],
+    control_mappings: [{ framework: "coalition-uav", control: "uas airworthiness interoperability baseline" }],
+    regulation_mappings: [{ regulation_id: "NATO_C_M_2002_49", section: "coalition UAS certification alignment" }],
+    implementation_guidance:
+      "Align UAS airworthiness criteria and certification evidence packages to coalition interoperability expectations in joint operations.",
+    licensing_restrictions: "Public summary only",
+    citations: [{ type: "NATO", ref: "STANAG 4671", source_url: "https://nso.nato.int" }]
+  },
+  {
+    id: "AS9100D_QMS",
+    name: "AS9100D",
+    version: "D revision",
+    publisher: "IAQG / SAE International",
+    scope: "Quality management system requirements for aviation, space, and defense organizations",
+    key_clauses: ["risk-based thinking", "configuration management", "product safety and counterfeit prevention"],
+    control_mappings: [{ framework: "quality-assurance", control: "aerospace qms baseline" }],
+    regulation_mappings: [{ regulation_id: "AEROSPACE_QUALITY_MANAGEMENT", section: "organization-wide quality baseline" }],
+    implementation_guidance:
+      "Implement AS9100D-aligned quality governance, traceability, and nonconformance controls across design, production, and sustainment workflows.",
+    licensing_restrictions: "Licensed standard text",
+    citations: [{ type: "SAE", ref: "AS9100D", source_url: "https://www.sae.org/standards/content/as9100d/" }]
+  },
+  {
+    id: "AS9110C_MRO_QMS",
+    name: "AS9110C",
+    version: "C revision",
+    publisher: "IAQG / SAE International",
+    scope: "Quality management system requirements for aerospace maintenance organizations",
+    key_clauses: ["maintenance release integrity", "work package control", "airworthiness records quality"],
+    control_mappings: [{ framework: "quality-assurance", control: "maintenance and sustainment qms baseline" }],
+    regulation_mappings: [{ regulation_id: "AEROSPACE_QUALITY_MANAGEMENT", section: "maintenance organization baseline" }],
+    implementation_guidance:
+      "Adopt AS9110C maintenance quality controls to preserve airworthiness release integrity and auditable sustainment records.",
+    licensing_restrictions: "Licensed standard text",
+    citations: [{ type: "SAE", ref: "AS9110C", source_url: "https://www.sae.org/standards/content/as9110c/" }]
+  },
+  {
+    id: "MIL_STD_810",
+    name: "MIL-STD-810",
+    version: "current",
+    publisher: "US DoD",
+    scope: "Environmental engineering considerations and laboratory testing",
+    key_clauses: ["mission profile tailoring", "environmental stress test methods", "qualification evidence traceability"],
+    control_mappings: [{ framework: "qualification", control: "environmental test qualification baseline" }],
+    regulation_mappings: [{ regulation_id: "AIRBORNE_EQUIPMENT_ENVIRONMENTAL_QUALIFICATION", section: "mission profile qualification tailoring" }],
+    implementation_guidance:
+      "Tailor environmental test profiles to operational mission conditions and maintain objective qualification evidence for design acceptance.",
+    licensing_restrictions: "Public guidance",
+    citations: [{ type: "MIL", ref: "MIL-STD-810", source_url: "https://quicksearch.dla.mil" }]
+  },
+  {
+    id: "MIL_STD_461",
+    name: "MIL-STD-461",
+    version: "current",
+    publisher: "US DoD",
+    scope: "Electromagnetic interference and compatibility control requirements",
+    key_clauses: ["conducted and radiated emissions limits", "susceptibility limits", "EMI/EMC verification evidence"],
+    control_mappings: [{ framework: "qualification", control: "electromagnetic compatibility assurance baseline" }],
+    regulation_mappings: [{ regulation_id: "MISSION_EMC_ASSURANCE", section: "emission and susceptibility qualification" }],
+    implementation_guidance:
+      "Integrate MIL-STD-461 emissions and susceptibility verification into subsystem qualification and platform integration acceptance gates.",
+    licensing_restrictions: "Public guidance",
+    citations: [{ type: "MIL", ref: "MIL-STD-461", source_url: "https://quicksearch.dla.mil" }]
+  },
+  {
+    id: "MIL_HDBK_516",
+    name: "MIL-HDBK-516",
+    version: "current",
+    publisher: "US DoD",
+    scope: "Military aircraft airworthiness certification criteria",
+    key_clauses: ["airworthiness criteria baseline", "compliance evidence expectations", "certification authority decision support"],
+    control_mappings: [{ framework: "airworthiness", control: "military certification criteria baseline" }],
+    regulation_mappings: [{ regulation_id: "AIRWORTHINESS_CERTIFICATION_CRITERIA", section: "military airworthiness evidence baseline" }],
+    implementation_guidance:
+      "Use MIL-HDBK-516 criteria to structure military airworthiness compliance evidence across design, qualification, and sustainment decisions.",
+    licensing_restrictions: "Public guidance",
+    citations: [{ type: "MIL", ref: "MIL-HDBK-516", source_url: "https://quicksearch.dla.mil" }]
+  },
+  {
+    id: "NIST_SP_800_37",
+    name: "NIST SP 800-37 Rev.2",
+    version: "Rev.2 (2018)",
+    publisher: "NIST",
+    scope: "Risk Management Framework lifecycle for mission systems",
+    key_clauses: ["prepare", "categorize", "select", "implement", "assess", "authorize", "monitor"],
+    control_mappings: [{ framework: "nist_sp_800_53", control: "RMF lifecycle integration" }],
+    regulation_mappings: [{ regulation_id: "DODI_8510_01", section: "RMF execution model" }],
+    implementation_guidance:
+      "Use RMF lifecycle governance to align system authorization boundaries, control inheritance, and continuous monitoring evidence.",
+    licensing_restrictions: "Public domain",
+    citations: [{ type: "NIST", ref: "SP 800-37 Rev.2", source_url: "https://csrc.nist.gov/pubs/sp/800/37/r2/final" }]
+  },
+  {
+    id: "NIST_SP_800_61",
+    name: "NIST SP 800-61 Rev.3",
+    version: "Rev.3 (2025)",
+    publisher: "NIST",
+    scope: "Computer security incident response recommendations",
+    key_clauses: ["preparation", "detection and analysis", "containment eradication and recovery", "post-incident activities"],
+    control_mappings: [{ framework: "nist_sp_800_53", control: "IR family operationalization" }],
+    regulation_mappings: [
+      { regulation_id: "DFARS_252.204-7012_INCIDENT", section: "timely reporting support" },
+      { regulation_id: "NIS2_DIRECTIVE_2022_2555_INCIDENT", section: "incident response process alignment" }
+    ],
+    implementation_guidance:
+      "Operationalize incident detection, escalation, reporting, and lessons-learned workflows with evidence that aligns to contractual notification deadlines.",
+    licensing_restrictions: "Public domain",
+    citations: [{ type: "NIST", ref: "SP 800-61 Rev.3", source_url: "https://csrc.nist.gov/pubs/sp/800/61/r3/final" }]
   },
   {
     id: "NIST_SP_800_53_DOD_OVERLAY",
@@ -2612,6 +3924,62 @@ const applicabilityRules = [
     citations: [{ type: "CFR", ref: "DFARS 252.204-7012", source_url: "https://www.acquisition.gov/dfars/252.204-7012-safeguarding-covered-defense-information-and-cyber-incident-reporting" }]
   },
   {
+    id: "rule-us-cui-assessment-notice",
+    condition: { country: ["US", "US-*"], role: ["prime_contractor", "defense_subcontractor", "subcontractor"], data_types: ["cui"] },
+    obligation: {
+      regulation_id: "DFARS_252.204-7019",
+      standard_id: "DFARS_7019_ASSESSMENT",
+      confidence: "authoritative",
+      basis: "Offerors handling CUI must maintain current NIST SP 800-171 DoD assessment results in SPRS."
+    },
+    rationale: "DFARS 252.204-7019 creates a pre-award assessment visibility requirement for CUI contracts.",
+    citations: [{ type: "DFARS", ref: "252.204-7019", source_url: "https://www.acquisition.gov/dfars/252.204-7019-notice-nist-sp-800-171-dod-assessment-requirements" }]
+  },
+  {
+    id: "rule-us-cui-assessment-access",
+    condition: { country: ["US", "US-*"], role: ["prime_contractor", "defense_subcontractor", "subcontractor"], data_types: ["cui"] },
+    obligation: {
+      regulation_id: "DFARS_252.204-7020",
+      standard_id: "DFARS_7020_ASSESSMENT",
+      confidence: "authoritative",
+      basis: "Contractors handling CUI must support DoD medium/high cybersecurity assessments when requested."
+    },
+    rationale: "DFARS 252.204-7020 requires contractor support for DoD assessment execution and evidence access.",
+    citations: [{ type: "DFARS", ref: "252.204-7020", source_url: "https://www.acquisition.gov/dfars/252.204-7020-nist-sp-800-171-dod-assessment-requirements" }]
+  },
+  {
+    id: "rule-us-scrm",
+    condition: {
+      country: ["US", "US-*"],
+      role: ["prime_contractor", "defense_subcontractor", "subcontractor", "aerospace_oem"],
+      data_types: ["supply-chain-data", "program-protection", "weapons-system-data"]
+    },
+    obligation: {
+      regulation_id: "NIST_SP_800_161",
+      standard_id: "NIST_SP_800_161",
+      confidence: "inferred",
+      basis: "Defense programs should apply formal cybersecurity supply chain risk management practices and supplier controls."
+    },
+    rationale: "Complex defense supply chains require structured C-SCRM controls for provenance, supplier risk, and assurance.",
+    citations: [{ type: "NIST", ref: "SP 800-161 Rev.1", source_url: "https://csrc.nist.gov/pubs/sp/800/161/r1/final" }]
+  },
+  {
+    id: "rule-us-ssdf",
+    condition: {
+      country: ["US", "US-*"],
+      role: ["prime_contractor", "defense_subcontractor", "subcontractor", "aerospace_oem"],
+      data_types: ["weapons-system-data", "program-protection"]
+    },
+    obligation: {
+      regulation_id: "NIST_SP_800_218",
+      standard_id: "NIST_SP_800_218",
+      confidence: "inferred",
+      basis: "Programs delivering defense software should maintain secure software development lifecycle evidence aligned to SSDF."
+    },
+    rationale: "Defense software assurance depends on repeatable secure development practices and vulnerability response governance.",
+    citations: [{ type: "NIST", ref: "SP 800-218", source_url: "https://csrc.nist.gov/pubs/sp/800/218/final" }]
+  },
+  {
     id: "rule-us-fci",
     condition: { country: ["US", "US-*"], data_types: ["fci"] },
     obligation: {
@@ -2660,6 +4028,203 @@ const applicabilityRules = [
     citations: [{ type: "CFR", ref: "32 CFR 117", source_url: "https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117" }]
   },
   {
+    id: "rule-us-rmf-governance",
+    condition: { country: ["US", "US-*"], role: ["prime_contractor", "defense_subcontractor", "aerospace_oem"], programs: ["DoD"] },
+    obligation: {
+      regulation_id: "NIST_SP_800_37",
+      standard_id: "NIST_SP_800_37",
+      confidence: "inferred",
+      basis: "DoD mission systems should apply RMF lifecycle governance aligned to authorization and continuous monitoring."
+    },
+    rationale: "RMF lifecycle discipline is foundational for defensible authorization, inheritance, and monitoring decisions in defense programs.",
+    citations: [{ type: "NIST", ref: "SP 800-37 Rev.2", source_url: "https://csrc.nist.gov/pubs/sp/800/37/r2/final" }]
+  },
+  {
+    id: "rule-us-avionics-data-bus",
+    condition: {
+      country: ["US", "US-*"],
+      role: ["aerospace_oem"],
+      system_types: ["aircraft", "uav", "da-uav", "da-weapons-system"],
+      data_types: ["weapons-system-data", "program-protection"]
+    },
+    obligation: {
+      regulation_id: "MIL_STD_1553",
+      standard_id: "MIL_STD_1553",
+      confidence: "inferred",
+      basis: "Airborne mission-system integration should use a deterministic avionics data bus interoperability baseline."
+    },
+    rationale: "MIL-STD-1553 remains a foundational interoperability baseline for many defense avionics integration contexts.",
+    citations: [{ type: "MIL", ref: "MIL-STD-1553", source_url: "https://quicksearch.dla.mil" }]
+  },
+  {
+    id: "rule-us-aircraft-store-interface",
+    condition: {
+      country: ["US", "US-*"],
+      role: ["aerospace_oem"],
+      system_types: ["aircraft", "uav", "da-uav", "da-weapons-system"],
+      data_types: ["weapons-system-data"]
+    },
+    obligation: {
+      regulation_id: "MIL_STD_1760",
+      standard_id: "MIL_STD_1760",
+      confidence: "inferred",
+      basis: "Aircraft and payload/store integration should meet standardized electrical/data interface interoperability requirements."
+    },
+    rationale: "MIL-STD-1760 compatibility lowers integration risk for weapon and mission payload interfaces.",
+    citations: [{ type: "MIL", ref: "MIL-STD-1760", source_url: "https://quicksearch.dla.mil" }]
+  },
+  {
+    id: "rule-airborne-environmental-qualification",
+    condition: {
+      country: ["US", "EU", "UK", "SE", "NL", "DE", "FR", "IT", "ES"],
+      role: ["aerospace_oem"],
+      system_types: ["aircraft", "uav", "da-uav", "da-weapons-system"]
+    },
+    obligation: {
+      regulation_id: "DO_160",
+      standard_id: "DO_160",
+      confidence: "inferred",
+      basis: "Airborne equipment should maintain environmental qualification evidence aligned to aviation mission profiles."
+    },
+    rationale: "DO-160 qualification evidence is commonly required to demonstrate airborne equipment resilience across operational environments.",
+    citations: [{ type: "RTCA", ref: "DO-160", source_url: "https://www.rtca.org/standards/" }]
+  },
+  {
+    id: "rule-us-mil-environmental-engineering",
+    condition: {
+      country: ["US", "US-*"],
+      role: ["aerospace_oem"],
+      system_types: ["aircraft", "uav", "da-uav", "da-weapons-system"],
+      data_types: ["weapons-system-data", "program-protection"]
+    },
+    obligation: {
+      regulation_id: "MIL_STD_810",
+      standard_id: "MIL_STD_810",
+      confidence: "inferred",
+      basis: "Defense airborne and mission systems should maintain mission-tailored environmental qualification evidence."
+    },
+    rationale: "MIL-STD-810 testing remains a common baseline for mission-profile environmental qualification in defense programs.",
+    citations: [{ type: "MIL", ref: "MIL-STD-810", source_url: "https://quicksearch.dla.mil" }]
+  },
+  {
+    id: "rule-us-mil-emc-hardening",
+    condition: {
+      country: ["US", "US-*"],
+      role: ["aerospace_oem"],
+      system_types: ["aircraft", "uav", "da-uav", "da-weapons-system", "da-tactical-network"],
+      data_types: ["weapons-system-data", "program-protection", "nato-classified"]
+    },
+    obligation: {
+      regulation_id: "MIL_STD_461",
+      standard_id: "MIL_STD_461",
+      confidence: "inferred",
+      basis: "Mission subsystems should satisfy electromagnetic compatibility and interference control qualification criteria."
+    },
+    rationale: "MIL-STD-461 reduces mission risk from emissions and susceptibility issues across integrated defense platforms.",
+    citations: [{ type: "MIL", ref: "MIL-STD-461", source_url: "https://quicksearch.dla.mil" }]
+  },
+  {
+    id: "rule-us-airworthiness-certification-criteria",
+    condition: {
+      country: ["US", "US-*"],
+      role: ["aerospace_oem"],
+      system_types: ["aircraft", "uav", "da-uav"]
+    },
+    obligation: {
+      regulation_id: "MIL_HDBK_516",
+      standard_id: "MIL_HDBK_516",
+      confidence: "inferred",
+      basis: "Military aviation programs should maintain airworthiness certification evidence aligned to MIL-HDBK-516 criteria."
+    },
+    rationale: "MIL-HDBK-516 is widely used to structure military airworthiness certification criteria and evidence.",
+    citations: [{ type: "MIL", ref: "MIL-HDBK-516", source_url: "https://quicksearch.dla.mil" }]
+  },
+  {
+    id: "rule-aerospace-quality-management",
+    condition: {
+      country: ["US", "US-*", "EU", "UK", "SE", "NL", "DE", "FR", "IT", "ES", "NATO"],
+      role: ["aerospace_oem", "prime_contractor", "defense_subcontractor"],
+      system_types: ["aircraft", "uav", "da-uav", "da-weapons-system", "da-supply-chain"],
+      data_types: ["weapons-system-data", "program-protection", "supply-chain-data"]
+    },
+    obligation: {
+      regulation_id: "AS9100D_QMS",
+      standard_id: "AS9100D_QMS",
+      confidence: "inferred",
+      basis: "Aerospace production programs should apply an aviation/space/defense quality management baseline."
+    },
+    rationale: "AS9100D provides common quality governance expectations across aerospace design and production supply chains.",
+    citations: [{ type: "SAE", ref: "AS9100D", source_url: "https://www.sae.org/standards/content/as9100d/" }]
+  },
+  {
+    id: "rule-aerospace-maintenance-quality-management",
+    condition: {
+      country: ["US", "US-*", "EU", "UK", "SE", "NL", "DE", "FR", "IT", "ES", "NATO"],
+      role: ["aerospace_oem", "prime_contractor", "defense_subcontractor"],
+      system_types: ["aircraft", "uav", "da-uav", "da-weapons-system"],
+      data_types: ["weapons-system-data", "supply-chain-data"]
+    },
+    obligation: {
+      regulation_id: "AS9110C_MRO_QMS",
+      standard_id: "AS9110C_MRO_QMS",
+      confidence: "inferred",
+      basis: "Aviation sustainment and maintenance workflows should enforce aerospace maintenance quality management controls."
+    },
+    rationale: "AS9110C strengthens maintenance record integrity and quality discipline for aerospace sustainment activities.",
+    citations: [{ type: "SAE", ref: "AS9110C", source_url: "https://www.sae.org/standards/content/as9110c/" }]
+  },
+  {
+    id: "rule-nato-uas-airworthiness",
+    condition: {
+      country: ["NATO", "NATO-*", "SE", "NL", "DE", "FR", "IT", "ES", "UK", "NO", "US"],
+      role: ["aerospace_oem", "prime_contractor", "defense_subcontractor"],
+      system_types: ["uav", "da-uav"],
+      data_types: ["weapons-system-data", "nato-classified"]
+    },
+    obligation: {
+      regulation_id: "NATO_STANAG_4671",
+      standard_id: "NATO_STANAG_4671",
+      confidence: "inferred",
+      basis: "Coalition UAS programs should align to NATO airworthiness interoperability criteria."
+    },
+    rationale: "STANAG 4671 supports coalition UAS airworthiness and interoperability alignment in multinational operations.",
+    citations: [{ type: "NATO", ref: "STANAG 4671", source_url: "https://nso.nato.int" }]
+  },
+  {
+    id: "rule-us-face-open-architecture",
+    condition: {
+      country: ["US", "US-*"],
+      role: ["prime_contractor", "defense_subcontractor", "aerospace_oem"],
+      system_types: ["da-uav", "da-weapons-system", "da-c2"],
+      data_types: ["weapons-system-data", "program-protection"]
+    },
+    obligation: {
+      regulation_id: "FACE_TS",
+      standard_id: "FACE_TS",
+      confidence: "inferred",
+      basis: "DoD airborne software modernization programs should align open architecture components with FACE conformance profiles."
+    },
+    rationale: "FACE supports software portability and interoperability goals in mission-system modernization efforts.",
+    citations: [{ type: "FACE", ref: "Technical Standard", source_url: "https://www.opengroup.org/face" }]
+  },
+  {
+    id: "rule-us-sosa-open-architecture",
+    condition: {
+      country: ["US", "US-*", "NATO"],
+      role: ["prime_contractor", "defense_subcontractor", "aerospace_oem"],
+      system_types: ["da-c2", "da-isr", "da-tactical-network"],
+      data_types: ["weapons-system-data", "nato-classified"]
+    },
+    obligation: {
+      regulation_id: "SOSA_TS",
+      standard_id: "SOSA_TS",
+      confidence: "inferred",
+      basis: "Mission-system sensor and processing architectures should align to SOSA modular interoperability profiles."
+    },
+    rationale: "SOSA alignment supports modular sensor/system integration and faster coalition capability insertion.",
+    citations: [{ type: "SOSA", ref: "Technical Standard", source_url: "https://www.opengroup.org/sosa" }]
+  },
+  {
     id: "rule-us-aerospace-airworthiness",
     condition: { country: ["US", "EU", "SE", "NL", "DE"], role: ["aerospace_oem"], system_types: ["aircraft", "uav"] },
     obligation: {
@@ -2670,6 +4235,136 @@ const applicabilityRules = [
     },
     rationale: "Cybersecurity assurance for aircraft/UAV software aligns with DO-326A/DO-356A methods.",
     citations: [{ type: "RTCA", ref: "DO-326A", source_url: "https://www.rtca.org" }]
+  },
+  {
+    id: "rule-us-aerospace-continuing-airworthiness",
+    condition: { country: ["US", "EU", "UK", "SE", "NL", "DE"], role: ["aerospace_oem"], system_types: ["aircraft", "uav"] },
+    obligation: {
+      regulation_id: "DO_355",
+      standard_id: "DO_355",
+      confidence: "inferred",
+      basis: "Aircraft operators and OEMs should sustain cybersecurity controls during maintenance and operational life."
+    },
+    rationale: "Continuing airworthiness requires explicit cybersecurity maintenance and operational assurance practices.",
+    citations: [{ type: "RTCA", ref: "DO-355", source_url: "https://www.rtca.org/standards/" }]
+  },
+  {
+    id: "rule-us-aerospace-software-assurance",
+    condition: { country: ["US", "EU", "UK", "SE", "NL", "DE"], role: ["aerospace_oem"], system_types: ["aircraft", "uav"] },
+    obligation: {
+      regulation_id: "DO_178C",
+      standard_id: "DO_178C",
+      confidence: "inferred",
+      basis: "Airborne software should meet DAL-appropriate lifecycle and verification objectives for certification."
+    },
+    rationale: "Airborne software certification depends on DO-178C lifecycle evidence and verification rigor.",
+    citations: [{ type: "RTCA", ref: "DO-178C", source_url: "https://www.rtca.org/standards/" }]
+  },
+  {
+    id: "rule-us-aerospace-hardware-assurance",
+    condition: { country: ["US", "EU", "UK", "SE", "NL", "DE"], role: ["aerospace_oem"], system_types: ["aircraft", "uav"] },
+    obligation: {
+      regulation_id: "DO_254",
+      standard_id: "DO_254",
+      confidence: "inferred",
+      basis: "Airborne electronic hardware should satisfy design assurance lifecycle objectives and verification evidence."
+    },
+    rationale: "Airborne hardware assurance relies on structured planning, traceability, and verification per DO-254.",
+    citations: [{ type: "RTCA", ref: "DO-254", source_url: "https://www.rtca.org/standards/" }]
+  },
+  {
+    id: "rule-us-aerospace-system-development",
+    condition: { country: ["US", "EU", "UK", "SE", "NL", "DE"], role: ["aerospace_oem"], system_types: ["aircraft", "uav"] },
+    obligation: {
+      regulation_id: "ARP4754A",
+      standard_id: "ARP4754A",
+      confidence: "inferred",
+      basis: "Aircraft/system development should maintain integrated lifecycle planning and requirements allocation controls."
+    },
+    rationale: "ARP4754A supports consistent aircraft and system development governance across multidisciplinary teams.",
+    citations: [{ type: "SAE", ref: "ARP4754A", source_url: "https://www.sae.org/standards/content/arp4754a/" }]
+  },
+  {
+    id: "rule-us-aerospace-system-safety",
+    condition: { country: ["US", "EU", "UK", "SE", "NL", "DE"], role: ["aerospace_oem"], system_types: ["aircraft", "uav"] },
+    obligation: {
+      regulation_id: "ARP4761A",
+      standard_id: "ARP4761A",
+      confidence: "inferred",
+      basis: "Aircraft/system hazard analysis should be maintained with FHA/PSSA/SSA artifacts linked to cybersecurity threat models."
+    },
+    rationale: "ARP4761A supports safety case consistency and risk acceptance evidence for complex airborne systems.",
+    citations: [{ type: "SAE", ref: "ARP4761A", source_url: "https://www.sae.org/standards/content/arp4761a/" }]
+  },
+  {
+    id: "rule-eu-space-software-engineering",
+    condition: {
+      country: ["EU", "SE", "NL", "DE", "FR", "IT", "ES"],
+      role: ["aerospace_oem"],
+      system_types: ["satellite", "da-satellite"]
+    },
+    obligation: {
+      regulation_id: "ECSS_E_ST_40",
+      standard_id: "ECSS_E_ST_40",
+      confidence: "inferred",
+      basis: "European space missions should apply ECSS software engineering lifecycle requirements to mission and ground software."
+    },
+    rationale: "ECSS-E-ST-40 provides the baseline software engineering controls used in many European space programs.",
+    citations: [{ type: "ECSS", ref: "ECSS-E-ST-40C", source_url: "https://ecss.nl" }]
+  },
+  {
+    id: "rule-eu-space-software-assurance",
+    condition: {
+      country: ["EU", "SE", "NL", "DE", "FR", "IT", "ES"],
+      role: ["aerospace_oem"],
+      system_types: ["satellite", "da-satellite"]
+    },
+    obligation: {
+      regulation_id: "ECSS_Q_ST_80",
+      standard_id: "ECSS_Q_ST_80",
+      confidence: "inferred",
+      basis: "European space programs should maintain software product assurance evidence aligned to ECSS quality objectives."
+    },
+    rationale: "ECSS-Q-ST-80 drives software assurance discipline for space mission acceptance and risk reduction.",
+    citations: [{ type: "ECSS", ref: "ECSS-Q-ST-80C", source_url: "https://ecss.nl" }]
+  },
+  {
+    id: "rule-us-space-software-governance",
+    condition: {
+      country: ["US", "US-*"],
+      role: ["aerospace_oem"],
+      system_types: ["satellite", "da-satellite"]
+    },
+    obligation: {
+      regulation_id: "NASA_NPR_7150_2",
+      standard_id: "NASA_NPR_7150_2",
+      confidence: "inferred",
+      basis: "US mission software programs should align software lifecycle rigor and assurance to NASA NPR 7150.2."
+    },
+    rationale: "NPR 7150.2 is a common mission software engineering baseline in US space programs.",
+    citations: [{ type: "NASA", ref: "NPR 7150.2", source_url: "https://nodis3.gsfc.nasa.gov/displayDir.cfm?t=NPR&c=7150&s=2" }]
+  },
+  {
+    id: "rule-eu-aerospace-part-is",
+    condition: { country: ["EU", "SE", "NL", "DE", "FR", "ES", "IT"], role: ["aerospace_oem"], system_types: ["aircraft", "uav"] },
+    obligation: {
+      regulation_id: "EASA_PART_IS_2023_203",
+      standard_id: "EASA_PART_IS",
+      confidence: "authoritative",
+      basis: "EU aviation entities should implement Part-IS information security risk management and incident reporting controls.",
+      legal_force: "regulation",
+      conflict_group: "airworthiness-cybersecurity",
+      precedence_tier: 2,
+      clause_refs: ["clause-easa-part-is-2023-203", "clause-easa-part-is-2022-1645"]
+    },
+    rationale: "EASA Part-IS imposes aviation-sector information security governance across operational and continuing airworthiness domains.",
+    citations: [
+      {
+        type: "EU",
+        ref: "Implementing Regulation (EU) 2023/203",
+        source_url: "https://www.easa.europa.eu/en/document-library/regulations/commission-implementing-regulation-eu-2023203"
+      }
+    ]
   },
   {
     id: "rule-se-defense-sub",
@@ -2761,6 +4456,59 @@ const applicabilityRules = [
     citations: [{ type: "NATO", ref: "C-M(2002)49", source_url: "https://www.nato.int/cps/en/natohq/topics_50090.htm" }]
   },
   {
+    id: "rule-nato-uav-interoperability",
+    condition: {
+      country: ["NATO", "SE", "NL", "DE", "US", "UK", "FR", "IT"],
+      role: ["aerospace_oem", "prime_contractor", "defense_subcontractor"],
+      system_types: ["uav", "da-uav"],
+      data_types: ["nato-classified", "weapons-system-data"],
+      additional_context: ["coalition_sharing"]
+    },
+    obligation: {
+      regulation_id: "NATO_STANAG_4586",
+      standard_id: "NATO_STANAG_4586",
+      confidence: "inferred",
+      basis: "Coalition UAV operations should align control-system interoperability to STANAG 4586 interface profiles."
+    },
+    rationale: "STANAG 4586 interoperability reduces coalition UAV command/control integration failures.",
+    citations: [{ type: "NATO", ref: "STANAG 4586", source_url: "https://nso.nato.int" }]
+  },
+  {
+    id: "rule-nato-isr-imagery-interoperability",
+    condition: {
+      country: ["NATO", "SE", "NL", "DE", "US", "UK", "FR", "IT"],
+      role: ["aerospace_oem", "prime_contractor", "defense_subcontractor"],
+      system_types: ["uav", "satellite", "da-uav", "da-satellite", "da-isr"],
+      data_types: ["nato-classified", "weapons-system-data"],
+      additional_context: ["coalition_sharing"]
+    },
+    obligation: {
+      regulation_id: "NATO_STANAG_4609",
+      standard_id: "NATO_STANAG_4609",
+      confidence: "inferred",
+      basis: "Coalition ISR imagery workflows should use STANAG 4609-compatible formats and metadata."
+    },
+    rationale: "STANAG 4609 enables interoperable ISR motion imagery exploitation across coalition systems.",
+    citations: [{ type: "NATO", ref: "STANAG 4609", source_url: "https://nso.nato.int" }]
+  },
+  {
+    id: "rule-nato-tactical-data-link",
+    condition: {
+      country: ["NATO", "SE", "NL", "DE", "US", "UK", "FR", "IT"],
+      system_types: ["da-tactical-network", "da-c2", "uav"],
+      data_types: ["nato-classified", "weapons-system-data"],
+      additional_context: ["coalition_sharing"]
+    },
+    obligation: {
+      regulation_id: "NATO_STANAG_5516",
+      standard_id: "NATO_STANAG_5516",
+      confidence: "inferred",
+      basis: "Coalition tactical data exchanges should align to STANAG 5516 interoperability profiles."
+    },
+    rationale: "STANAG 5516 governs tactical data link interoperability that underpins coalition C2 and air operations.",
+    citations: [{ type: "NATO", ref: "STANAG 5516", source_url: "https://nso.nato.int" }]
+  },
+  {
     id: "rule-program-protection",
     condition: { country: ["US", "SE", "NL", "DE", "UK"], data_types: ["program-protection", "weapons-system-data"] },
     obligation: {
@@ -2807,6 +4555,18 @@ const applicabilityRules = [
     },
     rationale: "Reporting timelines and evidence preservation obligations are mandatory for affected covered defense information.",
     citations: [{ type: "CFR", ref: "DFARS 252.204-7012(d)", source_url: "https://www.acquisition.gov/dfars/252.204-7012-safeguarding-covered-defense-information-and-cyber-incident-reporting" }]
+  },
+  {
+    id: "rule-incident-response-process",
+    condition: { country: ["US", "US-*"], data_types: ["cui", "fci", "itar-controlled", "ear-controlled"] },
+    obligation: {
+      regulation_id: "NIST_SP_800_61",
+      standard_id: "NIST_SP_800_61",
+      confidence: "inferred",
+      basis: "Defense-relevant cyber incidents should follow a documented incident response lifecycle that supports contractual reporting timelines."
+    },
+    rationale: "Standardized incident response processes reduce reporting failures and improve forensic/evidence quality for defense contracts.",
+    citations: [{ type: "NIST", ref: "SP 800-61 Rev.3", source_url: "https://csrc.nist.gov/pubs/sp/800/61/r3/final" }]
   },
   {
     id: "rule-uk-mod-cyber-baseline",
@@ -2883,12 +4643,45 @@ const OBLIGATION_CLAUSE_REFERENCE_MAP = {
   "NATO_FSC_HANDLING": ["clause-nato-cm2002-49"],
   "DFARS_252.204-7021": ["clause-dfars-7021"],
   "DFARS_252.204-7025": ["clause-dfars-7025"],
+  "DFARS_252.204-7019": ["clause-dfars-7019"],
+  "DFARS_252.204-7020": ["clause-dfars-7020"],
+  "NIST_SP_800_161": ["clause-nist-800-161r1"],
+  "NIST_SP_800_218": ["clause-nist-800-218"],
+  "NIST_SP_800_37": ["clause-nist-800-37r2"],
+  "NIST_SP_800_61": ["clause-nist-800-61r3"],
+  "MIL_STD_1553": ["clause-mil-std-1553"],
+  "MIL_STD_1760": ["clause-mil-std-1760"],
+  "DO_160": ["clause-do-160"],
+  "FACE_TS": ["clause-face-ts"],
+  "SOSA_TS": ["clause-sosa-ts"],
+  "NATO_STANAG_4671": ["clause-stanag-4671"],
+  "AS9100D_QMS": ["clause-as9100d"],
+  "AS9110C_MRO_QMS": ["clause-as9110c"],
+  "MIL_STD_810": ["clause-mil-std-810"],
+  "MIL_STD_461": ["clause-mil-std-461"],
+  "MIL_HDBK_516": ["clause-mil-hdbk-516"],
+  "NATO_STANAG_4586": ["clause-stanag-4586"],
+  "NATO_STANAG_4609": ["clause-stanag-4609"],
+  "NATO_STANAG_5516": ["clause-stanag-5516"],
+  "ECSS_E_ST_40": ["clause-ecss-e-st-40c"],
+  "ECSS_Q_ST_80": ["clause-ecss-q-st-80c"],
+  "NASA_NPR_7150_2": ["clause-nasa-npr-7150-2"],
+  "DO_355": ["clause-do-355"],
+  "DO_178C": ["clause-do-178c"],
+  "DO_254": ["clause-do-254"],
+  "ARP4754A": ["clause-arp4754a"],
+  "ARP4761A": ["clause-arp4761a"],
+  "EASA_PART_IS_2023_203": ["clause-easa-part-is-2023-203"],
+  "EASA_PART_IS_2022_1645": ["clause-easa-part-is-2022-1645"],
   "EU_CRA_2024_2847": ["clause-eu-cra-art6"],
   "UK_DEFSTAN_05_138": ["clause-uk-defstan-05-138"]
 };
 
 function inferLegalForce(regulationId) {
   const id = String(regulationId || "").toLowerCase();
+  if (id.includes("easa_part_is")) {
+    return "regulation";
+  }
   if (id.includes("cfr") || id.includes("dfars") || id.includes("far") || id.includes("itar") || id.includes("ear")) {
     return "regulation";
   }
@@ -2901,7 +4694,21 @@ function inferLegalForce(regulationId) {
   if (id.includes("stanag") || id.includes("nato")) {
     return "alliance-policy";
   }
-  if (id.includes("nist") || id.includes("dodi") || id.includes("cmmc")) {
+  if (
+    id.includes("nist") ||
+    id.includes("dodi") ||
+    id.includes("cmmc") ||
+    id.includes("ecss") ||
+    id.includes("npr") ||
+    id.includes("do_") ||
+    id.includes("arp") ||
+    id.includes("mil_std") ||
+    id.includes("mil_hdbk") ||
+    id.includes("as9100") ||
+    id.includes("as9110") ||
+    id.includes("face_ts") ||
+    id.includes("sosa_ts")
+  ) {
     return "standard-policy";
   }
   return "guidance";
@@ -2915,8 +4722,21 @@ function inferConflictGroup(regulationId) {
   if (id.includes("nato") || id.includes("euci") || id.includes("nispom")) {
     return "classified-handling";
   }
-  if (id.includes("incident") || id.includes("7012") || id.includes("nis2")) {
+  if (id.includes("incident") || id.includes("7012") || id.includes("nis2") || id.includes("800_61")) {
     return "incident-reporting";
+  }
+  if (
+    id.includes("easa") ||
+    id.includes("do_") ||
+    id.includes("arp") ||
+    id.includes("ecss") ||
+    id.includes("npr") ||
+    id.includes("mil_hdbk")
+  ) {
+    return "airworthiness-cybersecurity";
+  }
+  if (id.includes("face") || id.includes("sosa") || id.includes("mil_std") || id.includes("as9100") || id.includes("as9110")) {
+    return "mission-assurance";
   }
   if (id.includes("cmmc") || id.includes("800_171") || id.includes("fci")) {
     return "cui-fci-compliance";
