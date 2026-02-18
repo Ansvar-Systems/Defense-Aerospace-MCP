@@ -27,7 +27,7 @@ function getMetadataMap(db) {
 
 function createSchema(db) {
   db.exec(`
-    PRAGMA journal_mode=WAL;
+    PRAGMA journal_mode=DELETE;
     PRAGMA foreign_keys=OFF;
 
     CREATE TABLE IF NOT EXISTS architecture_patterns (

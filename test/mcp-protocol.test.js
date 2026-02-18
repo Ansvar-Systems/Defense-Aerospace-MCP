@@ -8,7 +8,7 @@ const test = require("node:test");
 
 const { openDatabase } = require("../src/database");
 const { makeTools, TOOL_DEFINITIONS } = require("../src/domain-service");
-const { DefenseMcpServer } = require("../src/mcp-server");
+const { DefenseMcpServer, computeHealthStatus } = require("../src/mcp-server");
 
 function createServerHarness() {
   const dbPath = path.join(os.tmpdir(), `defense-mcp-protocol-${Date.now()}-${Math.random()}.db`);
@@ -78,6 +78,16 @@ test("tools/list exposes universal and domain-specific tools", async () => {
   }
 });
 
+test("database journal mode is DELETE for serverless-safe SQLite behavior", () => {
+  const harness = createServerHarness();
+  try {
+    const row = harness.db.prepare("PRAGMA journal_mode;").get();
+    assert.equal(String(row.journal_mode).toLowerCase(), "delete");
+  } finally {
+    harness.cleanup();
+  }
+});
+
 test("tools/call wraps structured tool response", async () => {
   const harness = createServerHarness();
   try {
@@ -115,4 +125,40 @@ test("unknown method returns JSON-RPC method not found", async () => {
   } finally {
     harness.cleanup();
   }
+});
+
+test("notifications/cancelled is accepted as a no-op notification", async () => {
+  const harness = createServerHarness();
+  try {
+    const response = await harness.server.handleJsonRpcPayload({
+      jsonrpc: "2.0",
+      method: "notifications/cancelled",
+      params: {
+        requestId: 3,
+        reason: "client cancel"
+      }
+    });
+
+    assert.equal(response, null);
+  } finally {
+    harness.cleanup();
+  }
+});
+
+test("health status is stale when dataset age exceeds stale threshold", () => {
+  const health = computeHealthStatus(
+    { last_updated: "2025-11-01" },
+    new Date("2026-02-18T00:00:00Z")
+  );
+  assert.equal(health.status, "stale");
+  assert.ok(health.age_days >= health.stale_after_days);
+});
+
+test("health status is degraded when dataset age exceeds degraded threshold", () => {
+  const health = computeHealthStatus(
+    { last_updated: "2024-01-01" },
+    new Date("2026-02-18T00:00:00Z")
+  );
+  assert.equal(health.status, "degraded");
+  assert.ok(health.age_days >= health.degraded_after_days);
 });

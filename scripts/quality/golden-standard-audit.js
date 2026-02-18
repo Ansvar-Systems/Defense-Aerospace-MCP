@@ -312,6 +312,24 @@ async function runScenarioGates(tools, checks, failures) {
     collectRecordChecks("evidence_artifacts", seed.evidenceArtifacts, checks, failures);
     collectRecordChecks("expert_playbooks", seed.expertPlaybooks || [], checks, failures);
 
+    const goldenFixturePath = path.join(process.cwd(), "fixtures", "golden-tests.json");
+    let goldenFixtureEntries = [];
+    try {
+      goldenFixtureEntries = JSON.parse(fs.readFileSync(goldenFixturePath, "utf8"));
+    } catch {
+      goldenFixtureEntries = [];
+    }
+    checks.push({
+      gate: "golden_contract_fixture_depth",
+      status: Array.isArray(goldenFixtureEntries) && goldenFixtureEntries.length >= 10 ? "pass" : "fail",
+      details: `${Array.isArray(goldenFixtureEntries) ? goldenFixtureEntries.length : 0} fixture cases`
+    });
+    assert(
+      Array.isArray(goldenFixtureEntries) && goldenFixtureEntries.length >= 10,
+      "fixtures/golden-tests.json must contain at least 10 contract cases",
+      failures
+    );
+
     const requiredSourceIds = [
       "nist-800-171-r3",
       "nist-800-171a-r3",

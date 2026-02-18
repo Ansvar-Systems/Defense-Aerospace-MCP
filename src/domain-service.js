@@ -98,6 +98,33 @@ function toText(value) {
   return JSON.stringify(value);
 }
 
+function toBoundedInt(value, fallback, min, max) {
+  const parsed = Number.parseInt(String(value ?? ""), 10);
+  if (Number.isNaN(parsed)) {
+    return fallback;
+  }
+  return Math.max(min, Math.min(parsed, max));
+}
+
+function requireObject(value, fieldName) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    throw new ToolInputError(`${fieldName} is required`, { required: [fieldName] });
+  }
+}
+
+function requireNonEmptyString(value, fieldName) {
+  if (!toText(value).trim()) {
+    throw new ToolInputError(`${fieldName} is required`, { required: [fieldName] });
+  }
+}
+
+function requireNonEmptyArray(value, fieldName) {
+  const values = normalizeArray(value).filter((entry) => entry !== undefined && entry !== null && String(entry).trim() !== "");
+  if (values.length === 0) {
+    throw new ToolInputError(`${fieldName} is required`, { required: [fieldName] });
+  }
+}
+
 function normalizeTopic(topic) {
   return (topic || "").trim().toLowerCase();
 }
@@ -1320,7 +1347,7 @@ function makeTools(db, metadataMap) {
       return wrapResponse(
         {
           name: "Defense / Aerospace MCP",
-          version: "1.2.0",
+          version: metadataMap.dataset_version || seed.DATASET_VERSION,
           domain: "defense-aerospace",
           coverage_summary: {
             architecture_patterns: patternCount,
@@ -1367,19 +1394,24 @@ function makeTools(db, metadataMap) {
 
     async list_sources(args = {}) {
       const sourceType = args.source_type;
+      const limit = toBoundedInt(args.limit, 50, 1, 200);
+      const offset = toBoundedInt(args.offset, 0, 0, 1000000);
       let rows = [];
+      let totalMatches = 0;
       if (sourceType) {
+        totalMatches = db.prepare("SELECT COUNT(*) AS n FROM sources WHERE lower(source_type)=lower(?)").get(sourceType).n;
         rows = db
           .prepare(
-            "SELECT id, name, source_type, content, provenance, license, refresh_cadence, source_url, effective_date, last_verified, knowledge_tier, last_updated FROM sources WHERE lower(source_type)=lower(?) ORDER BY name"
+            "SELECT id, name, source_type, content, provenance, license, refresh_cadence, source_url, effective_date, last_verified, knowledge_tier, last_updated FROM sources WHERE lower(source_type)=lower(?) ORDER BY name LIMIT ? OFFSET ?"
           )
-          .all(sourceType);
+          .all(sourceType, limit, offset);
       } else {
+        totalMatches = db.prepare("SELECT COUNT(*) AS n FROM sources").get().n;
         rows = db
           .prepare(
-            "SELECT id, name, source_type, content, provenance, license, refresh_cadence, source_url, effective_date, last_verified, knowledge_tier, last_updated FROM sources ORDER BY name"
+            "SELECT id, name, source_type, content, provenance, license, refresh_cadence, source_url, effective_date, last_verified, knowledge_tier, last_updated FROM sources ORDER BY name LIMIT ? OFFSET ?"
           )
-          .all();
+          .all(limit, offset);
       }
 
       const entries = rows.map((row) => ({
@@ -1400,10 +1432,17 @@ function makeTools(db, metadataMap) {
       return wrapResponse(
         {
           entries,
+          total_matches: totalMatches,
+          returned: entries.length,
+          limit,
+          offset,
+          has_more: offset + entries.length < totalMatches,
           freshness_summary: {
             baseline_date: seed.KNOWLEDGE_BASELINE.baseline_date,
             authoritative_sources: entries.filter((entry) => entry.knowledge_tier === "authoritative").length,
-            advisory_sources: entries.filter((entry) => entry.knowledge_tier === "advisory").length
+            advisory_sources: entries.filter((entry) => entry.knowledge_tier === "advisory").length,
+            authoritative_sources_returned: entries.filter((entry) => entry.knowledge_tier === "authoritative").length,
+            advisory_sources_returned: entries.filter((entry) => entry.knowledge_tier === "advisory").length
           }
         },
         metadataMap,
@@ -1421,7 +1460,8 @@ function makeTools(db, metadataMap) {
       const coverageLevel = toText(args.coverage_level || "").toLowerCase();
       const requestedJurisdiction = normalizeJurisdictionToken(args.jurisdiction || args.country || "");
       const natoMember = normalizeBoolean(args.nato_member);
-      const limit = Math.max(1, Math.min(Number(args.limit) || 50, 200));
+      const limit = toBoundedInt(args.limit, 50, 1, 200);
+      const offset = toBoundedInt(args.offset, 0, 0, 1000000);
 
       const profiles = (seed.jurisdictionProfiles || []).filter((profile) => {
         if (region && String(profile.region || "").toUpperCase() !== region) {
@@ -1451,7 +1491,7 @@ function makeTools(db, metadataMap) {
           }
           return String(a.jurisdiction || "").localeCompare(String(b.jurisdiction || ""));
         })
-        .slice(0, limit);
+        .slice(offset, offset + limit);
 
       const foundationCalls = dedupeBy(
         sortedProfiles.flatMap((profile) => profile.foundation_join_hints || []),
@@ -1462,7 +1502,10 @@ function makeTools(db, metadataMap) {
         {
           entries: sortedProfiles,
           total_matches: profiles.length,
-          returned: sortedProfiles.length
+          returned: sortedProfiles.length,
+          limit,
+          offset,
+          has_more: offset + sortedProfiles.length < profiles.length
         },
         metadataMap,
         {
@@ -1761,6 +1804,8 @@ function makeTools(db, metadataMap) {
     async list_clause_references(args = {}) {
       const regulationId = toText(args.regulation_id || "");
       const jurisdiction = normalizeJurisdictionToken(args.jurisdiction_scope || "");
+      const limit = toBoundedInt(args.limit, 100, 1, 500);
+      const offset = toBoundedInt(args.offset, 0, 0, 1000000);
 
       let clauses = getAllClauseReferences();
       if (regulationId) {
@@ -1773,15 +1818,22 @@ function makeTools(db, metadataMap) {
           return requestContexts.some((context) => entryContexts.includes(context));
         });
       }
+      const totalMatches = clauses.length;
+      const pagedClauses = clauses.slice(offset, offset + limit);
 
       return wrapResponse(
         {
-          clauses
+          clauses: pagedClauses,
+          total_matches: totalMatches,
+          returned: pagedClauses.length,
+          limit,
+          offset,
+          has_more: offset + pagedClauses.length < totalMatches
         },
         metadataMap,
         {
           confidence: "authoritative",
-          citations: clauses.map((entry) => ({
+          citations: pagedClauses.map((entry) => ({
             type: "SOURCE",
             ref: entry.regulation_id,
             source_url: entry.source_url
@@ -2322,7 +2374,12 @@ function makeTools(db, metadataMap) {
         selectedTables.push({ table: "threat_scenarios_fts", source: "threat_scenarios" });
       }
       if (contentType === "all" || contentType === "standard") {
-        selectedTables.push({ table: "technical_standards_fts", source: "technical_standards" });
+        selectedTables.push({
+          table: "technical_standards_fts",
+          source: "technical_standards",
+          titleField: "name",
+          descriptionField: "scope"
+        });
       }
       if (contentType === "all" || contentType === "data") {
         selectedTables.push({ table: "data_categories_fts", source: "data_categories" });
@@ -2469,6 +2526,7 @@ function makeTools(db, metadataMap) {
     },
 
     async build_control_baseline(args = {}) {
+      requireObject(args.org_profile, "org_profile");
       const orgProfile = args.org_profile || {};
       const dataTypes = normalizeArray(orgProfile.data_types || []).map((entry) => String(entry).toLowerCase());
       const priorityProgram = Boolean(orgProfile.priority_program || orgProfile.highest_priority_cui);
@@ -2558,6 +2616,12 @@ function makeTools(db, metadataMap) {
         });
       }
 
+      if (dataTypes.length === 0) {
+        throw new ToolInputError("data_types must include at least one data type", {
+          required: ["data_types[]"]
+        });
+      }
+
       const notifications = [];
       for (const jurisdiction of jurisdictions) {
         const contextBuckets = dedupeBy(
@@ -2636,6 +2700,8 @@ function makeTools(db, metadataMap) {
     },
 
     async create_remediation_backlog(args = {}) {
+      requireObject(args.current_state, "current_state");
+      requireObject(args.target_baseline, "target_baseline");
       const currentState = args.current_state || {};
       const targetBaseline = args.target_baseline || {};
 
@@ -2699,6 +2765,9 @@ function makeTools(db, metadataMap) {
     },
 
     async determine_cmmc_level(args = {}) {
+      requireNonEmptyString(args.contract_description, "contract_description");
+      requireNonEmptyArray(args.data_types, "data_types");
+      requireNonEmptyString(args.prime_or_sub, "prime_or_sub");
       const contractDescription = toText(args.contract_description).toLowerCase();
       const dataTypes = normalizeArray(args.data_types).map((entry) => String(entry).toLowerCase());
       const primeOrSub = toText(args.prime_or_sub || "unknown").toLowerCase();
@@ -2797,6 +2866,11 @@ function makeTools(db, metadataMap) {
           required: ["item_description"]
         });
       }
+      if (!destination) {
+        throw new ToolInputError("destination is required", {
+          required: ["destination"]
+        });
+      }
 
       const allText = `${description} ${technicalParams}`;
       const embargoed = new Set(["IR", "KP", "SY", "RU", "CU", "BY"]);
@@ -2856,6 +2930,8 @@ function makeTools(db, metadataMap) {
     },
 
     async assess_classified_environment(args = {}) {
+      requireNonEmptyString(args.country, "country");
+      requireNonEmptyString(args.system_type, "system_type");
       const level = toText(args.classification_level).toUpperCase();
       const country = normalizeJurisdictionToken(args.country);
       const systemType = toText(args.system_type || "general");
@@ -2943,6 +3019,9 @@ function makeTools(db, metadataMap) {
     },
 
     async assess_nato_interoperability(args = {}) {
+      requireNonEmptyString(args.sharing_scope, "sharing_scope");
+      requireNonEmptyString(args.classification, "classification");
+      requireNonEmptyArray(args.participating_nations, "participating_nations");
       const sharingScope = toText(args.sharing_scope || "coalition operation");
       const classification = toText(args.classification || "NATO RESTRICTED");
       const participatingNations = normalizeArray(args.participating_nations).map((entry) => String(entry).toUpperCase());
@@ -3009,7 +3088,9 @@ const TOOL_DEFINITIONS = [
     inputSchema: {
       type: "object",
       properties: {
-        source_type: { type: "string", description: "Optional filter by source type (standard, regulation, policy, threat-intel)." }
+        source_type: { type: "string", description: "Optional filter by source type (standard, regulation, policy, threat-intel)." },
+        limit: { type: "number", minimum: 1, maximum: 200, description: "Maximum number of source entries to return (default: 50)." },
+        offset: { type: "number", minimum: 0, description: "Zero-based pagination offset." }
       }
     }
   },
@@ -3025,7 +3106,8 @@ const TOOL_DEFINITIONS = [
         jurisdiction: { type: "string" },
         country: { type: "string" },
         nato_member: { type: "boolean" },
-        limit: { type: "number", minimum: 1, maximum: 200 }
+        limit: { type: "number", minimum: 1, maximum: 200 },
+        offset: { type: "number", minimum: 0 }
       }
     }
   },
@@ -3104,7 +3186,9 @@ const TOOL_DEFINITIONS = [
       type: "object",
       properties: {
         regulation_id: { type: "string" },
-        jurisdiction_scope: { type: "string" }
+        jurisdiction_scope: { type: "string" },
+        limit: { type: "number", minimum: 1, maximum: 500 },
+        offset: { type: "number", minimum: 0 }
       }
     }
   },

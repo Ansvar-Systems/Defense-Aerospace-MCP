@@ -3,4 +3,5 @@ coverage/
 data/*.db
 data/*.db-shm
 data/*.db-wal
+data/source-updates-report.json
 .DS_Store

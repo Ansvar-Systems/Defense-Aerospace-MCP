@@ -39,6 +39,71 @@ function toJsonRpcError(id, error) {
   };
 }
 
+function toPositiveInt(value, fallback) {
+  const parsed = Number.parseInt(String(value ?? ""), 10);
+  if (Number.isNaN(parsed) || parsed <= 0) {
+    return fallback;
+  }
+  return parsed;
+}
+
+function parseDate(value) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return null;
+  }
+  return date;
+}
+
+function computeHealthStatus(metadata = {}, now = new Date()) {
+  const staleAfterDays = toPositiveInt(process.env.HEALTH_STALE_DAYS, 90);
+  const degradedAfterDays = Math.max(staleAfterDays + 1, toPositiveInt(process.env.HEALTH_DEGRADED_DAYS, 365));
+  const lastUpdated = metadata.last_updated || null;
+  const parsedLastUpdated = parseDate(lastUpdated);
+  if (!parsedLastUpdated) {
+    return {
+      status: "degraded",
+      reason: "invalid_last_updated",
+      last_updated: lastUpdated,
+      age_days: null,
+      stale_after_days: staleAfterDays,
+      degraded_after_days: degradedAfterDays
+    };
+  }
+
+  const ageDays = Math.floor((now.getTime() - parsedLastUpdated.getTime()) / (24 * 60 * 60 * 1000));
+  if (ageDays >= degradedAfterDays) {
+    return {
+      status: "degraded",
+      reason: "dataset_age_exceeded_degraded_threshold",
+      last_updated: lastUpdated,
+      age_days: ageDays,
+      stale_after_days: staleAfterDays,
+      degraded_after_days: degradedAfterDays
+    };
+  }
+
+  if (ageDays >= staleAfterDays) {
+    return {
+      status: "stale",
+      reason: "dataset_age_exceeded_stale_threshold",
+      last_updated: lastUpdated,
+      age_days: ageDays,
+      stale_after_days: staleAfterDays,
+      degraded_after_days: degradedAfterDays
+    };
+  }
+
+  return {
+    status: "ok",
+    reason: null,
+    last_updated: lastUpdated,
+    age_days: ageDays,
+    stale_after_days: staleAfterDays,
+    degraded_after_days: degradedAfterDays
+  };
+}
+
 class DefenseMcpServer {
   constructor({ tools, toolDefinitions, metadata }) {
     this.tools = tools;
@@ -80,12 +145,16 @@ class DefenseMcpServer {
         },
         serverInfo: {
           name: "defense-aerospace-mcp",
-          version: "1.2.0"
+          version: this.metadata.dataset_version || "1.2.0"
         }
       };
     }
 
     if (method === "notifications/initialized" || method === "notifications/cancelled") {
+      return null;
+    }
+
+    if (method === "notifications/cancelled") {
       return null;
     }
 
@@ -229,14 +298,20 @@ class DefenseMcpServer {
       }
 
       if (req.method === "GET" && req.url === "/health") {
-        res.writeHead(200, { "Content-Type": "application/json" });
+        const health = computeHealthStatus(this.metadata);
+        const statusCode = health.status === "degraded" ? 503 : 200;
+        res.writeHead(statusCode, { "Content-Type": "application/json" });
         res.end(
           JSON.stringify({
-            status: "ok",
+            status: health.status,
+            reason: health.reason,
             domain: "defense-aerospace",
             dataset_version: this.metadata.dataset_version,
             dataset_fingerprint: this.metadata.dataset_fingerprint,
-            last_updated: this.metadata.last_updated
+            last_updated: this.metadata.last_updated,
+            age_days: health.age_days,
+            stale_after_days: health.stale_after_days,
+            degraded_after_days: health.degraded_after_days
           })
         );
         return;
@@ -309,5 +384,6 @@ module.exports = {
   JSON_RPC_VERSION,
   JsonRpcError,
   toJsonRpcSuccess,
-  toJsonRpcError
+  toJsonRpcError,
+  computeHealthStatus
 };

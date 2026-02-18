@@ -50,6 +50,12 @@ Set custom port:
 PORT=8080 npm start
 ```
 
+Run as stdio-only MCP (for local clients such as Claude Desktop/Cursor):
+
+```bash
+npx @ansvar/defense-aerospace-mcp
+```
+
 ## Tool coverage
 
 Universal tools:
@@ -123,6 +129,15 @@ This runs:
 - `test`: executes protocol + domain behavior tests
 - `audit:golden`: runs a production-style quality audit and writes `data/golden-standard-report.json`
 
+Optional freshness check:
+
+```bash
+npm run check:source-updates
+```
+
+- Writes `data/source-updates-report.json`
+- Use `STRICT_SOURCE_CHECK=1` to fail on stale/unreachable sources
+
 The golden audit enforces:
 
 - Required authoritative source presence (CMMC rule, DFARS CMMC subpart, NIST rev3 publications, ITAR/EAR, DoD issuances)
@@ -144,3 +159,9 @@ This repository intentionally stores only unclassified/public framework guidance
 - No ITAR technical detail records
 
 Use outputs as structured compliance/threat-modeling guidance and route authoritative legal/regulatory text retrieval to foundation MCPs.
+
+## Release metadata
+
+- MCP registry metadata: `server.json`
+- Source provenance export: `sources.yml`
+- Change history: `CHANGELOG.md`

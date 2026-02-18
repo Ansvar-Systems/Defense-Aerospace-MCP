@@ -1,0 +1,33 @@
+name: Socket Security
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+  schedule:
+    - cron: "0 3 * * 5"
+
+concurrency:
+  group: security-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  socket:
+    if: ${{ secrets.SOCKET_SECURITY_API_KEY != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Socket Security
+        uses: SocketDev/socket-basics@1.0.25
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          socket_security_api_key: ${{ secrets.SOCKET_SECURITY_API_KEY }}

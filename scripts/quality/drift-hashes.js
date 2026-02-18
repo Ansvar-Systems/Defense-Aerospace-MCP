@@ -36,6 +36,10 @@ const report = {
 const outPath = path.join(process.cwd(), "data", "drift-hashes.json");
 fs.mkdirSync(path.dirname(outPath), { recursive: true });
 fs.writeFileSync(outPath, JSON.stringify(report, null, 2));
+const fixturePath = path.join(process.cwd(), "fixtures", "golden-hashes.json");
+fs.mkdirSync(path.dirname(fixturePath), { recursive: true });
+fs.writeFileSync(fixturePath, JSON.stringify(report, null, 2));
 
 process.stdout.write(`Wrote drift hashes: ${outPath}\n`);
+process.stdout.write(`Wrote golden hash fixture: ${fixturePath}\n`);
 process.stdout.write(`${report.combined_fingerprint}\n`);

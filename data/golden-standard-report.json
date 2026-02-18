@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-18T09:22:55.636Z",
+  "generated_at": "2026-02-18T13:13:25.937Z",
   "dataset_version": "1.2.0",
   "knowledge_baseline_date": "2026-02-18",
   "grade": "A",
@@ -73,6 +73,11 @@
       "gate": "expert_playbooks_citations",
       "status": "pass",
       "details": "all records cite sources"
+    },
+    {
+      "gate": "golden_contract_fixture_depth",
+      "status": "pass",
+      "details": "12 fixture cases"
     },
     {
       "gate": "source_nist-800-171-r3",
@@ -260,7 +265,7 @@
     "Advisory source present (NIST SP 800-172 Rev.3 FPD); ensure this is not treated as binding requirement text."
   ],
   "summary": {
-    "pass_count": 56,
+    "pass_count": 57,
     "fail_count": 0,
     "warning_count": 1
   }

@@ -1,8 +1,12 @@
 {
   "name": "@ansvar/defense-aerospace-mcp",
+  "mcpName": "eu.ansvar/defense-aerospace-mcp",
   "version": "1.2.0",
   "description": "Defense/Aerospace domain intelligence MCP for compliance and threat modeling",
   "main": "src/index.js",
+  "bin": {
+    "defense-aerospace-mcp": "bin/defense-aerospace-mcp.js"
+  },
   "type": "commonjs",
   "engines": {
     "node": ">=25.0.0"
@@ -14,8 +18,14 @@
     "drift:hashes": "node scripts/quality/drift-hashes.js",
     "sources:sync": "node scripts/quality/export-sources-yaml.js",
     "audit:golden": "node scripts/quality/golden-standard-audit.js",
+    "check:source-updates": "node scripts/quality/check-source-updates.js",
     "validate": "npm run sources:sync && npm run drift:hashes && npm test && npm run audit:golden"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ansvar-Systems/Defense-Aerospace-MCP"
+  },
+  "homepage": "https://github.com/Ansvar-Systems/Defense-Aerospace-MCP",
   "keywords": [
     "mcp",
     "defense",
@@ -26,11 +36,9 @@
   ],
   "author": "Ansvar Systems Engineering",
   "license": "MIT",
-  "bin": {
-    "defense-aerospace-mcp": "src/index.js"
-  },
   "files": [
     "src/",
+    "bin/",
     "data/",
     "sources.yml",
     "server.json",

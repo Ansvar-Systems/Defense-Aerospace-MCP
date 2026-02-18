@@ -1,10 +1,11 @@
 {
-  "mcpName": "defense-aerospace-mcp",
+  "name": "eu.ansvar/defense-aerospace-mcp",
+  "displayName": "Defense / Aerospace MCP",
   "version": "1.2.0",
-  "description": "Defense/Aerospace domain intelligence MCP for compliance and threat modeling — covers CMMC, ITAR/EAR, NIST 800-171/53, DO-178C, ED-12C, IEC 62443, DORA, UK DEFSTAN, and more.",
-  "repository": "https://github.com/Ansvar-Systems-Engineering/Defense-Aerospace-MCP",
+  "description": "Defense and aerospace domain intelligence MCP for compliance, threat modeling, and control/evidence planning.",
+  "repository": "https://github.com/Ansvar-Systems/Defense-Aerospace-MCP",
   "license": "MIT",
-  "author": "Ansvar Systems Engineering",
+  "runtime": "node",
   "tools": [
     "about",
     "list_sources",
@@ -26,13 +27,20 @@
     "compare_jurisdictions",
     "build_control_baseline"
   ],
-  "transport": {
+  "transports": [
+    "stdio",
+    "streamable-http"
+  ],
+  "entrypoints": {
     "stdio": {
-      "command": "node",
-      "args": ["src/index.js"]
+      "command": "npx",
+      "args": [
+        "@ansvar/defense-aerospace-mcp"
+      ]
     },
     "http": {
-      "url": "http://localhost:3000/mcp"
+      "path": "/mcp",
+      "health": "/health"
     }
   }
 }

@@ -1,0 +1,164 @@
+[
+  {
+    "id": "golden-about-domain",
+    "tool": "about",
+    "input": {},
+    "expect": {
+      "domain": "defense-aerospace"
+    }
+  },
+  {
+    "id": "golden-classify-itar",
+    "tool": "classify_data",
+    "input": {
+      "data_description": "technical drawings for missile guidance system",
+      "jurisdictions": [
+        "US"
+      ]
+    },
+    "expect_contains": [
+      "itar-controlled"
+    ]
+  },
+  {
+    "id": "golden-classify-cui",
+    "tool": "classify_data",
+    "input": {
+      "data_description": "CUI for DoD avionics maintenance",
+      "jurisdictions": [
+        "US"
+      ]
+    },
+    "expect_contains": [
+      "cui"
+    ]
+  },
+  {
+    "id": "golden-cmmc-level2",
+    "tool": "determine_cmmc_level",
+    "input": {
+      "contract_description": "DoD prime contract handling CUI",
+      "data_types": [
+        "cui"
+      ],
+      "prime_or_sub": "prime_contractor"
+    },
+    "expect": {
+      "cmmc_level": "Level 2"
+    }
+  },
+  {
+    "id": "golden-cmmc-level3",
+    "tool": "determine_cmmc_level",
+    "input": {
+      "contract_description": "highest-priority CUI program",
+      "data_types": [
+        "cui",
+        "highest_priority_cui"
+      ],
+      "prime_or_sub": "prime_contractor"
+    },
+    "expect": {
+      "cmmc_level": "Level 3"
+    }
+  },
+  {
+    "id": "golden-export-itar",
+    "tool": "classify_export_control",
+    "input": {
+      "item_description": "missile guidance package",
+      "destination": "UK"
+    },
+    "expect": {
+      "jurisdiction": "ITAR",
+      "license_required": true
+    }
+  },
+  {
+    "id": "golden-breach-72h",
+    "tool": "assess_breach_obligations",
+    "input": {
+      "incident_description": "ransomware in CUI enclave",
+      "jurisdictions": [
+        "US"
+      ],
+      "data_types": [
+        "cui"
+      ]
+    },
+    "expect_contains": [
+      "72 hours"
+    ]
+  },
+  {
+    "id": "golden-jurisdiction-fr",
+    "tool": "get_jurisdiction_profile",
+    "input": {
+      "jurisdiction": "FR"
+    },
+    "expect_contains": [
+      "NIS2_DIRECTIVE_2022_2555"
+    ]
+  },
+  {
+    "id": "golden-jurisdiction-us-state",
+    "tool": "get_jurisdiction_profile",
+    "input": {
+      "jurisdiction": "US-CA"
+    },
+    "expect_contains": [
+      "CMMC_2_0"
+    ]
+  },
+  {
+    "id": "golden-search-clause",
+    "tool": "search_domain_knowledge",
+    "input": {
+      "query": "Article 21 risk management measures",
+      "content_type": "clause",
+      "limit": 5
+    },
+    "expect_contains": [
+      "clause-nis2-art21"
+    ]
+  },
+  {
+    "id": "golden-nato-controls",
+    "tool": "assess_nato_interoperability",
+    "input": {
+      "sharing_scope": "coalition ISR exchange",
+      "classification": "NATO RESTRICTED",
+      "participating_nations": [
+        "SE",
+        "NL",
+        "US"
+      ]
+    },
+    "expect_contains": [
+      "NATO_STANAG_4774",
+      "NATO_STANAG_4778"
+    ]
+  },
+  {
+    "id": "golden-applicability-us-prime",
+    "tool": "assess_applicability",
+    "input": {
+      "country": "US",
+      "role": "prime_contractor",
+      "data_types": [
+        "cui"
+      ],
+      "system_types": [
+        "da-cui-environment"
+      ],
+      "additional_context": {
+        "programs": [
+          "DoD"
+        ]
+      }
+    },
+    "expect_contains": [
+      "CMMC_2_0"
+    ]
+  }
+]

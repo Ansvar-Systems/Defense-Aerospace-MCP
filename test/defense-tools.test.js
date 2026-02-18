@@ -304,6 +304,24 @@ test("list_sources returns source freshness metadata", async () => {
   }
 });
 
+test("list_sources supports deterministic pagination metadata", async () => {
+  const runtime = createRuntime();
+  try {
+    const pageOne = await runtime.tools.list_sources({ limit: 2, offset: 0 });
+    const pageTwo = await runtime.tools.list_sources({ limit: 2, offset: 2 });
+
+    assert.equal(pageOne.data.limit, 2);
+    assert.equal(pageOne.data.offset, 0);
+    assert.equal(pageOne.data.returned, 2);
+    assert.ok(pageOne.data.total_matches >= 10);
+    assert.ok(pageOne.data.has_more);
+    assert.equal(pageTwo.data.offset, 2);
+    assert.notEqual(pageOne.data.entries[0].id, pageTwo.data.entries[0].id);
+  } finally {
+    runtime.cleanup();
+  }
+});
+
 test("list_jurisdiction_profiles returns full EU coverage profiles", async () => {
   const runtime = createRuntime();
   try {
@@ -322,6 +340,33 @@ test("list_jurisdiction_profiles returns full EU coverage profiles", async () =>
   }
 });
 
+test("list_jurisdiction_profiles supports offset pagination", async () => {
+  const runtime = createRuntime();
+  try {
+    const firstPage = await runtime.tools.list_jurisdiction_profiles({
+      region: "US",
+      coverage_level: "minimum",
+      limit: 5,
+      offset: 0
+    });
+    const secondPage = await runtime.tools.list_jurisdiction_profiles({
+      region: "US",
+      coverage_level: "minimum",
+      limit: 5,
+      offset: 5
+    });
+
+    assert.equal(firstPage.data.returned, 5);
+    assert.equal(firstPage.data.limit, 5);
+    assert.equal(firstPage.data.offset, 0);
+    assert.ok(firstPage.data.total_matches >= 52);
+    assert.equal(secondPage.data.offset, 5);
+    assert.notEqual(firstPage.data.entries[0].id, secondPage.data.entries[0].id);
+  } finally {
+    runtime.cleanup();
+  }
+});
+
 test("list_jurisdiction_profiles returns US minimum federal and state coverage", async () => {
   const runtime = createRuntime();
   try {
@@ -334,6 +379,51 @@ test("list_jurisdiction_profiles returns US minimum federal and state coverage",
     assert.ok(response.data.entries.length >= 52);
     assert.ok(response.data.entries.some((entry) => entry.jurisdiction === "US"));
     assert.ok(response.data.entries.some((entry) => entry.jurisdiction === "US-CA"));
+  } finally {
+    runtime.cleanup();
+  }
+});
+
+test("build_control_baseline enforces required org_profile input", async () => {
+  const runtime = createRuntime();
+  try {
+    await assert.rejects(
+      () => runtime.tools.build_control_baseline({}),
+      /org_profile is required/
+    );
+  } finally {
+    runtime.cleanup();
+  }
+});
+
+test("determine_cmmc_level enforces required fields", async () => {
+  const runtime = createRuntime();
+  try {
+    await assert.rejects(
+      () =>
+        runtime.tools.determine_cmmc_level({
+          data_types: ["cui"],
+          prime_or_sub: "prime_contractor"
+        }),
+      /contract_description is required/
+    );
+  } finally {
+    runtime.cleanup();
+  }
+});
+
+test("assess_nato_interoperability enforces participating nations input", async () => {
+  const runtime = createRuntime();
+  try {
+    await assert.rejects(
+      () =>
+        runtime.tools.assess_nato_interoperability({
+          sharing_scope: "coalition operation",
+          classification: "NATO RESTRICTED",
+          participating_nations: []
+        }),
+      /participating_nations is required/
+    );
   } finally {
     runtime.cleanup();
   }
@@ -690,6 +780,22 @@ test("search_domain_knowledge supports clause content type", async () => {
 
     assert.ok(response.data.results.length >= 1);
     assert.ok(response.data.results.every((entry) => entry.content_type === "clause_references"));
+  } finally {
+    runtime.cleanup();
+  }
+});
+
+test("search_domain_knowledge supports all content type without SQL errors", async () => {
+  const runtime = createRuntime();
+  try {
+    const response = await runtime.tools.search_domain_knowledge({
+      query: "NIST SP 800-171 CMMC controls",
+      content_type: "all",
+      limit: 5
+    });
+
+    assert.ok(response.data.results.length >= 1);
+    assert.ok(response.data.results.every((entry) => entry.content_type && entry.title));
   } finally {
     runtime.cleanup();
   }
