@@ -18,7 +18,7 @@ const REDIRECT_KEYWORDS = [
     reason: "Healthcare interoperability and clinical domains are outside Defense/Aerospace scope."
   },
   {
-    pattern: /(swift|pci dss|open banking|trading|mifid|psd2)/i,
+    pattern: /(swift|pci dss|open banking|trading|mifid|psd2|dora\b)/i,
     mcp: "financial-services",
     reason: "Financial services regulations and architectures are outside Defense/Aerospace scope."
   },
@@ -2393,7 +2393,7 @@ function makeTools(db, metadataMap) {
             ],
             relevance_score: scored.relevance_score,
             source_ref: profile.jurisdiction,
-            _raw_score: scored.raw_score
+            _raw_score: -(1 / (scored.raw_score || 1))
           });
         }
       }
@@ -2799,7 +2799,8 @@ function makeTools(db, metadataMap) {
       }
 
       const allText = `${description} ${technicalParams}`;
-      const embargoed = new Set(["IR", "KP", "SY", "RU", "CU"]);
+      const embargoed = new Set(["IR", "KP", "SY", "RU", "CU", "BY"]);
+      const defenseRestricted = new Set(["CN", "VE"]);
 
       let jurisdiction = "EAR";
       let classification = "ECCN to be determined";
@@ -2826,6 +2827,9 @@ function makeTools(db, metadataMap) {
       if (embargoed.has(destination)) {
         licenseRequired = true;
         exceptions = ["No standard exception; strict embargo controls apply"];
+      } else if (defenseRestricted.has(destination)) {
+        licenseRequired = true;
+        exceptions = ["Significant defense export restrictions; license review required for all controlled items"];
       }
 
       return wrapResponse(
@@ -2884,6 +2888,16 @@ function makeTools(db, metadataMap) {
           "Compartmented access controls"
         ];
         physicalRequirements.push("NATO-approved document handling zones");
+      } else if (country === "UK" && (level.includes("SECRET") || level.includes("TOP SECRET") || level.includes("OFFICIAL"))) {
+        accreditationStandard = "UK HMG Security Policy Framework + Def Stan 05-138";
+        technicalControls = [
+          "UK List X / List N facility accreditation",
+          "Cyber Essentials Plus certification baseline",
+          "UK national authority-approved CDS for cross-domain transfers",
+          "NCSC-approved cryptography for classified communications"
+        ];
+        physicalRequirements.push("Physical security measures per HMG SPF classification tier");
+        personnelRequirements.push("Developed Vetting (DV) or Security Check (SC) as required by classification level");
       } else if (country === "US" && (level.includes("SECRET") || level.includes("TOP SECRET") || level.includes("CONFIDENTIAL"))) {
         accreditationStandard = "NISPOM + CNSSI 1253 / RMF";
         technicalControls = [
@@ -2897,6 +2911,18 @@ function makeTools(db, metadataMap) {
       if (/cloud/i.test(systemType)) {
         technicalControls.push("Impact-level tenancy segmentation");
         technicalControls.push("Privileged cloud admin nationality/access controls");
+
+        if (country === "US" || isUsContext(country)) {
+          if (level.includes("CUI")) {
+            technicalControls.push("FedRAMP Moderate or High authorization baseline required");
+            technicalControls.push("DoD IL4 (CUI) or IL5 (CUI with national security data) environment designation");
+            technicalControls.push("GCC High or equivalent DoD-approved cloud offering");
+          } else if (level.includes("SECRET") || level.includes("TOP SECRET")) {
+            technicalControls.push("DoD IL6 (classified SECRET) isolated cloud environment");
+            technicalControls.push("FedRAMP High baseline with DoD SRG overlay");
+            technicalControls.push("US-only data residency and personnel restrictions");
+          }
+        }
       }
 
       return wrapResponse(

@@ -249,7 +249,7 @@ const sources = [
     license: "Public domain (US government)",
     refresh_cadence: "Per revision",
     source_url: "https://csrc.nist.gov/pubs/sp/800/171/a/r3/final",
-    effective_date: "2024-11-13",
+    effective_date: "2024-05-14",
     last_verified: "2026-02-18",
     knowledge_tier: "authoritative"
   },
@@ -275,7 +275,7 @@ const sources = [
     license: "Public domain (US government)",
     refresh_cadence: "Per draft revision",
     source_url: "https://csrc.nist.gov/pubs/sp/800/172/r3/fpd",
-    effective_date: "2025-08-14",
+    effective_date: "2025-09-29",
     last_verified: "2026-02-18",
     knowledge_tier: "advisory"
   },
@@ -379,9 +379,9 @@ const sources = [
     license: "Public domain (US government)",
     refresh_cadence: "Per publication",
     source_url: "https://www.esd.whs.mil/DD/DoD-Issuances/DoD-Issuances-Website/",
-    effective_date: "2025-10-31",
+    effective_date: "2022-07-19",
     last_verified: "2026-02-18",
-    knowledge_tier: "authoritative"
+    knowledge_tier: "advisory"
   },
   {
     id: "dodi-5200-48",
@@ -475,6 +475,84 @@ const sources = [
     knowledge_tier: "authoritative"
   },
   {
+    id: "eu-cra",
+    name: "EU Cyber Resilience Act (EU) 2024/2847",
+    source_type: "regulation",
+    content: "Horizontal cybersecurity requirements for products with digital elements placed on the EU market",
+    provenance: "EUR-Lex",
+    license: "EU public law text",
+    refresh_cadence: "Per amendment",
+    source_url: "https://eur-lex.europa.eu/eli/reg/2024/2847/oj",
+    effective_date: "2024-12-10",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "dfars-7021",
+    name: "DFARS 252.204-7021",
+    source_type: "regulation",
+    content: "Contractor Compliance with the Cybersecurity Maturity Model Certification Level Requirement",
+    provenance: "Acquisition.gov / DoD",
+    license: "Public domain (US government)",
+    refresh_cadence: "Per amendment",
+    source_url: "https://www.acquisition.gov/dfars/252.204-7021-contractor-compliance-cybersecurity-maturity-model-certification-level-requirement",
+    effective_date: "2025-11-10",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "dfars-7025",
+    name: "DFARS 252.204-7025",
+    source_type: "regulation",
+    content: "Subcontractor Compliance with the Cybersecurity Maturity Model Certification Level Requirement",
+    provenance: "Acquisition.gov / DoD",
+    license: "Public domain (US government)",
+    refresh_cadence: "Per amendment",
+    source_url: "https://www.acquisition.gov/dfars/252.204-7025",
+    effective_date: "2025-11-10",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "uk-osa-2023",
+    name: "UK Official Secrets Act 2023",
+    source_type: "regulation",
+    content: "Modernised UK official secrets framework replacing OSA 1911/1989 provisions",
+    provenance: "UK Parliament",
+    license: "Open Government Licence",
+    refresh_cadence: "Per amendment",
+    source_url: "https://www.legislation.gov.uk/ukpga/2023/32/contents",
+    effective_date: "2023-07-11",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "uk-cyber-essentials",
+    name: "UK Cyber Essentials Plus (MoD requirement)",
+    source_type: "standard",
+    content: "UK baseline cybersecurity certification required for MoD contracts handling sensitive data",
+    provenance: "NCSC / UK MoD",
+    license: "Open Government Licence",
+    refresh_cadence: "Per update",
+    source_url: "https://www.ncsc.gov.uk/cyberessentials/overview",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
+    id: "uk-defstan-05-138",
+    name: "UK Defence Standard 05-138",
+    source_type: "standard",
+    content: "Cyber security for defence suppliers - requirements for defence contracts",
+    provenance: "UK MoD",
+    license: "UK MoD",
+    refresh_cadence: "Per revision",
+    source_url: "https://www.dstan.mod.uk",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
+    knowledge_tier: "authoritative"
+  },
+  {
     id: "mitre-attack",
     name: "MITRE ATT&CK",
     source_type: "threat-intel",
@@ -484,7 +562,7 @@ const sources = [
     refresh_cadence: "Quarterly",
     source_url: "https://attack.mitre.org",
     effective_date: "rolling",
-    last_verified: "2026-02-18",
+    last_verified: LAST_UPDATED,
     knowledge_tier: "authoritative"
   }
 ];
@@ -656,6 +734,62 @@ const clauseReferenceLibrary = [
     jurisdiction_scope: "NATO",
     effective_date: "rolling",
     last_verified: "2026-02-18",
+    status: "effective"
+  },
+  {
+    id: "clause-dfars-7021",
+    regulation_id: "DFARS_252.204-7021",
+    provision_ref: "252.204-7021",
+    title: "Contractor CMMC Level Compliance",
+    summary: "Requires contractors to achieve and maintain the CMMC level specified in the contract before award.",
+    source_id: "dfars-7021",
+    source_url: "https://www.acquisition.gov/dfars/252.204-7021-contractor-compliance-cybersecurity-maturity-model-certification-level-requirement",
+    legal_force: "regulation",
+    jurisdiction_scope: "US",
+    effective_date: "2025-11-10",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-dfars-7025",
+    regulation_id: "DFARS_252.204-7025",
+    provision_ref: "252.204-7025",
+    title: "Subcontractor CMMC Level Compliance",
+    summary: "Requires prime contractors to ensure subcontractors achieve required CMMC levels for CUI/FCI flowdown.",
+    source_id: "dfars-7025",
+    source_url: "https://www.acquisition.gov/dfars/252.204-7025",
+    legal_force: "regulation",
+    jurisdiction_scope: "US",
+    effective_date: "2025-11-10",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-eu-cra-art6",
+    regulation_id: "EU_CRA_2024_2847",
+    provision_ref: "Article 6",
+    title: "Essential cybersecurity requirements for products with digital elements",
+    summary: "Defines essential cybersecurity requirements for design, development, production, and vulnerability handling of products with digital elements.",
+    source_id: "eu-cra",
+    source_url: "https://eur-lex.europa.eu/eli/reg/2024/2847/oj",
+    legal_force: "regulation",
+    jurisdiction_scope: "EU",
+    effective_date: "2024-12-10",
+    last_verified: LAST_UPDATED,
+    status: "effective"
+  },
+  {
+    id: "clause-uk-defstan-05-138",
+    regulation_id: "UK_DEFSTAN_05_138",
+    provision_ref: "Def Stan 05-138",
+    title: "UK defence supplier cyber security requirements",
+    summary: "Mandates cyber security baseline controls for UK MoD suppliers and subcontractors handling defence information.",
+    source_id: "uk-defstan-05-138",
+    source_url: "https://www.dstan.mod.uk",
+    legal_force: "standard-policy",
+    jurisdiction_scope: "UK",
+    effective_date: "rolling",
+    last_verified: LAST_UPDATED,
     status: "effective"
   }
 ];
@@ -1672,6 +1806,43 @@ function buildJurisdictionProfiles() {
         { type: "CFR", ref: "15 CFR 730-774", source_url: "https://www.ecfr.gov/current/title-15/subtitle-B/chapter-VII/subchapter-C" }
       ],
       last_verified: LAST_UPDATED
+    },
+    {
+      id: "jur-uk",
+      jurisdiction: "UK",
+      display_name: "United Kingdom",
+      region: "NATO",
+      coverage_level: "full",
+      eu_member: false,
+      nato_member: true,
+      baseline_obligations: [
+        "UK_DEFSTAN_05_138",
+        "UK_CYBER_ESSENTIALS_PLUS",
+        "UK_OSA_2023",
+        "NATO_C_M_2002_49",
+        "NATO_STANAG_4774",
+        "NATO_STANAG_4778"
+      ],
+      incident_reporting_model: [
+        "NCSC incident reporting for defence-related cyber incidents",
+        "Immediate classified incident reporting through UK national security authority",
+        "MoD contract-specific notification obligations"
+      ],
+      national_overlay_guidance:
+        "UK MoD procurement requires Def Stan 05-138 compliance and Cyber Essentials Plus certification. Post-Brexit, UK is not subject to NIS2 or EU Dual-Use Regulation but maintains own export control and security frameworks. AUKUS and Five Eyes obligations may apply to specific programs.",
+      foundation_join_hints: [
+        { mcp: "security-controls", tool: "get_control", params: { framework: "uk_defstan_05_138", control: "baseline" } },
+        { mcp: "security-controls", tool: "get_control", params: { framework: "nato_stanag_4774", control: "label syntax" } },
+        { mcp: "security-controls", tool: "get_control", params: { framework: "nato_stanag_4778", control: "metadata binding" } }
+      ],
+      knowledge_tier: "authoritative",
+      citations: [
+        { type: "UK", ref: "Def Stan 05-138", source_url: "https://www.dstan.mod.uk" },
+        { type: "UK", ref: "Cyber Essentials Plus", source_url: "https://www.ncsc.gov.uk/cyberessentials/overview" },
+        { type: "UK", ref: "Official Secrets Act 2023", source_url: "https://www.legislation.gov.uk/ukpga/2023/32/contents" },
+        { type: "NATO", ref: "C-M(2002)49", source_url: "https://www.nato.int/cps/en/natohq/topics_50090.htm" }
+      ],
+      last_verified: LAST_UPDATED
     }
   ];
 
@@ -2636,6 +2807,65 @@ const applicabilityRules = [
     },
     rationale: "Reporting timelines and evidence preservation obligations are mandatory for affected covered defense information.",
     citations: [{ type: "CFR", ref: "DFARS 252.204-7012(d)", source_url: "https://www.acquisition.gov/dfars/252.204-7012-safeguarding-covered-defense-information-and-cyber-incident-reporting" }]
+  },
+  {
+    id: "rule-uk-mod-cyber-baseline",
+    condition: {
+      country: ["UK"],
+      role: ["prime_contractor", "defense_subcontractor", "aerospace_oem"],
+      data_types: ["cui", "supply-chain-data", "program-protection", "weapons-system-data"]
+    },
+    obligation: {
+      regulation_id: "UK_DEFSTAN_05_138",
+      standard_id: "UK_CYBER_ESSENTIALS_PLUS",
+      confidence: "inferred",
+      basis: "UK MoD contracts require Def Stan 05-138 compliance and Cyber Essentials Plus certification for suppliers handling defence information.",
+      legal_force: "standard-policy",
+      conflict_group: "cui-fci-compliance",
+      precedence_tier: 3,
+      clause_refs: ["clause-uk-defstan-05-138"]
+    },
+    rationale: "UK defence suppliers must meet Def Stan 05-138 cyber security requirements and hold valid Cyber Essentials Plus certification.",
+    citations: [{ type: "UK", ref: "Def Stan 05-138", source_url: "https://www.dstan.mod.uk" }]
+  },
+  {
+    id: "rule-uk-classified",
+    condition: {
+      country: ["UK"],
+      data_types: ["national-classified", "nato-classified"]
+    },
+    obligation: {
+      regulation_id: "UK_OSA_2023",
+      standard_id: "UK_SECURITY_VETTING",
+      confidence: "inferred",
+      basis: "UK classified information handling governed by Official Secrets Act 2023 and national security vetting framework.",
+      legal_force: "regulation",
+      conflict_group: "classified-handling",
+      precedence_tier: 2,
+      clause_refs: []
+    },
+    rationale: "Handling UK classified information requires security clearance, facility accreditation, and compliance with Official Secrets Act 2023.",
+    citations: [{ type: "UK", ref: "Official Secrets Act 2023", source_url: "https://www.legislation.gov.uk/ukpga/2023/32/contents" }]
+  },
+  {
+    id: "rule-eu-cra-digital-products",
+    condition: {
+      country: ["EU"],
+      role: ["defense_subcontractor", "prime_contractor", "aerospace_oem"],
+      data_types: ["supply-chain-data", "weapons-system-data"]
+    },
+    obligation: {
+      regulation_id: "EU_CRA_2024_2847",
+      standard_id: "CRA_ESSENTIAL_REQUIREMENTS",
+      confidence: "inferred",
+      basis: "Products with digital elements placed on the EU market must meet CRA essential cybersecurity requirements for design, development, and vulnerability handling.",
+      legal_force: "regulation",
+      conflict_group: "general",
+      precedence_tier: 4,
+      clause_refs: ["clause-eu-cra-art6"]
+    },
+    rationale: "EU Cyber Resilience Act imposes horizontal cybersecurity requirements on hardware and software products, relevant to defense supply chain components.",
+    citations: [{ type: "EU", ref: "Regulation (EU) 2024/2847", source_url: "https://eur-lex.europa.eu/eli/reg/2024/2847/oj" }]
   }
 ];
 
@@ -2650,7 +2880,11 @@ const OBLIGATION_CLAUSE_REFERENCE_MAP = {
   "NIS2_DIRECTIVE_2022_2555": ["clause-nis2-art21"],
   "NATO_C_M_2002_49": ["clause-nato-cm2002-49"],
   "EUCI_HANDLING": ["clause-euci-2013-488"],
-  "NATO_FSC_HANDLING": ["clause-nato-cm2002-49"]
+  "NATO_FSC_HANDLING": ["clause-nato-cm2002-49"],
+  "DFARS_252.204-7021": ["clause-dfars-7021"],
+  "DFARS_252.204-7025": ["clause-dfars-7025"],
+  "EU_CRA_2024_2847": ["clause-eu-cra-art6"],
+  "UK_DEFSTAN_05_138": ["clause-uk-defstan-05-138"]
 };
 
 function inferLegalForce(regulationId) {
@@ -3402,6 +3636,124 @@ const expertPlaybooks = [
     citations: [
       { type: "CFR", ref: "22 CFR 120-130", source_url: "https://www.ecfr.gov/current/title-22/chapter-I/subchapter-M" },
       { type: "EU", ref: "Regulation (EU) 2021/821", source_url: "https://eur-lex.europa.eu/eli/reg/2021/821/oj" }
+    ],
+    last_verified: LAST_UPDATED
+  },
+  {
+    id: "pb-foci-mitigation-assessment",
+    name: "FOCI Mitigation and Governance Assessment",
+    scenario:
+      "Entity with foreign ownership, control, or influence requires facility clearance or access to classified programs.",
+    jurisdictions: ["US"],
+    data_types: ["national-classified", "program-protection", "cui"],
+    when_to_use: [
+      "Foreign investment or M&A involving cleared contractor",
+      "Joint venture or teaming arrangement with foreign-owned entity",
+      "DCSA FOCI determination or annual review"
+    ],
+    steps: [
+      "Assess foreign ownership, control, or influence factors per NISPOM criteria.",
+      "Determine appropriate FOCI mitigation instrument (SSA, SCA, proxy agreement, VTA).",
+      "Establish Government Security Committee and outside director governance structure.",
+      "Implement technology control plan and electronic communications plan as required.",
+      "Submit FOCI package to DCSA and maintain ongoing compliance monitoring."
+    ],
+    common_failure_modes: [
+      "Incomplete disclosure of beneficial ownership chains to DCSA",
+      "Technology control plan not enforced for visiting foreign nationals",
+      "GSC oversight lapses during corporate restructuring events"
+    ],
+    evidence_outputs: [
+      "FOCI package and mitigation instrument",
+      "Technology control plan",
+      "Electronic communications plan",
+      "GSC meeting minutes and annual compliance certification"
+    ],
+    regulation_basis: [
+      { regulation_id: "32_CFR_PART_117_NISPOM", section: "FOCI provisions" },
+      { regulation_id: "DCSA_FOCI", section: "mitigation requirements" }
+    ],
+    citations: [
+      { type: "CFR", ref: "32 CFR Part 117", source_url: "https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-D/part-117" }
+    ],
+    last_verified: LAST_UPDATED
+  },
+  {
+    id: "pb-cross-domain-solution-accreditation",
+    name: "Cross-Domain Solution Accreditation Workflow",
+    scenario:
+      "Standing up or accrediting a cross-domain solution for controlled information transfer between security domains.",
+    jurisdictions: ["US", "NATO", "UK"],
+    data_types: ["national-classified", "nato-classified", "cui"],
+    when_to_use: [
+      "Mission architecture requires data transfer between classification levels or domains",
+      "Coalition operations need controlled release across national boundaries"
+    ],
+    steps: [
+      "Define cross-domain transfer requirements including data types, direction, and volume.",
+      "Select NCDSMO-listed or NCIA-approved CDS product for the required security domain pair.",
+      "Develop transfer policy, content filtering rules, and label-enforcement mechanisms.",
+      "Prepare accreditation package including security architecture, risk assessment, and test evidence.",
+      "Obtain Authorizing Official (AO) or national security authority approval with conditions of operation."
+    ],
+    common_failure_modes: [
+      "Filter policy does not cover all data types in production traffic",
+      "CDS product version drift without re-accreditation",
+      "Insufficient monitoring and audit of cross-domain transfer events"
+    ],
+    evidence_outputs: [
+      "CDS architecture and security design document",
+      "Transfer policy and content filtering rules",
+      "Risk assessment and residual risk acceptance",
+      "Accreditation decision letter and conditions"
+    ],
+    regulation_basis: [
+      { regulation_id: "CNSSP_24", section: "cross-domain policy" },
+      { regulation_id: "NATO_C_M_2002_49", section: "cross-domain requirements" }
+    ],
+    citations: [
+      { type: "CNSS", ref: "CNSSP-24", source_url: "https://www.cnss.gov" },
+      { type: "NATO", ref: "C-M(2002)49", source_url: "https://www.nato.int/cps/en/natohq/topics_50090.htm" }
+    ],
+    last_verified: LAST_UPDATED
+  },
+  {
+    id: "pb-cloud-cui-migration",
+    name: "Cloud Migration for CUI Workloads",
+    scenario:
+      "Migrating defense contractor CUI workloads to cloud infrastructure while maintaining CMMC and DFARS compliance.",
+    jurisdictions: ["US", "US-*"],
+    data_types: ["cui", "fci", "supply-chain-data"],
+    when_to_use: [
+      "Moving on-premises CUI systems to GCC High, IL4, or IL5 cloud",
+      "Evaluating CSP authorization status for defense contract requirements"
+    ],
+    steps: [
+      "Verify CSP holds FedRAMP High authorization and DoD provisional authorization at required impact level.",
+      "Map existing SSP boundary controls to cloud shared responsibility model.",
+      "Define CUI data residency, encryption at rest and in transit, and key management architecture.",
+      "Implement identity federation, privileged access controls, and continuous monitoring telemetry.",
+      "Update SSP, POA&M, and assessment evidence to reflect cloud-hosted control implementation."
+    ],
+    common_failure_modes: [
+      "Assuming CSP authorization covers all tenant-level control responsibilities",
+      "Missing encryption key management and data residency contractual terms",
+      "Break-glass and admin access paths not restricted to US persons",
+      "Assessment evidence references on-premises controls no longer in scope"
+    ],
+    evidence_outputs: [
+      "Cloud SSP addendum with shared responsibility matrix",
+      "CSP authorization and PA/ATO documentation",
+      "Data residency and encryption architecture",
+      "Updated POA&M and continuous monitoring plan"
+    ],
+    regulation_basis: [
+      { regulation_id: "CMMC_2_0", section: "cloud-hosted CUI controls" },
+      { regulation_id: "DFARS_252.204-7012", section: "(b)(2)(ii) cloud computing" }
+    ],
+    citations: [
+      { type: "CFR", ref: "32 CFR Part 170", source_url: "https://www.federalregister.gov/documents/2024/10/15/2024-22905/cybersecurity-maturity-model-certification-cmmc-program" },
+      { type: "DFARS", ref: "252.204-7012", source_url: "https://www.acquisition.gov/dfars/252.204-7012-safeguarding-covered-defense-information-and-cyber-incident-reporting" }
     ],
     last_verified: LAST_UPDATED
   }

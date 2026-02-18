@@ -31,6 +31,8 @@ Defense/Aerospace domain intelligence MCP implementing the shared domain tool co
 
 ## Quick start
 
+Prerequisite: Node.js `>=25.0.0`
+
 ```bash
 npm install
 npm start
@@ -60,6 +62,8 @@ Universal tools:
 - `get_expertise_scorecard`
 - `list_expert_playbooks`
 - `get_expert_playbook`
+- `list_clause_references`
+- `get_clause_reference`
 - `list_architecture_patterns`
 - `get_architecture_pattern`
 - `classify_data`
@@ -126,6 +130,10 @@ The golden audit enforces:
 - Core scenario correctness (classification, applicability, CMMC determination, jurisdiction comparison)
 - Structured response contract expectations
 - EU-27 completeness checks and US minimum coverage checks
+
+## Coverage document
+
+See `docs/COVERAGE.md` for auditable scope and completeness details across EU, US, and NATO coverage targets.
 
 ## Safety and scope
 

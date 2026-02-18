@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-18T07:56:14.491Z",
+  "generated_at": "2026-02-18T08:37:57.818Z",
   "dataset_version": "1.2.0",
   "knowledge_baseline_date": "2026-02-18",
   "grade": "A",
@@ -47,7 +47,7 @@
     {
       "gate": "applicability_rules_count",
       "status": "pass",
-      "details": "18 records"
+      "details": "21 records"
     },
     {
       "gate": "applicability_rules_citations",
@@ -67,7 +67,7 @@
     {
       "gate": "expert_playbooks_count",
       "status": "pass",
-      "details": "8 records"
+      "details": "11 records"
     },
     {
       "gate": "expert_playbooks_citations",
@@ -135,12 +135,12 @@
     {
       "gate": "clause_reference_library",
       "status": "pass",
-      "details": "12 clause references"
+      "details": "16 clause references"
     },
     {
       "gate": "expert_playbook_depth",
       "status": "pass",
-      "details": "8 expert playbooks"
+      "details": "11 expert playbooks"
     },
     {
       "gate": "jurisdiction_profiles_eu_coverage",
