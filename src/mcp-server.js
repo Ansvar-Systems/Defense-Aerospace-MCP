@@ -85,7 +85,7 @@ class DefenseMcpServer {
       };
     }
 
-    if (method === "notifications/initialized") {
+    if (method === "notifications/initialized" || method === "notifications/cancelled") {
       return null;
     }
 

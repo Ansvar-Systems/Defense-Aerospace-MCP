@@ -1,0 +1,49 @@
+name: Check Source Freshness
+
+on:
+  schedule:
+    - cron: "0 8 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check-freshness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 25
+
+      - name: Run drift hash check
+        run: npm run drift:hashes 2>&1 | tee drift-output.txt
+
+      - name: Run golden standard audit
+        run: npm run audit:golden 2>&1 | tee audit-output.txt
+
+      - name: Create issue if drift detected
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          DRIFT_BODY=$(cat drift-output.txt)
+          AUDIT_BODY=$(cat audit-output.txt)
+          gh issue create \
+            --title "[Automated] Data freshness check failed — $(date +%Y-%m-%d)" \
+            --label "data-freshness,automated" \
+            --body "## Drift Hash Check
+          \`\`\`
+          ${DRIFT_BODY}
+          \`\`\`
+
+          ## Golden Standard Audit
+          \`\`\`
+          ${AUDIT_BODY}
+          \`\`\`
+
+          Please review and update sources as needed."
