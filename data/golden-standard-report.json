@@ -1,0 +1,267 @@
+{
+  "generated_at": "2026-02-18T07:56:14.491Z",
+  "dataset_version": "1.2.0",
+  "knowledge_baseline_date": "2026-02-18",
+  "grade": "A",
+  "checks": [
+    {
+      "gate": "architecture_patterns_count",
+      "status": "pass",
+      "details": "12 records"
+    },
+    {
+      "gate": "architecture_patterns_citations",
+      "status": "pass",
+      "details": "all records cite sources"
+    },
+    {
+      "gate": "data_categories_count",
+      "status": "pass",
+      "details": "12 records"
+    },
+    {
+      "gate": "data_categories_citations",
+      "status": "pass",
+      "details": "all records cite sources"
+    },
+    {
+      "gate": "threat_scenarios_count",
+      "status": "pass",
+      "details": "13 records"
+    },
+    {
+      "gate": "threat_scenarios_citations",
+      "status": "pass",
+      "details": "all records cite sources"
+    },
+    {
+      "gate": "technical_standards_count",
+      "status": "pass",
+      "details": "16 records"
+    },
+    {
+      "gate": "technical_standards_citations",
+      "status": "pass",
+      "details": "all records cite sources"
+    },
+    {
+      "gate": "applicability_rules_count",
+      "status": "pass",
+      "details": "18 records"
+    },
+    {
+      "gate": "applicability_rules_citations",
+      "status": "pass",
+      "details": "all records cite sources"
+    },
+    {
+      "gate": "evidence_artifacts_count",
+      "status": "pass",
+      "details": "6 records"
+    },
+    {
+      "gate": "evidence_artifacts_citations",
+      "status": "pass",
+      "details": "all records cite sources"
+    },
+    {
+      "gate": "expert_playbooks_count",
+      "status": "pass",
+      "details": "8 records"
+    },
+    {
+      "gate": "expert_playbooks_citations",
+      "status": "pass",
+      "details": "all records cite sources"
+    },
+    {
+      "gate": "source_nist-800-171-r3",
+      "status": "pass"
+    },
+    {
+      "gate": "source_nist-800-171a-r3",
+      "status": "pass"
+    },
+    {
+      "gate": "source_dod-cmmc-32cfr170",
+      "status": "pass"
+    },
+    {
+      "gate": "source_dfars-cmmc-subpart-204-75",
+      "status": "pass"
+    },
+    {
+      "gate": "source_dfars-7012",
+      "status": "pass"
+    },
+    {
+      "gate": "source_itar-usml",
+      "status": "pass"
+    },
+    {
+      "gate": "source_ear-ccl",
+      "status": "pass"
+    },
+    {
+      "gate": "source_dodi-8500-01",
+      "status": "pass"
+    },
+    {
+      "gate": "source_dodi-8510-01",
+      "status": "pass"
+    },
+    {
+      "gate": "source_eu-dual-use",
+      "status": "pass"
+    },
+    {
+      "gate": "source_eu-nis2",
+      "status": "pass"
+    },
+    {
+      "gate": "source_eu-euci-2013-488",
+      "status": "pass"
+    },
+    {
+      "gate": "source_completeness",
+      "status": "pass",
+      "details": "all sources complete"
+    },
+    {
+      "gate": "source_freshness_authoritative",
+      "status": "pass",
+      "details": "all authoritative sources verified within 365 days"
+    },
+    {
+      "gate": "clause_reference_library",
+      "status": "pass",
+      "details": "12 clause references"
+    },
+    {
+      "gate": "expert_playbook_depth",
+      "status": "pass",
+      "details": "8 expert playbooks"
+    },
+    {
+      "gate": "jurisdiction_profiles_eu_coverage",
+      "status": "pass",
+      "details": "EU profile plus all EU-27 country profiles present"
+    },
+    {
+      "gate": "jurisdiction_profiles_us_coverage",
+      "status": "pass",
+      "details": "US federal profile plus all state compatibility profiles present"
+    },
+    {
+      "gate": "jurisdiction_profiles_coverage_level",
+      "status": "pass",
+      "details": "EU profiles=full and US state profiles=minimum"
+    },
+    {
+      "gate": "jurisdiction_profiles_nato_coverage",
+      "status": "pass",
+      "details": "NATO aggregate plus all member profiles present"
+    },
+    {
+      "gate": "jurisdiction_profiles_nato_coverage_level",
+      "status": "pass",
+      "details": "NATO members mapped via EU/US or focused NATO profile"
+    },
+    {
+      "gate": "eu_member_state_data_coverage",
+      "status": "pass",
+      "details": "all data categories include EU-27 coverage"
+    },
+    {
+      "gate": "us_minimum_data_coverage",
+      "status": "pass",
+      "details": "US minimum data coverage present"
+    },
+    {
+      "gate": "nato_member_state_data_coverage",
+      "status": "pass",
+      "details": "all data categories include NATO member-state coverage"
+    },
+    {
+      "gate": "scenario_about",
+      "status": "pass"
+    },
+    {
+      "gate": "scenario_classification",
+      "status": "pass"
+    },
+    {
+      "gate": "scenario_applicability",
+      "status": "pass"
+    },
+    {
+      "gate": "scenario_cmmc_l2",
+      "status": "pass"
+    },
+    {
+      "gate": "scenario_comparison",
+      "status": "pass"
+    },
+    {
+      "gate": "scenario_eu_applicability",
+      "status": "pass"
+    },
+    {
+      "gate": "scenario_us_state_applicability",
+      "status": "pass"
+    },
+    {
+      "gate": "scenario_eu_classification",
+      "status": "pass"
+    },
+    {
+      "gate": "scenario_precedence_model",
+      "status": "pass"
+    },
+    {
+      "gate": "scenario_eu_jurisdiction_profiles",
+      "status": "pass"
+    },
+    {
+      "gate": "scenario_us_jurisdiction_profiles",
+      "status": "pass"
+    },
+    {
+      "gate": "scenario_get_jurisdiction_profile",
+      "status": "pass"
+    },
+    {
+      "gate": "scenario_nato_jurisdiction_profiles",
+      "status": "pass"
+    },
+    {
+      "gate": "scenario_nato_profile_resolution",
+      "status": "pass"
+    },
+    {
+      "gate": "scenario_nato_applicability",
+      "status": "pass"
+    },
+    {
+      "gate": "scenario_coverage_matrix",
+      "status": "pass"
+    },
+    {
+      "gate": "scenario_expertise_scorecard",
+      "status": "pass"
+    },
+    {
+      "gate": "scenario_expert_playbooks",
+      "status": "pass"
+    }
+  ],
+  "failures": [],
+  "warnings": [
+    "Advisory source present (NIST SP 800-172 Rev.3 FPD); ensure this is not treated as binding requirement text."
+  ],
+  "summary": {
+    "pass_count": 56,
+    "fail_count": 0,
+    "warning_count": 1
+  }
+}

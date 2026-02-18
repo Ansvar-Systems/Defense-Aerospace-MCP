@@ -1,0 +1,21 @@
+{
+  "generated_at": "2026-02-18T07:56:13.917Z",
+  "dataset_version": "1.2.0",
+  "dataset_baseline_date": "2026-02-18",
+  "hashes": {
+    "sources": "sha256:8c15c0529a2ecf626f7daa224d8bdda0dcb8976a1400f4bec3af5ac1e570af7e",
+    "clauseReferenceLibrary": "sha256:1e6a6002ee71fc6ca42479ad208cfa65760456d1ff5dd58f8e8d3d4c7cddf554",
+    "architecturePatterns": "sha256:f97f5222dd0e6545f33865cd54c24bb757afd9e651e27a5f4ec0a357b9ba39e0",
+    "dataCategories": "sha256:b382aecfcfbc04d00cc39677df4475f30d4a6e21355adc4b9edcb36c7d677db5",
+    "threatScenarios": "sha256:a31e10f6d9fd61b91ffd1d801160a22f884767523af4a1d3ad6001f51fe501e8",
+    "technicalStandards": "sha256:d5c0d6aa5bb9e992b18d8a4bb7eb85d9a1201609b1d669c5cf5e41736562e01d",
+    "applicabilityRules": "sha256:37bb8d6f7a0a5afc3278affe9ed36c1e4a521008a9f141fbac997bb3dced1fb4",
+    "evidenceArtifacts": "sha256:411798c0d70ac7c6fbffd3c9c9a6079ab44d91688fded2ff6970906c9e21c746",
+    "jurisdictionComparisons": "sha256:0be2fd043ea3a2e7866acff4d231ef0ddcb3a1c2a8826e9bc90cdcbac12bc194",
+    "jurisdictionProfiles": "sha256:c0b385d13c1e710ec3ecf68f2d2c1b5ad32957a654e9f0c79590e4f1347134e0",
+    "breachObligations": "sha256:5829a14c78afc054bf0b923f26c2c270a60bf6eda06590511aebcfd918889ff0",
+    "controlBaselines": "sha256:f8a11c61d42b23e63f0bcb0a02890d48226c6319c8bdb91ddf946cc7edb8dfef",
+    "expertPlaybooks": "sha256:cce1a8839fd91ba5bf85b70c2afd2bc118a338231487a62111459d7d3e52ed2f"
+  },
+  "combined_fingerprint": "sha256:bf60a2f2e3e193e8c581c89760e7910e21537dfae2ef04951f4dc63de020ca10"
+}
