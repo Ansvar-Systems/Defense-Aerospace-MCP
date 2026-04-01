@@ -2,6 +2,33 @@
 
 Defense/Aerospace domain intelligence MCP implementing the shared domain tool contract from `domain-mcp-specifications.md`.
 
+
+### Public Endpoint (Streamable HTTP)
+
+Connect from any MCP client (Claude Desktop, ChatGPT, Cursor, VS Code, GitHub Copilot):
+
+```
+https://mcp.ansvar.eu/defense-aerospace/mcp
+```
+
+**Claude Code:**
+```bash
+claude mcp add defense-aerospace --transport http https://mcp.ansvar.eu/defense-aerospace/mcp
+```
+
+**Claude Desktop / Cursor** (`claude_desktop_config.json`):
+```json
+{
+  "mcpServers": {
+    "defense-aerospace": {
+      "type": "url",
+      "url": "https://mcp.ansvar.eu/defense-aerospace/mcp"
+    }
+  }
+}
+```
+
+No authentication required. See [all Ansvar MCP endpoints](https://github.com/Ansvar-Systems/Ansvar-Architecture-Documentation/blob/main/docs/mcp-remote-access.md).
 ## What this server provides
 
 - Dual transport:
