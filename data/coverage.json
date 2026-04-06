@@ -1,0 +1,88 @@
+{
+  "generated_at": "2026-04-06T00:00:00.000Z",
+  "dataset_version": "1.2.0",
+  "knowledge_baseline_date": "2026-02-18",
+  "geographic_coverage": {
+    "eu_member_states": {
+      "requirement": "full",
+      "expected": 27,
+      "covered": 27,
+      "missing": 0,
+      "status": "PASS"
+    },
+    "us_state_compatibility": {
+      "requirement": "minimum",
+      "expected": 51,
+      "covered": 51,
+      "missing": 0,
+      "status": "PASS"
+    },
+    "nato_member_states": {
+      "requirement": "focused",
+      "expected": 32,
+      "covered": 32,
+      "missing": 0,
+      "status": "PASS"
+    }
+  },
+  "jurisdiction_profiles": {
+    "total": 90,
+    "eu_profiles": 28,
+    "us_profiles": 52,
+    "nato_profiles": 10
+  },
+  "domain_knowledge": {
+    "sources": 56,
+    "architecture_patterns": 12,
+    "data_categories": 12,
+    "threat_scenarios": 13,
+    "technical_standards": 45,
+    "applicability_rules": 50,
+    "clause_references": 46,
+    "evidence_artifacts": 6,
+    "expert_playbooks": 11
+  },
+  "tool_surface": {
+    "total_tools": 27,
+    "meta_tools": ["about", "list_sources", "check_data_freshness"],
+    "domain_tools": [
+      "list_jurisdiction_profiles",
+      "get_jurisdiction_profile",
+      "get_coverage_matrix",
+      "get_expertise_scorecard",
+      "list_expert_playbooks",
+      "get_expert_playbook",
+      "list_clause_references",
+      "get_clause_reference",
+      "list_architecture_patterns",
+      "get_architecture_pattern",
+      "classify_data",
+      "get_domain_threats",
+      "assess_applicability",
+      "map_to_technical_standards",
+      "search_domain_knowledge",
+      "compare_jurisdictions",
+      "build_control_baseline",
+      "build_evidence_plan",
+      "assess_breach_obligations",
+      "create_remediation_backlog",
+      "determine_cmmc_level",
+      "classify_export_control",
+      "assess_classified_environment",
+      "assess_nato_interoperability"
+    ]
+  },
+  "data_completeness": {
+    "eu_coverage_in_data_taxonomy": "100%",
+    "us_minimum_data_coverage": "100%",
+    "nato_member_state_data_coverage": "100%",
+    "overall_data_completeness": "100%"
+  },
+  "golden_audit": {
+    "grade": "A",
+    "pass_count": 87,
+    "fail_count": 0,
+    "warning_count": 1,
+    "report_file": "data/golden-standard-report.json"
+  }
+}
