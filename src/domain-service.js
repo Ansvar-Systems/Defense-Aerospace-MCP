@@ -1,6 +1,7 @@
 "use strict";
 
 const seed = require("./data/seed");
+const { buildCitation } = require("./citation");
 
 const TIER_PRIORITY = {
   low: 1,
@@ -1626,7 +1627,7 @@ function makeTools(db, metadataMap) {
         (entry) => entry.regulation_id
       );
 
-      return wrapResponse(
+      const result = wrapResponse(
         {
           jurisdiction: resolved.requested_jurisdiction,
           profile: {
@@ -1645,12 +1646,19 @@ function makeTools(db, metadataMap) {
             "Jurisdiction profile is resolved by normalized country/state context with fallback to regional baseline profiles."
         }
       );
+      result._citation = buildCitation(
+        resolved.requested_jurisdiction,
+        `Defense/Aerospace jurisdiction profile: ${resolved.requested_jurisdiction}`,
+        "get_jurisdiction_profile",
+        { jurisdiction: jurisdictionInput }
+      );
+      return result;
     },
 
     async get_coverage_matrix() {
       const coverage = buildCoverageMatrixSnapshot();
 
-      return wrapResponse(
+      const result = wrapResponse(
         coverage,
         metadataMap,
         {
@@ -1660,6 +1668,13 @@ function makeTools(db, metadataMap) {
             "Coverage matrix is computed from jurisdiction profile records against expected EU member, US state compatibility, and NATO member sets."
         }
       );
+      result._citation = buildCitation(
+        "Defense/Aerospace coverage matrix",
+        "Defense/Aerospace jurisdiction coverage matrix",
+        "get_coverage_matrix",
+        {}
+      );
+      return result;
     },
 
     async get_expertise_scorecard(args = {}) {
@@ -1670,7 +1685,7 @@ function makeTools(db, metadataMap) {
         mapRegulationToFoundationCall({ regulation_id: "NATO_C_M_2002_49", section: "security principles" })
       ];
 
-      return wrapResponse(
+      const result = wrapResponse(
         scorecard,
         metadataMap,
         {
@@ -1686,6 +1701,13 @@ function makeTools(db, metadataMap) {
             "Scorecard is computed from deterministic coverage, source quality, rule rigor, and tool contract metrics."
         }
       );
+      result._citation = buildCitation(
+        "Defense/Aerospace expertise scorecard",
+        "Defense/Aerospace domain expertise scorecard",
+        "get_expertise_scorecard",
+        {}
+      );
+      return result;
     },
 
     async list_expert_playbooks(args = {}) {
@@ -1840,7 +1862,7 @@ function makeTools(db, metadataMap) {
         (item) => `${item.mcp}|${item.tool}|${JSON.stringify(item.params)}`
       );
 
-      return wrapResponse(
+      const result = wrapResponse(
         {
           playbook: selected
         },
@@ -1853,6 +1875,13 @@ function makeTools(db, metadataMap) {
             "Playbook is retrieved from curated expert workflow knowledge with deterministic ID/scenario matching."
         }
       );
+      result._citation = buildCitation(
+        selected.id || selected.name,
+        `Expert playbook: ${selected.name}`,
+        "get_expert_playbook",
+        { ...(playbookId ? { playbook_id: playbookId } : { scenario }) }
+      );
+      return result;
     },
 
     async list_architecture_patterns(args = {}) {
@@ -1959,7 +1988,7 @@ function makeTools(db, metadataMap) {
       }
 
       const clause = parseClauseReferenceRow(row);
-      return wrapResponse(
+      const result = wrapResponse(
         {
           clause
         },
@@ -1971,6 +2000,14 @@ function makeTools(db, metadataMap) {
             "Clause reference is directly retrieved from the curated clause reference library."
         }
       );
+      result._citation = buildCitation(
+        `${clause.regulation_id} ${clause.provision_ref || ""}`.trim(),
+        `Clause reference: ${clause.regulation_id} ${clause.provision_ref || ""}`.trim(),
+        "get_clause_reference",
+        { ...(clauseId ? { clause_id: clauseId } : { regulation_id: regulationId, provision_ref: provisionRef }) },
+        clause.source_url || undefined
+      );
+      return result;
     },
 
     async get_architecture_pattern(args = {}) {
@@ -1990,7 +2027,7 @@ function makeTools(db, metadataMap) {
         .prepare("SELECT COUNT(*) AS n FROM threat_scenarios WHERE affected_patterns LIKE ?")
         .get(`%${args.pattern_id}%`).n;
 
-      return wrapResponse(
+      const result = wrapResponse(
         {
           pattern,
           related_threat_count: relatedThreatCount
@@ -2003,6 +2040,13 @@ function makeTools(db, metadataMap) {
             "Pattern details are direct domain records; threat count uses affected_patterns linkage."
         }
       );
+      result._citation = buildCitation(
+        args.pattern_id,
+        `Architecture pattern: ${pattern.name || args.pattern_id}`,
+        "get_architecture_pattern",
+        { pattern_id: args.pattern_id }
+      );
+      return result;
     },
 
     async classify_data(args = {}) {
@@ -2181,7 +2225,7 @@ function makeTools(db, metadataMap) {
         (item) => `${item.mcp}|${item.tool}|${JSON.stringify(item.params)}`
       );
 
-      return wrapResponse(
+      const result = wrapResponse(
         {
           threats: topThreats
         },
@@ -2194,6 +2238,16 @@ function makeTools(db, metadataMap) {
             "Threats are filtered by affected architecture patterns and data categories, then enriched with regulation/control crosswalks."
         }
       );
+      result._citation = buildCitation(
+        pattern ? `Defense threats: ${pattern}` : "Defense/Aerospace threats",
+        `Defense/Aerospace threat scenarios${pattern ? ` for ${pattern}` : ""}`,
+        "get_domain_threats",
+        {
+          ...(pattern ? { architecture_pattern: pattern } : {}),
+          ...(dataTypes.length > 0 ? { data_types: dataTypes.join(",") } : {})
+        }
+      );
+      return result;
     },
 
     async assess_applicability(args = {}) {
