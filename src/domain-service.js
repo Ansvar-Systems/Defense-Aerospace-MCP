@@ -519,6 +519,12 @@ function buildMetadataEnvelope(metadataMap, options = {}) {
 
 function wrapResponse(data, metadataMap, options = {}) {
   return {
+    _meta: {
+      disclaimer:
+        "This output is generated from seeded domain knowledge and is for informational purposes only. It does not constitute legal advice, export-control adjudication, or a substitute for qualified legal or compliance counsel.",
+      data_age: seed.LAST_UPDATED,
+      copyright: `© ${new Date(seed.LAST_UPDATED).getFullYear()} Ansvar Systems. Data sourced from publicly available authoritative standards and regulations.`
+    },
     data,
     metadata: buildMetadataEnvelope(metadataMap, options)
   };
@@ -3216,6 +3222,36 @@ function makeTools(db, metadataMap) {
             "Interoperability profile is derived from NATO metadata labeling/binding standards and classification handling constraints."
         }
       );
+    },
+
+    async check_data_freshness(args = {}) {
+      const maxAgeDays = args.max_age_days ? Number(args.max_age_days) : null;
+      const lastUpdated = seed.LAST_UPDATED;
+      const knowledgeBaseline = seed.KNOWLEDGE_BASELINE;
+      const datasetVersion = metadataMap.dataset_version || seed.DATASET_VERSION;
+
+      const lastUpdatedDate = new Date(lastUpdated);
+      const now = new Date();
+      const ageMs = now - lastUpdatedDate;
+      const ageDays = Math.floor(ageMs / (1000 * 60 * 60 * 24));
+
+      const staleness = {
+        dataset_version: datasetVersion,
+        last_updated: lastUpdated,
+        knowledge_baseline_date: typeof knowledgeBaseline === "object" ? knowledgeBaseline.date || lastUpdated : lastUpdated,
+        age_days: ageDays,
+        stale: maxAgeDays !== null ? ageDays > maxAgeDays : false,
+        max_age_days_checked: maxAgeDays
+      };
+
+      return wrapResponse(
+        staleness,
+        metadataMap,
+        {
+          confidence: "authoritative",
+          inference_rationale: "Freshness is derived directly from seeded dataset version constants."
+        }
+      );
     }
   };
 }
@@ -3552,6 +3588,22 @@ const TOOL_DEFINITIONS = [
         sharing_scope: { type: "string" },
         classification: { type: "string" },
         participating_nations: { type: "array", items: { type: "string" } }
+      }
+    }
+  },
+  {
+    name: "check_data_freshness",
+    description:
+      "Check the freshness and staleness of the seeded domain knowledge base, reporting dataset version, last-updated date, knowledge baseline date, and whether any sources exceed a caller-specified maximum age threshold.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        max_age_days: {
+          type: "number",
+          minimum: 1,
+          maximum: 3650,
+          description: "Optional maximum acceptable age in days for the dataset. Returns a staleness flag when the dataset exceeds this threshold."
+        }
       }
     }
   }

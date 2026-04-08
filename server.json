@@ -25,7 +25,15 @@
     "map_to_technical_standards",
     "search_domain_knowledge",
     "compare_jurisdictions",
-    "build_control_baseline"
+    "build_control_baseline",
+    "build_evidence_plan",
+    "assess_breach_obligations",
+    "create_remediation_backlog",
+    "determine_cmmc_level",
+    "classify_export_control",
+    "assess_classified_environment",
+    "assess_nato_interoperability",
+    "check_data_freshness"
   ],
   "transports": [
     "stdio",

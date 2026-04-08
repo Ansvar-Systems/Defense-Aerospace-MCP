@@ -1,0 +1,43 @@
+{
+  "dataset_version": "1.2.0",
+  "knowledge_baseline_date": "2026-02-18",
+  "last_updated": "2026-02-18",
+  "geographic_coverage": {
+    "eu_member_states": { "required": 27, "covered": 27, "missing": 0, "status": "PASS" },
+    "us_states": { "required": 51, "covered": 51, "missing": 0, "status": "PASS" },
+    "nato_members": { "required": 32, "covered": 32, "missing": 0, "status": "PASS" }
+  },
+  "jurisdiction_profiles": {
+    "total": 90,
+    "eu_region": 28,
+    "us_region": 52,
+    "nato_region": 10
+  },
+  "domain_knowledge": {
+    "sources": 56,
+    "architecture_patterns": 12,
+    "data_categories": 12,
+    "threat_scenarios": 13,
+    "technical_standards": 45,
+    "applicability_rules": 50,
+    "clause_references": 46,
+    "evidence_artifacts": 6,
+    "expert_playbooks": 11
+  },
+  "data_completeness": {
+    "eu_coverage": "100%",
+    "us_minimum_coverage": "100%",
+    "nato_member_state_coverage": "100%",
+    "overall": "100%"
+  },
+  "tool_surface": {
+    "total_tools": 26,
+    "categories": [
+      "universal_contract",
+      "coverage_and_expertise",
+      "clause_level_retrieval",
+      "expert_playbook_retrieval",
+      "defense_specialized"
+    ]
+  }
+}
