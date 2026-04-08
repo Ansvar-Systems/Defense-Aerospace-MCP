@@ -24,10 +24,10 @@ jobs:
       issues: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
 
       - name: Run Socket Security
-        uses: SocketDev/socket-basics@1.0.25
+        uses: SocketDev/socket-basics@933940968bf73a35a63d5594e78a27d0b2a8c2d3 # v2.0.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           socket_security_api_key: ${{ secrets.SOCKET_SECURITY_API_KEY }}
