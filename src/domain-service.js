@@ -1539,6 +1539,93 @@ function makeTools(db, metadataMap) {
       );
     },
 
+    async check_data_freshness() {
+      const staleThresholdDays = 90;
+      const degradedThresholdDays = 365;
+      const now = new Date();
+
+      const rows = db
+        .prepare(
+          "SELECT id, name, source_type, knowledge_tier, last_verified, refresh_cadence, source_url FROM sources ORDER BY name"
+        )
+        .all();
+
+      const sources = rows.map((row) => {
+        const lastVerified = row.last_verified ? new Date(row.last_verified) : null;
+        const ageDays =
+          lastVerified && !Number.isNaN(lastVerified.getTime())
+            ? Math.floor((now.getTime() - lastVerified.getTime()) / (24 * 60 * 60 * 1000))
+            : null;
+
+        let status;
+        let action;
+        if (ageDays === null) {
+          status = "degraded";
+          action = "last_verified date is missing or invalid; manual verification required";
+        } else if (ageDays >= degradedThresholdDays) {
+          status = "degraded";
+          action = `source has not been verified in ${ageDays} days (threshold: ${degradedThresholdDays}); re-verification required`;
+        } else if (ageDays >= staleThresholdDays) {
+          status = "stale";
+          action = `source has not been verified in ${ageDays} days (threshold: ${staleThresholdDays}); schedule re-verification`;
+        } else {
+          status = "ok";
+          action = null;
+        }
+
+        return {
+          source_id: row.id,
+          name: row.name,
+          source_type: row.source_type,
+          knowledge_tier: row.knowledge_tier,
+          last_verified: row.last_verified || null,
+          age_days: ageDays,
+          refresh_cadence: row.refresh_cadence || null,
+          source_url: row.source_url || null,
+          status,
+          action
+        };
+      });
+
+      const okCount = sources.filter((s) => s.status === "ok").length;
+      const staleCount = sources.filter((s) => s.status === "stale").length;
+      const degradedCount = sources.filter((s) => s.status === "degraded").length;
+
+      let overallStatus;
+      if (degradedCount > 0) {
+        overallStatus = "degraded";
+      } else if (staleCount > 0) {
+        overallStatus = "stale";
+      } else {
+        overallStatus = "ok";
+      }
+
+      return wrapResponse(
+        {
+          overall_status: overallStatus,
+          checked_at: now.toISOString(),
+          thresholds: {
+            stale_after_days: staleThresholdDays,
+            degraded_after_days: degradedThresholdDays
+          },
+          summary: {
+            total: sources.length,
+            ok: okCount,
+            stale: staleCount,
+            degraded: degradedCount
+          },
+          sources
+        },
+        metadataMap,
+        {
+          confidence: "authoritative",
+          citations: [],
+          inference_rationale:
+            "Freshness computed from last_verified column in source registry against configurable stale/degraded day thresholds."
+        }
+      );
+    },
+
     async list_jurisdiction_profiles(args = {}) {
       const region = toText(args.region || "").toUpperCase();
       const coverageLevel = toText(args.coverage_level || "").toLowerCase();
@@ -3238,6 +3325,12 @@ const TOOL_DEFINITIONS = [
         offset: { type: "number", minimum: 0, description: "Zero-based pagination offset." }
       }
     }
+  },
+  {
+    name: "check_data_freshness",
+    description:
+      "Check the freshness of each ingested data source. Reports staleness against configurable thresholds and provides action guidance for stale or degraded sources.",
+    inputSchema: { type: "object", properties: {} }
   },
   {
     name: "list_jurisdiction_profiles",
