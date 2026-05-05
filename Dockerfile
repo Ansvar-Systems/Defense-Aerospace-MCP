@@ -2,12 +2,11 @@ FROM node:24-alpine
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev && npm cache clean --force
-RUN addgroup -g 1001 -S nodejs && adduser -S nodejs -u 1001
 COPY src/ ./src/
 COPY bin/ ./bin/
 COPY data/ ./data/
-RUN chown -R nodejs:nodejs /app
-USER nodejs
+RUN chown -R node:node /app
+USER node
 ENV NODE_ENV=production
 ENV PORT=3000
 EXPOSE 3000
